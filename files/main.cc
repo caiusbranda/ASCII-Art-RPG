@@ -13,6 +13,12 @@ int main(int argc, char *argv){
 	// init commands
 	if (cin >> cmd) {
 
+		// end of file case
+		if (cin.eof()) {
+			cerr << "End of file detected. Exiting." << endl;
+			return 0;
+		}
+
 		switch(cmd) {
 			// shade
 			case "s": b->chooseShade(); break;
@@ -34,8 +40,6 @@ int main(int argc, char *argv){
 
 			// quit
 			case "q": b->quit(); break;
-
-			// also need end of file case
 
 			default: cerr << "INVALID INPUT" << endl; break;
 		}
