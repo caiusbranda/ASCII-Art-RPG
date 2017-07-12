@@ -4,18 +4,31 @@
 #include <string>
 #include <iostream>
 #include <map>
+
+#include "posn.h"
+
+#include "observer.h"
+#include "subject.h"
+#include "display.h"
+
+#include "room.h"
+#include "chamber.h"
+#include "passage.h"
+#include "tile.h"
+
 #include "entity.h"
 
-struct Posn {
-	unsigned int x, y;
-
-	Posn operator<(const Posn &rhs) const;
-};
-
-
 class Board {
-	Map<Posn, Entity*> ents;
 
+	std::map<Posn, Entity*> ents;
+
+	int curFloor;
+
+public:
+
+	void initEmpty();
+
+	int getCurFloor() const;
 
 
 };
