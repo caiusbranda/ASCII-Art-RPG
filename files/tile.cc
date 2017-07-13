@@ -2,10 +2,9 @@
 
 using namespace std;
 
-Tile::Tile(char type, Posn p) : p{p}, type{type} {}
+Tile::Tile(Posn p, char type) : p{p}, type{type} {}
 
-
-char Tile::getType() const { 
+char Tile::getType() const {
   return this->type;
 }
 
@@ -15,5 +14,9 @@ void Tile::notifyLeave() {
 
 void Tile::notifyComing(Subject &whoNotified) {
     this->type = whoNotified.getType();
-    this->notifyDisplay();
+    //this->notifyDisplay();
   }
+
+SubscriptionType Tile::getSubType() const {
+	return SubscriptionType::Display;
+}

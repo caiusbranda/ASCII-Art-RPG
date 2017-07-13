@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char *argv[]){
 
-
+	fstream in;
 
 	Board *b = new Board;
 
@@ -49,6 +49,9 @@ int main(int argc, char *argv[]){
 			default: cerr << "INVALID INPUT" << endl; break;
 		}
 	}
+
+	b->displayBoard();
+
 /*
 	// commands while running
 	string dir = "";

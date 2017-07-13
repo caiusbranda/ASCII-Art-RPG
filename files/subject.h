@@ -3,19 +3,19 @@
 
 #include <vector>
 #include "posn.h"
-#include "subcriptions.h"
+#include "subscriptions.h"
 
 struct Posn;
 class Observer;
 
 class Subject {
-  std::vector<Observer*> observers;
+	std::vector<Observer*> observers;
 
- public:
-  void attach(Observer *o);
-  void notifyObservers(SubscriptionType t);
-  virtual string getType() const = 0;
-  virtual ~Subject() = 0;
+public:
+	void attach(Observer *o);
+	void notifyObservers(SubscriptionType t);
+	virtual char getType() const = 0;
+	virtual ~Subject() = 0;
 };
 
 #endif

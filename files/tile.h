@@ -1,6 +1,8 @@
 #ifndef __TILE_H__
 #define __TILE_H__
 
+#include "subject.h"
+#include "observer.h"
 #include "posn.h"
 
 struct Posn;
@@ -12,7 +14,7 @@ class Tile final : public Subject, public Observer {
 public:
 
 	// constructs a type of tile
-	Tile(string type, Posn p);
+	Tile(Posn p, char type);
 
 	char getType() const override;
 
@@ -20,6 +22,8 @@ public:
   void notifyLeave() override;
 
   void notifyComing(Subject &whoNotified) override;
-}
+
+  SubscriptionType getSubType() const override;
+};
 
 #endif

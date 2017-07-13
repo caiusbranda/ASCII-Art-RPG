@@ -3,18 +3,19 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <map>
 
 #include "posn.h"
 
 #include "observer.h"
 #include "display.h"
-//#include "subject.h"
+#include "subject.h"
+#include "tile.h"
 /*
 #include "room.h"
 #include "chamber.h"
 #include "passage.h"
-#include "tile.h"
 #include "entity.h"
 */
 
@@ -23,13 +24,21 @@ class Display;
 class Board {
 
 	Display *disp;
+
+	std::map<Posn, Tile*> tiles;
+
+
+
 	//std::map<Posn, Entity*> ents;
 
 	//int curFloor;
 
 public:
 
-	void initEmpty();
+	Board();
+	~Board();
+
+	void initEmpty(std::string &source);
 
 	//int getCurFloor() const;
 
@@ -43,7 +52,8 @@ public:
 	void chooseGobl();
 	*/
 
-
+	// displays board to cout
+	void displayBoard() const;
 
 };
 
