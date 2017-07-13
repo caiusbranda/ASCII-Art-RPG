@@ -14,7 +14,6 @@ class Chamber final : public Room {
 	int type; // which chamber is it?
 	std::map<Posn,Tile*> tiles; // map of tile pointers with Posn as key
 
-
 public:
 
 	Posn getPosn() const override;

@@ -8,27 +8,41 @@
 #include "posn.h"
 
 #include "observer.h"
-#include "subject.h"
 #include "display.h"
-
+//#include "subject.h"
+/*
 #include "room.h"
 #include "chamber.h"
 #include "passage.h"
 #include "tile.h"
-
 #include "entity.h"
+*/
+
+class Display;
 
 class Board {
 
-	std::map<Posn, Entity*> ents;
+	Display *disp;
+	//std::map<Posn, Entity*> ents;
 
-	int curFloor;
+	//int curFloor;
 
 public:
 
 	void initEmpty();
 
-	int getCurFloor() const;
+	//int getCurFloor() const;
+
+	//Player Character choices:
+
+	void chooseShade();
+	/*
+	void chooseDrow();
+	void chooseVamp();
+	void chooseTroll();
+	void chooseGobl();
+	*/
+
 
 
 };

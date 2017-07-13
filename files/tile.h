@@ -5,12 +5,20 @@
 
 struct Posn;
 
-class Tile final : public subject {
+class Tile final : public Subject {
 	Posn p;
 	string type; // what kind of tile is it
+	char disp;
 
 public:
-	string getState() const override;
+
+	// constructs a type of tile
+	Tile(string type, Posn p);
+
+	string getIcon() const override;
+
+
+
 }
 
 #endif

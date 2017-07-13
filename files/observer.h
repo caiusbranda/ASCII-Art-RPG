@@ -5,7 +5,7 @@
 
 class Observer {
 public:
-	virtual void notify(Subject &whoNotified) = 0;
+	//virtual void notify(Subject &whoNotified) = 0;
 
 	virtual SubscriptionType getSubType() const = 0;
 	virtual ~Observer() = default;
