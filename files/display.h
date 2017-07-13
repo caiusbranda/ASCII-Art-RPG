@@ -1,24 +1,31 @@
 #ifndef __DISPLAY_H__
 #define __DISPLAY_H__
 
-#include <std::vector<char> v;>
+#include <iostream>
+#include <map>
+#include "observer.h"
+#include "posn.h"
+
+struct Posn;
 
 class Display final : public Observer {
-	std::vector<std::vector<char>> theDisplay;
+	std::map<Posn, char> theDisplay;
 
-	const int h; // height
-	const int w; // width
+	const int h; // height will be 25
+	const int w; // width 79
 
 public:
 
-	Display(int h, int w);
-	// updates theDisplay at Posn of who notified
-	virtual void notify(Subject &whoNotified);
+	Display();
+	~Display();
 
-	virtual SubscriptionType getSubType() override;
+	// updates theDisplay at Posn of who notified
+	//void notify(Subject &whoNotified);
+
+	SubscriptionType getSubType() const override;
 
 	// to output
 	friend std::ostream &operator<<(std::ostream &out, const Display &d);
-}
+};
 
 #endif
