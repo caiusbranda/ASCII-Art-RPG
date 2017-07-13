@@ -40,7 +40,7 @@ void Board::initEmpty(string &source) {
 		}
 	}
 }
-
+]
 void Board::chooseShade() {
 	string file = "cc3kfloorbase.txt";
 	initEmpty(file);
