@@ -9,6 +9,8 @@ class Entity : public Subject {
 	char icon;
 public:
   Posn getPosn();
+  virtual void use(Player &p);
   virtual ~Entity() = 0;
-}
+};
+
 #endif
