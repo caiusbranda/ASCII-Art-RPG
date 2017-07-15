@@ -23,20 +23,11 @@ public:
 	int getHp() const;
 	int getAtt() const;
 	int getDef() const;
-	//Posn getPos() const;
-
-// mutators:
-	void setHp(int hp);
-	void setAtt(int att);
-	void setDef(int def);
-	//void setPos(Posn &p);
-
-	//void move(string dir);
-
+  virtual void move(string dir);
+  void attack(Character &other);
 
 // abstract class
-virtual ~Character() = 0;
-
+  virtual ~Character() = 0;
 };
 
 #endif
