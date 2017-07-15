@@ -14,6 +14,8 @@ class Display final : public Observer {
 	const int h; // height will be 25
 	const int w; // width 79
 
+
+
 public:
 
 	Display();

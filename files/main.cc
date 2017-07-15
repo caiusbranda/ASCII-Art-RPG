@@ -26,19 +26,19 @@ int main(int argc, char *argv[]){
 		switch(beg) {
 
 			// shade
-			case 's': b->chooseShade(); break;
+			case 's': b->choosePlayer(beg); break;
 /*
 			// drow
-			case 'd': b->chooseDrow(); break;
+			case 'd': b->choosePlayer(beg); break;
 
 			// vamp
-			case 'v': b->chooseVamp(); break;
+			case 'v': b->choosePlayer(beg); break;
 
 			// troll
-			case 't': b->chooseTroll(); break;
+			case 't': b->choosePlayer(beg); break;
 
 			// goblin
-			case 'g': b->chooseGobl(); break;
+			case 'g': b->choosePlayer(beg); break;
 
 			// restart
 			case 'r': b->restart(); break;
@@ -82,6 +82,8 @@ int main(int argc, char *argv[]){
 
 			// quit while game is running
 			case "q": b->giveUp(); break;
+
+			b->updateTurn();
 
 	}
 	*/

@@ -3,7 +3,7 @@
 
 #include "enemy.h"
 
-class Goblin final : public Player {
+class Orc final : public Enemy {
 
 
 public:
