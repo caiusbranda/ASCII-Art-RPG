@@ -4,7 +4,7 @@
 #include "posn.h"
 
 // Entity is an abstract class
-class Entity {
+class Entity : public Subject {
 	int x, y;
 	char icon;
 public:
