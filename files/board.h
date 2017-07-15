@@ -27,7 +27,7 @@ class Board {
 
 	std::map<Posn, Tile*> tiles;
 
-
+	// void generateItem(char i);
 
 	//std::map<Posn, Entity*> ents;
 
@@ -46,10 +46,16 @@ public:
 
 	void chooseShade();
 	/*
-	void chooseDrow();
-	void chooseVamp();
-	void chooseTroll();
-	void chooseGobl();
+	void generateBoard();
+	void choosePlayer(char c);
+	void move(string dir);
+	void attack(string dir);
+	void use(string dir);
+	void restart();
+	void giveUp();
+	void quit();
+	void freeze();
+	void updateTurn();
 	*/
 
 	// displays board to cout
