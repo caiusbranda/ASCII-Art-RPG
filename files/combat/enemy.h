@@ -6,12 +6,13 @@
 class Enemy : public Character {
 
 
-
+	bool hostile;
 
 
 public:
 
-	virtual ~Enemy() = 0;
+	virtual Enemy();
+	virtual ~Enemy();
   virtual void attackedBy(Shade &e) = 0;
   virtual void attackedBy(Drow &e) = 0;
   virtual void attackedBy(Goblin &e) = 0;

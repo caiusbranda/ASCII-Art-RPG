@@ -8,6 +8,7 @@ class Orc final : public Enemy {
 
 public:
 
+	void attackedBy(Goblin &g) = 0 override;
 
 };
 

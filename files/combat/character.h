@@ -1,10 +1,8 @@
 #ifndef __CHARACTERS_H__
 #define __CHARACTERS_H__
 
-struct Posn {
-	int x;
-	int y;
-}
+#include "posn.h"
+
 
 class Character {
 
@@ -14,20 +12,22 @@ class Character {
 	int att;
 	int def;
 
-	//Posn p;
+	Posn p;
 
 public:
+
+	Character(int maxhp, int hp, int att, int def, Posn p);
 
 // accessors:
 	int getMaxHp() const;
 	int getHp() const;
 	int getAtt() const;
 	int getDef() const;
-  virtual void move(string dir);
-  void attack(Character &other);
 
-// abstract class
-  virtual ~Character() = 0;
+  //virtual void move(string dir);
+
+  virtual void attack(Character &other) = 0;
+
 };
 
 #endif

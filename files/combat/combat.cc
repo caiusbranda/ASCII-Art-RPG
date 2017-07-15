@@ -1,4 +1,7 @@
 #include <iostream>
+#include <string>
+
+#include "posn.h"
 
 #include "characters.h"
 #include "player.h"
@@ -9,7 +12,6 @@
 #include "elf.h"
 
 int main() {
-
 
 
 

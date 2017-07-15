@@ -6,9 +6,11 @@ class Player : public Character {
 
 public:
 
-  virtual void move(string direction) = 0;
-	virtual ~Player() = 0;
-  virtual void attackedBy(Elf &e) = 0;
+  virtual ~Player() = 0;
+
+  //virtual void move(string direction) = 0;
+
+  //virtual void attackedBy(Elf &e) = 0;
   virtual void attackedBy(Orc &e) = 0;
   /*
   virtual void attackedBy(Halfling &e) = 0;
