@@ -6,7 +6,7 @@ class Player : public Character {
 
 public:
 
-  virtual ~Player() = 0;
+  virtual ~Player();
 
   //virtual void move(string direction) = 0;
 
@@ -19,6 +19,8 @@ public:
   virtual void attackedBy(Dwarf &e) = 0;
   virtual void attackedBy(Human &e) = 0;
   */
+
+  virtual int potionMagnitude();
 };
 
 #endif
