@@ -2,10 +2,12 @@
 
 using namespace std;
 
-char getIcon() const {
+Player::Player(int maxhp, int hp, int att, int def, Posn p) : Character{maxhp, hp, att, def, p} {}
+
+char Player::getType() const {
 	return '@';
 }
 
-int potionMagnitude() {
+int Player::potionMagnitude() {
 	return 1;
 }

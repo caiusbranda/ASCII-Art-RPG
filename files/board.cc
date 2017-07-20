@@ -75,7 +75,7 @@ void Board::generateFloor() {
 void Board::generatePlayer() {
 	Posn p{10, 5};
 	this->player = new Goblin(p);
-	tiles.at(p)->notifyComing(*player);
+	tiles.at(p)->notifyComing(player);
 
 }
 

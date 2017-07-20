@@ -1,4 +1,4 @@
-#include "character.cc"
+#include "character.h"
 
 Character::Character(int maxhp, int hp, int att, int def, Posn p) :
 	maxhp{maxhp}, hp{hp}, att{att}, def{def}, p{p} {}

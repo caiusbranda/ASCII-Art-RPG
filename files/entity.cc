@@ -5,3 +5,4 @@ Posn Entity::getPosn() const {
   return Posn(this->x, this->y);
 }
 
+Entity::~Entity(){}

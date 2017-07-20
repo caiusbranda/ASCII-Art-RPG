@@ -7,9 +7,11 @@ class Player : public Character {
 
 public:
 
+  Player(int maxhp, int hp, int att, int def, Posn p);
+
   virtual ~Player() = default;
 
-  char getIcon() const;
+  char getType() const override;
 
   //virtual void move(string direction) = 0;
 

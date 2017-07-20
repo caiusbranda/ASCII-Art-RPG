@@ -16,7 +16,10 @@ class Subject {
 public:
 	void attach(Display *o);
 	void notifyDisplay();
+  virtual Posn getPosn() const = 0;
+  virtual char getType() const = 0;
 	virtual ~Subject() = 0;
+
 };
 
 #endif

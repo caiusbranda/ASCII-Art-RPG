@@ -7,3 +7,6 @@ void Subject::attach(Display *o) {
 void Subject::notifyDisplay() {
 	this->display->notifyComing(this);
 }
+
+
+Subject::~Subject(){}

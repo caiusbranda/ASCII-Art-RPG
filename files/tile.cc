@@ -1,3 +1,4 @@
+
 #include "tile.h"
 
 using namespace std;
@@ -15,8 +16,8 @@ void Tile::notifyLeave() {
     this->type = '.'; // sets cell to empty
   }
 
-void Tile::notifyComing(Subject &whoNotified) {
-    this->type = whoNotified.getType();
+void Tile::notifyComing(Subject *whoNotified) {
+    this->type = whoNotified->getType();
     this->notifyDisplay();
   }
 
@@ -37,3 +38,4 @@ Posn Tile::getPosn() const {
 	return p;
 }
 
+Tile::~Tile(){}

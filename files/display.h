@@ -6,9 +6,7 @@
 #include "observer.h"
 #include "posn.h"
 #include "subject.h"
-#include "tile.h"
 
-class Tile;
 class Subject;
 struct Posn;
 
@@ -28,7 +26,7 @@ public:
 	// updates theDisplay at Posn of who notified
 	//void notify(Subject &whoNotified);
 
-	void notifyComing(Tile &whoNotified) override;
+	void notifyComing(Subject *whoNotified) override;
 	void notifyLeave() override;
 
 	SubscriptionType getSubType() const override;

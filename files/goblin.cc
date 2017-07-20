@@ -6,7 +6,7 @@
 using namespace std;
 
 // goblin (110 HP, 15 Atk, 20 Def, steals 5 gold from every slain enemy)
-Goblin::Goblin(Posn p) : Character{110, 110, 15, 20, p} {}
+Goblin::Goblin(Posn p) : Player{110, 110, 15, 20, p} {}
 
 Goblin::~Goblin() {}
 /*

@@ -23,14 +23,14 @@ public:
   //notifies this tile that the thing previously on it has left (and thus revert to default)
   void notifyLeave() override;
 
-  void notifyComing(Subject &whoNotified) override;
+  void notifyComing(Subject *whoNotified) override;
 
   SubscriptionType getSubType() const override;
 
   int getChamber() const;
   void setChamber(int cham);
 
-
+  ~Tile();
 };
 
 #endif

@@ -27,8 +27,8 @@ std::ostream &operator<<(std::ostream &out, const Display &d) {
 }
 
 
-void Display::notifyComing(Tile &whoNotified) {
-	this->theDisplay[whoNotified.getPosn()] = whoNotified.getType();
+void Display::notifyComing(Subject *whoNotified) {
+	this->theDisplay[whoNotified->getPosn()] = whoNotified->getType();
 }
 
 void Display::notifyLeave() {
