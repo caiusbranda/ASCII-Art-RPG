@@ -6,6 +6,7 @@ struct Posn {
 	int y;
 
 	bool operator<(const Posn &rhs) const;
+	Posn operator+(const Posn &rhs) const;
 
 	Posn(int x, int y);
 };

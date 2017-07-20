@@ -1,15 +1,20 @@
+#include <cstdlib>
+#include <ctime>
+
 #include "board.h"
 
 using namespace std;
 
-Board::Board() : disp{nullptr} {}
+Board::Board() : disp{nullptr}, player{nullptr}, numChambers{5} {}
 
 Board::~Board() {
 	delete disp;
 
-	for (auto i : tiles) {
-		delete &i;
-	}
+	delete player;
+
+	for (auto i : tiles) delete &i;
+
+	for (auto i : chambers) delete &i;
 }
 
 void Board::initEmpty(string &source) {
@@ -34,18 +39,51 @@ void Board::initEmpty(string &source) {
 
 			if(c != '\n') {
 				tiles[p] = new Tile{p,c};
+				tiles.at(p)->attach(disp);
+
 				disp->updateDisplay(p,c);
 				++x;
 			}
 		}
 	}
+
+	for (int i = 1; i <= numChambers; ++i) {
+		chambers.push_back(new Chamber(this, i));
+		//cout << *(chambers.at(i));
+	}
+
 }
-]
-void Board::chooseShade() {
+
+void Board::choosePlayer(char c) {
 	string file = "cc3kfloorbase.txt";
+
 	initEmpty(file);
+	generateFloor();
+}
+
+void Board::generateFloor() {
+	// order is player, stairs, potions, gold, enemies
+	generatePlayer();
+	/*
+	generateStairs();
+	generatePotions();
+	generateGold();
+	generateEnemies();
+	*/
+}
+
+void Board::generatePlayer() {
+	Posn p{10, 5};
+	this->player = new Goblin(p);
+	tiles.at(p)->notifyComing(*player);
+
 }
 
 void Board::displayBoard() const {
 	cout << *disp;
 }
+
+Tile* Board::getTile(Posn p) const {
+	return tiles.at(p);
+}
+

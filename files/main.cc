@@ -52,6 +52,8 @@ int main(int argc, char *argv[]){
 
 	b->displayBoard();
 
+
+
 /*
 	// commands while running
 	string dir = "";

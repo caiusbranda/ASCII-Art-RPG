@@ -1,11 +1,9 @@
 #include "subject.h"
 
-void Subject::attach(Observer *o) {
-	observers.push_back(o);
+void Subject::attach(Display *o) {
+	this->display = o;
 }
 
-void Subject::notifyObservers(SubscriptionType t) {
-	return;
+void Subject::notifyDisplay() {
+	this->display->notifyComing(this);
 }
-
-Subject::~Subject() {}
