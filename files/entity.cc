@@ -2,7 +2,7 @@
 using namespace std;
 
 Posn Entity::getPosn() const {
-  return Posn(this->x, this->y);
+  return this->p;
 }
 
 Entity::~Entity(){}

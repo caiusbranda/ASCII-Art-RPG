@@ -7,7 +7,7 @@
 
 // Entity is an abstract class
 class Entity : public Subject {
-	int x, y;
+	Posn p;
 	char icon;
 public:
   Posn getPosn() const override;

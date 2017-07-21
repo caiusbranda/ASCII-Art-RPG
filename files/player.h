@@ -13,7 +13,7 @@ public:
 
   char getType() const override;
 
-  //virtual void move(string direction) = 0;
+  virtual void move(string direction);
 
   //virtual void attackedBy(Elf &e) = 0;
   //virtual void attackedBy(Orc &e) = 0;

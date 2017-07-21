@@ -13,8 +13,6 @@ class Character : public Entity {
 	int att;
 	int def;
 
-	Posn p;
-
 public:
 
 	Character(int maxhp, int hp, int att, int def, Posn p);
@@ -25,9 +23,9 @@ public:
 	int getAtt() const;
 	int getDef() const;
 
-  //virtual void move(string dir);
+  virtual void move(Tile &potentialTile);
 
-  //mvirtual void attack(Character &other) = 0;
+  //virtual void attack(Character &other) = 0;
 
 };
 
