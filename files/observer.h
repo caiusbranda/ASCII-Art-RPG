@@ -6,7 +6,7 @@ class Subject;
 
 class Observer {
 public:
-	virtual void notifyComing(Subject &whoNotified) = 0;
+	virtual void notifyComing(Subject *whoNotified) = 0;
 	virtual void notifyLeave() = 0 ;
 	virtual notify(Subject &whoNotified) = 0;
 	virtual SubscriptionType getSubType() const = 0;

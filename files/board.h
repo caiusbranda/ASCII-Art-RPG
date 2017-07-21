@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <vector>
+#include <string>
 
 #include "posn.h"
 
@@ -12,22 +14,37 @@
 #include "display.h"
 #include "subject.h"
 #include "tile.h"
-/*
-#include "room.h"
 #include "chamber.h"
+//#include "character.h"
+//#include "player.h"
+#include "goblin.h"
+
+/*
 #include "passage.h"
 #include "entity.h"
 */
 
 class Display;
+class Chamber;
+class Player;
 
 class Board {
 
 	Display *disp;
 
 	std::map<Posn, Tile*> tiles;
+	std::vector<Chamber *> chambers;
 
-	// void generateItem(char i);
+	Player *player;
+
+	const int numChambers;
+	char playerRace;
+
+	void initEmpty(std::string &source);
+
+	void generateFloor();
+
+	void generatePlayer();
 
 	//std::map<Posn, Entity*> ents;
 
@@ -38,17 +55,16 @@ public:
 	Board();
 	~Board();
 
-	void initEmpty(std::string &source);
-
 	//int getCurFloor() const;
 
 	//Player Character choices:
+	void choosePlayer(char c);
 
-	void chooseShade();
+	//mvoid move(std::string dir);
 	/*
 	void generateBoard();
 	void choosePlayer(char c);
-	void move(string dir);
+
 	void attack(string dir);
 	void use(string dir);
 	void restart();
@@ -60,6 +76,9 @@ public:
 
 	// displays board to cout
 	void displayBoard() const;
+
+	// gets pointer to Tile at p
+	Tile* getTile(Posn p) const;
 
 };
 

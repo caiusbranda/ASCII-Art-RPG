@@ -5,7 +5,9 @@
 #include <map>
 #include "observer.h"
 #include "posn.h"
+#include "subject.h"
 
+class Subject;
 struct Posn;
 
 class Display final : public Observer {
@@ -13,8 +15,6 @@ class Display final : public Observer {
 
 	const int h; // height will be 25
 	const int w; // width 79
-
-
 
 public:
 
@@ -26,7 +26,7 @@ public:
 	// updates theDisplay at Posn of who notified
 	//void notify(Subject &whoNotified);
 
-	void notifyComing(Subject &whoNotified) override;
+	void notifyComing(Subject *whoNotified) override;
 	void notifyLeave() override;
 
 	SubscriptionType getSubType() const override;

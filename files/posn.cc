@@ -7,3 +7,11 @@ bool Posn::operator<(const Posn &rhs) const {
 	if (y == rhs.y) return x < rhs.x;
 	return false;
 }
+
+Posn Posn::operator+(const Posn &rhs) const {
+	Posn ret{x, y};
+
+	ret.x += rhs.x;
+	ret.y += rhs.y;
+	return ret;
+}
