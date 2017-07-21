@@ -63,6 +63,8 @@ void Board::choosePlayer(char c) {
 }
 
 void Board::generateFloor() {
+	srand(time(0)); // seeds generator with current time
+
 	// order is player, stairs, potions, gold, enemies
 	generatePlayer();
 	generatePotions();
@@ -74,7 +76,6 @@ void Board::generateFloor() {
 
 // generates player and stairs
 void Board::generatePlayer() {
-	srand(time(0)); // seeds generator with current time
 
 	// get random chamber
 	int playerChamber = (rand() % numChambers);
@@ -100,6 +101,28 @@ void Board::generatePlayer() {
 }
 
 void Board::generatePotions() {
+	// 10 potions are spawned on each floor.
+	//	each type having 1/6 probability.
+	//	each chamber has equal 1/5 probability.
+	//	Each tile in the chamber has equal chance.
+	int numPotions = 10;
+
+	for (int i = 0; i < numPotions; ++i) {
+		Posn p{0,0};
+		// first pick chamber
+		int potChamber = rand() % numChambers;
+
+		// second pick tile
+		p = chambers[potChamber]->randomTile();
+
+		//	then pick type
+		int whichPot = rand() % 6;
+		// <make pot goes here>
+		// tiles.at(p)->notifyComing(???)
+	}
+}
+
+void Board::generateGold() {
 
 }
 
