@@ -5,16 +5,17 @@
 
 using namespace std;
 
-Board::Board() : disp{nullptr}, player{nullptr}, numChambers{5} {}
+Board::Board() : disp{nullptr}, player{nullptr}, numChambers{5}, playerRace{'s'}
+	{}
 
 Board::~Board() {
 	delete disp;
 
 	delete player;
 
-	for (auto i : tiles) delete &i;
+	for (auto &i : tiles) delete &i;
 
-	for (auto i : chambers) delete &i;
+	for (auto &i : chambers) delete &i;
 }
 
 void Board::initEmpty(string &source) {
@@ -65,18 +66,37 @@ void Board::generateFloor() {
 	// order is player, stairs, potions, gold, enemies
 	generatePlayer();
 	/*
-	generateStairs();
 	generatePotions();
 	generateGold();
 	generateEnemies();
 	*/
 }
 
+// generates player and stairs
 void Board::generatePlayer() {
-	Posn p{10, 5};
-	this->player = new Goblin(p);
-	tiles.at(p)->notifyComing(player);
+	srand(time(0)); // seeds generator with current time
 
+	// get random chamber
+	int playerChamber = (rand() % numChambers);
+
+	// get random tile within chosen chamber
+	Posn p1 = chambers[playerChamber]->randomTile();
+
+	// creates player on that tile
+	this->player = new Goblin(p1);
+
+	// update display
+	tiles.at(p1)->notifyComing(player);
+
+	int stairsChamber = (rand() % numChambers);
+	while(true) {
+		if (stairsChamber != playerChamber) break;
+		stairsChamber = (rand() % numChambers);
+	}
+
+	Posn p2 = chambers[stairsChamber]->randomTile();
+
+	tiles.at(p2)->notifyComing('/');
 }
 
 void Board::displayBoard() const {

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <map>
 #include <vector>
+#include <string>
 
 #include "posn.h"
 
@@ -37,6 +38,7 @@ class Board {
 	Player *player;
 
 	const int numChambers;
+	char playerRace;
 
 	void initEmpty(std::string &source);
 
@@ -58,10 +60,11 @@ public:
 	//Player Character choices:
 	void choosePlayer(char c);
 
+	//mvoid move(std::string dir);
 	/*
 	void generateBoard();
 	void choosePlayer(char c);
-	void move(string dir);
+
 	void attack(string dir);
 	void use(string dir);
 	void restart();

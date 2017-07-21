@@ -1,3 +1,6 @@
+#include <cstdlib>
+#include <ctime>
+
 #include "chamber.h"
 
 using namespace std;
@@ -41,10 +44,10 @@ Chamber::Chamber(Board *b, int type)
 void Chamber::fillEmpties() {
 
 	// each row (first will always be a wall)
-	for (int y = 1; y < h; ++y) {
+	for (int y = 0; y < h; ++y) {
 
 		// each column (first will always be a wall)
-		for (int x = 1; x < w; ++x) {
+		for (int x = 0; x < w; ++x) {
 			Posn lp = {x,y}; // local pos (tile relative to chamber)
 			Posn gp = p + lp; // global pos (tile relative to board)
 
@@ -65,6 +68,13 @@ void Chamber::fillEmpties() {
 			}
 		}
 	}
+}
+
+Posn Chamber::randomTile() const {
+	srand(time(0));
+	int whichTile = (rand() % numEmpty);
+
+	return chamberTiles[whichTile]->getPosn();
 }
 
 bool Chamber::notInChamber(Tile *t) const {

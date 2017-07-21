@@ -27,7 +27,7 @@ public:
 
   //virtual void move(string dir);
 
-  //mvirtual void attack(Character &other) = 0;
+  virtual void attack(Character &other) = 0;
 
 };
 

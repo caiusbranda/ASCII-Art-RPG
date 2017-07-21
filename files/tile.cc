@@ -1,4 +1,3 @@
-
 #include "tile.h"
 
 using namespace std;
@@ -20,6 +19,11 @@ void Tile::notifyComing(Subject *whoNotified) {
     this->type = whoNotified->getType();
     this->notifyDisplay();
   }
+
+void Tile::notifyComing(char c) {
+  this->type = c;
+  this->notifyDisplay();
+}
 
 SubscriptionType Tile::getSubType() const {
 	return SubscriptionType::Display;

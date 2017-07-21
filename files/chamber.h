@@ -45,6 +45,8 @@ public:
 
 	Tile* getEmptyTile(Posn p);
 
+	Posn randomTile() const;
+
 	Chamber(Board *b, int type); // so it knows which chamber is being constructed
 	~Chamber(); // Dtor doesn't delete tiles
 
