@@ -2,7 +2,7 @@
 using namespace std;
 
 // Ctor
-Potion::Potion(int amount, string type): Item{amount}, type{type}{}
+Potion::Potion(int amount, string type, bool isNearby): Item{amount, type}, isNearby{isNearby}{}
 
 // use potion
 void Potion::use(Player &p){}

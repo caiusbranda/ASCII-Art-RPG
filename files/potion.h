@@ -1,16 +1,14 @@
-
 #ifndef __POTION_H__
 #define __POTION_H__
 
-#include <string>
 #include "item.h"
 
 class Potion : public Item {
-	std::string type;
+	bool isNearby;
 
 public:
 
-	Potion(int amount, std::string type);
+	Potion(int amount, std::string type, bool isNearby);
 	void use(Player &p) override;
 
 };

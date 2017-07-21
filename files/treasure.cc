@@ -2,7 +2,7 @@
 using namespace std;
 
 // Ctor
-Treasure::Treasure(int amount): Item{amount}{}
+Treasure::Treasure(int amount, string type): Item{amount, type}{}
 
 // Picks up gold
 void Treasure::use(Player &p){

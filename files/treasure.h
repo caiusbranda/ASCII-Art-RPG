@@ -6,7 +6,7 @@
 class Treasure final : public Item {
 
 public:
-	Treasure(int amount);
+	Treasure(int amount, std::string type);
 	void use(Player &p) override;
 
 };
