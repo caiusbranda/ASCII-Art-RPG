@@ -19,15 +19,20 @@ public:
 
 	Character(int maxhp, int hp, int att, int def, Posn p);
 
-// accessors:
+	// accessors:
 	int getMaxHp() const;
 	int getHp() const;
 	int getAtt() const;
 	int getDef() const;
+	
+	// mutators:
+	void setHp(int newHp);
+  void setAtt(int newAtt);
+  void setDef(int newDef);
+  
+	//virtual void move(string dir);
 
-  //virtual void move(string dir);
-
-  virtual void attack(Character &other) = 0;
+ // virtual void attack(Character &other) = 0;
 
 };
 

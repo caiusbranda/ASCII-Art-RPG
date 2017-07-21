@@ -18,3 +18,23 @@ int Character::getAtt() const {
 int Character::getDef() const {
 	return def;
 }
+
+void Character::setHp(int newHp){
+	if (newHp > maxhp){
+		this->hp = maxhp;
+	}
+	else if (newHp < 0){
+		this->hp = 0;	
+	}
+	else {
+	  this->hp = newHp;
+	}
+}
+
+void Character::setAtt(int newAtt){
+	this->att = newAtt;
+}
+
+void Character::setDef(int newDef){
+	this->def = newDef;
+}
