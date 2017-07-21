@@ -60,7 +60,7 @@ public:
 	//Player Character choices:
 	void choosePlayer(char c);
 
-	//mvoid move(std::string dir);
+	void move(std::string dir);
 	/*
 	void generateBoard();
 	void choosePlayer(char c);

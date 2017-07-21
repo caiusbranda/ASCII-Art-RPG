@@ -65,8 +65,8 @@ void Board::choosePlayer(char c) {
 void Board::generateFloor() {
 	// order is player, stairs, potions, gold, enemies
 	generatePlayer();
-	/*
 	generatePotions();
+	/*
 	generateGold();
 	generateEnemies();
 	*/
@@ -97,6 +97,10 @@ void Board::generatePlayer() {
 	Posn p2 = chambers[stairsChamber]->randomTile();
 
 	tiles.at(p2)->notifyComing('/');
+}
+
+void Board::generatePotions() {
+
 }
 
 void Board::displayBoard() const {
