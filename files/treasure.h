@@ -4,10 +4,9 @@
 #include "item.h"
 
 class Treasure final : public Item {
-	int value;
 
 public:
-
+	Treasure(int amount);
 	void use(Player &p) override;
 
 };
