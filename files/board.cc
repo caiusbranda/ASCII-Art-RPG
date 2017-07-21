@@ -117,13 +117,30 @@ void Board::generatePotions() {
 
 		//	then pick type
 		int whichPot = rand() % 6;
-		// <make pot goes here>
+		if (whichPot == 0) {
+
+		}
+		else ()
 		// tiles.at(p)->notifyComing(???)
 	}
 }
 
 void Board::generateGold() {
+	// 10 piles of gold
+	// the spawn rate of gold is
+	//	5/8 chance of normal,
+	//	1/8 dragon hoard,
+	//	1/4 small hoard.
+	int numPiles = 10;
 
+	for (int i = 0; i < numPiles; ++i) {
+		Posn p{0,0};
+		//first pick chamber and tile
+		int goldChamber = rand() % numChambers;
+		p = chambers[goldChamber]->randomTile();
+
+		// then pick type of gold.
+	}
 }
 
 void Board::displayBoard() const {

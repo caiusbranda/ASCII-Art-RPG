@@ -8,6 +8,7 @@
 struct Posn;
 
 class Tile final : public Subject, public Observer {
+  Entity *e;
 	Posn p;
 	char type; // used for printing to display and determining its type
 	int chamber; // which chamber is it in
