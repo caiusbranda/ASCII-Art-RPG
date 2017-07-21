@@ -5,16 +5,12 @@
 #include <string>
 #include "item.h"
 
-class Potion final : public Item {
-
-	int amount;
+class Potion : public Item {
 	std::string type;
 
 public:
 
-	Potion();
-	~Potion();
-
+	Potion(int amount, std::string type);
 	void use(Player &p) override;
 
 };

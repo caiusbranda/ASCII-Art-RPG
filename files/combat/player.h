@@ -5,7 +5,6 @@ class Player : public Character {
 
 
 public:
-
   virtual ~Player();
 
   //virtual void move(string direction) = 0;
