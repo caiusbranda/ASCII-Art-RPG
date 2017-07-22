@@ -8,6 +8,10 @@ Stairs::~Stairs() {}
 
 void Stairs::notify(Subject *whoNotified) {}
 
+char Stairs::getType() const {
+	return this->getIcon();
+}
+
 SubscriptionType Stairs::getSubType() const {
 	return SubscriptionType::Stairs;
 }

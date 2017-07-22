@@ -8,6 +8,10 @@ void Item::notify(Subject *whoNotified) {
 	return;
 }
 
+char Item::getType() const {
+	return this->getIcon();
+}
+
 // void Item::notifyComing(Subject *whoNotified){}
 
 // void Item::notifyLeave(){}

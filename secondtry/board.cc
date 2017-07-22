@@ -18,7 +18,9 @@ Board::~Board() {
 	for (auto &i : chambers) delete &i;
 }
 
-void Board::initEmpty(string &source) {
+//////////// INITIALIZATION /////////////
+
+void Board::initEmpty(const string &source) {
 	if (disp != nullptr) return;
 
 	ifstream in{source};
@@ -40,6 +42,7 @@ void Board::initEmpty(string &source) {
 
 			if(c != '\n') {
 				tiles[p] = new Tile{p,c};
+
 				tiles.at(p)->attach(disp);
 
 				disp->updateDisplay(p,c);
@@ -48,11 +51,12 @@ void Board::initEmpty(string &source) {
 		}
 	}
 
+
 	for (int i = 1; i <= numChambers; ++i) {
+
 		chambers.push_back(new Chamber(this, i));
 		//cout << *(chambers.at(i));
 	}
-
 }
 
 void Board::choosePlayer(char c) {
@@ -62,11 +66,17 @@ void Board::choosePlayer(char c) {
 	generateFloor();
 }
 
+
+
+//////////// GENERATION /////////////
+
 void Board::generateFloor() {
 	srand(time(0)); // seeds generator with current time
 
 	// order is player, stairs, potions, gold, enemies
+
 	generatePlayer();
+
 	/*m
 	generatePotions();
 	generateGold();
@@ -81,10 +91,10 @@ void Board::generatePlayer() {
 	int playerChamber = (rand() % numChambers);
 
 	// get random tile within chosen chamber
-	Posn p1 = chambers[playerChamber]->randomTile();
+	Posn pp = chambers[playerChamber]->randomTile();
 
 	// creates player on that tile
-	this->player = new Shade(p1);
+	this->player = new Shade(pp);
 
 	// attach display to player observers
 	player->attach(disp);
@@ -98,10 +108,10 @@ void Board::generatePlayer() {
 		stairsChamber = (rand() % numChambers);
 	}
 
-	Posn p2 = chambers[stairsChamber]->randomTile();
+	Posn sp = chambers[stairsChamber]->randomTile();
 
 	// make stairs
-	this->stairs = new Stairs(p2);
+	this->stairs = new Stairs(sp);
 
 	// attach display to stairs observers
 	stairs->attach(disp);
@@ -110,6 +120,9 @@ void Board::generatePlayer() {
 
 	// add stairs to player's observers
 	player->attach(stairs);
+
+	// add adjacent tiles to player's observers LAST
+	this->attachTiles(player);
 }
 
 
@@ -158,11 +171,47 @@ void Board::generateGold() {
 	}
 }
 */
+
+///////// MOVEMENT //////////
+
+void Board::movePlayer(const string &dir) {
+	bool success = player->move(dir);
+	if (success) {
+		attachTiles(player);
+		disp->notify(tiles.at(player->getLastPos()));
+	}
+}
+
+///////// MISC ////////////
+void Board::attachTiles(Subject *s) {
+	Posn sp = s->getCurPos();
+	for (int y = -1; y <= 1; ++y) {
+		for (int x = -1; x <= 1; ++x) {
+			Posn tp = {x,y};
+			tp = tp + sp;
+			s->attach(tp, tiles.at(tp));
+		}
+	}
+}
+
+///////// COMBAT ////////////
+
+void Board::attack(const string &dir) {
+	return;
+}
+
+void Board::use(const string &dir) {
+	return;
+}
+
+/////////////////////////////
+
+
 void Board::displayBoard() const {
 	cout << *disp;
 }
 
-Tile* Board::getTile(Posn p) const {
+Tile* Board::getTile(const Posn &p) const {
 	return tiles.at(p);
 }
 

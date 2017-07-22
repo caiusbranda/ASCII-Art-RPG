@@ -2,7 +2,9 @@
 using namespace std;
 
 Entity::Entity(Posn p, char icon)
-	: curPos{p}, lastPos{p}, icon{icon} {}
+	: icon{icon}, curPos{p}, lastPos{p} {}
+
+Entity::~Entity(){}
 
 char Entity::getIcon() const {
 	return this->icon;
@@ -16,4 +18,6 @@ Posn Entity::getLastPos() const {
 	return this->lastPos;
 }
 
-Entity::~Entity(){}
+void Entity::detachTiles() {
+	return;
+}

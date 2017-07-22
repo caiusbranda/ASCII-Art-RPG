@@ -6,6 +6,7 @@
 #include "observer.h"
 #include "posn.h"
 #include "subject.h"
+#include "player.h"
 
 class Subject;
 struct Posn;
@@ -16,12 +17,28 @@ class Display final : public Observer {
 	const int h; // height will be 25
 	const int w; // width 79
 
+	// for stats display
+	std::string race;
+	int gold;
+	int floor;
+	int hp;
+	int att;
+	int def;
+	std::string action;
+
+
+	void doNotify(Subject *whoNotified);
+
 public:
 
 	Display();
 	~Display();
 
+	void notify(Player *whoNotified);
 	void notify(Subject *whoNotified) override;
+
+
+	char getType() const override;
 
 	void updateDisplay(const Posn &p, char c);
 

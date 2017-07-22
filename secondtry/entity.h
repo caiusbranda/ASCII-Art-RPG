@@ -7,17 +7,21 @@
 
 // Entity is an abstract class
 class Entity : public Subject {
+
+	char icon;
+
+protected:
 	Posn curPos;
 	Posn lastPos;
-	char icon;
+
+	void detachTiles();
 public:
 
 	Entity(Posn p, char icon);
 
-	char getIcon() const override;
-
   Posn getCurPos() const override;
   Posn getLastPos() const override;
+  char getIcon() const override;
   //virtual void use(Player &p);
   virtual ~Entity() = 0;
 };

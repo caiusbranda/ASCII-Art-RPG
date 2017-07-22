@@ -12,6 +12,8 @@ public:
 
 	void notify(Subject *whoNotified) override;
 
+	char getType() const override;
+
 	SubscriptionType getSubType() const override;
 };
 

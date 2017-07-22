@@ -18,7 +18,7 @@ public:
 	void notifyComing(Subject *whoNotified) override;
 	void notifyLeave() override;
 	*/
-
+	char getType() const override;
 	void notify(Subject *whoNotified) override;
 	SubscriptionType getSubType() const override;
 

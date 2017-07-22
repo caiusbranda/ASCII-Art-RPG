@@ -11,8 +11,10 @@ public:
 	virtual void notifyLeave() = 0 ;
 	*/
 	virtual void notify(Subject *whoNotified) = 0;
+	virtual char getType() const = 0;
 	virtual SubscriptionType getSubType() const = 0;
 	virtual ~Observer() = default;
+
 };
 
 #endif

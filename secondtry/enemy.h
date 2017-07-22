@@ -13,6 +13,8 @@ public:
 
 	void notify(Subject *whoNotified) override;
 
+	char getType() const override;
+
 	virtual ~Enemy() = 0;
 
 	/*

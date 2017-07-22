@@ -2,6 +2,8 @@
 #define __SUBJECT_H__
 
 #include <vector>
+#include <map>
+
 #include "posn.h"
 #include "display.h"
 #include "subscriptions.h"
@@ -11,9 +13,13 @@ class Observer;
 class Display;
 
 class Subject {
-	std::vector<Observer *> observers;
+
+protected:
+	std::vector<Observer *> otherObservers;
+	std::map<Posn, Observer *> tileObservers;
 
 public:
+	void attach(const Posn &p, Observer *o);
 	void attach(Observer *o);
 
 	void notifyObservers(SubscriptionType t);

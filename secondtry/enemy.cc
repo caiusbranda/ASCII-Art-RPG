@@ -12,3 +12,7 @@ SubscriptionType Enemy::getSubType() {
 void Enemy::notify(Subject *whoNotified) {
 	return;
 }
+
+char Enemy::getType() const {
+	return this->getIcon();
+}

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Tile::Tile(Posn p, char type) : p{p}, type{type}, chamber{0} {
+Tile::Tile(Posn p, char type) : p{p}, base{type}, type{type}, chamber{0} {
 
 }
 
@@ -13,13 +13,13 @@ char Tile::getType() const {
 
 void Tile::notifyLeave() {
     this->type = '.'; // sets cell to empty
-  }
+}
 
 
 void Tile::notify(Subject *whoNotified) {
     this->type = whoNotified->getIcon();
     this->notifyObservers(SubscriptionType::Display);
-  }
+}
 /*
 void Tile::notifyComing(char c) {
   this->type = c;
@@ -28,7 +28,7 @@ void Tile::notifyComing(char c) {
 */
 
 SubscriptionType Tile::getSubType() const {
-	return SubscriptionType::Display;
+	return SubscriptionType::Move;
 }
 
 Posn Tile::getCurPos() const {

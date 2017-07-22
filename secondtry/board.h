@@ -42,8 +42,9 @@ class Board {
 	const int numChambers;
 	char playerRace;
 
-	void initEmpty(std::string &source);
+	void initEmpty(const std::string &source);
 
+// generation
 	void generateFloor();
 	void generatePlayer();
 	/*
@@ -55,6 +56,9 @@ class Board {
 
 	//int curFloor;
 
+// misc
+	void attachTiles(Subject *s);
+
 public:
 
 	Board();
@@ -65,13 +69,14 @@ public:
 	//Player Character choices:
 	void choosePlayer(char c);
 
-	void move(std::string dir);
-	/*
-	void generateBoard();
-	void choosePlayer(char c);
+	void movePlayer(const std::string &dir);
 
-	void attack(string dir);
-	void use(string dir);
+
+	void generateBoard();
+
+	void attack(const std::string &dir);
+	void use(const std::string &dir);
+	/*
 	void restart();
 	void giveUp();
 	void quit();
@@ -83,7 +88,7 @@ public:
 	void displayBoard() const;
 
 	// gets pointer to Tile at p
-	Tile* getTile(Posn p) const;
+	Tile* getTile(const Posn &p) const;
 
 };
 

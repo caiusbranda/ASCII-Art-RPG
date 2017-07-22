@@ -11,6 +11,7 @@ struct Posn;
 class Tile final : public Subject, public Observer {
   Entity *e;
 	Posn p;
+  const char base;
 	char type; // used for printing to display and determining its type
 	int chamber; // which chamber is it in
 
@@ -21,7 +22,7 @@ public:
 
 // accessors
   Posn getPosn() const;
-  char getType() const;
+  char getType() const override;
   int getChamber() const;
 
 // observer methods

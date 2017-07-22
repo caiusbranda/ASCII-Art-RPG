@@ -3,7 +3,7 @@
 
 #include "entity.h"
 #include "posn.h"
-
+#include "tile.h"
 
 class Character : public Entity {
 
@@ -12,6 +12,16 @@ class Character : public Entity {
 	int hp;
 	int att;
 	int def;
+
+	std::string action;
+
+	bool canMove(const Posn &np);
+
+
+
+protected:
+	virtual void moveEffect();
+
 
 public:
 
@@ -24,7 +34,7 @@ public:
 	int getDef() const;
 
 
-  //virtual void move(string dir);
+  bool move(const std::string &dir);
 
   //virtual void attack(Character &other) = 0;
 

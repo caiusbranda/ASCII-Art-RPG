@@ -5,9 +5,12 @@
 
 class Player : public Character {
 
+  std::string race;
+  int gold;
+
 public:
 
-  Player(int maxhp, int hp, int att, int def, Posn p);
+  Player(int maxhp, int hp, int att, int def, Posn p, std::string race);
 
   virtual ~Player() = default;
 
@@ -26,6 +29,10 @@ public:
   */
 
   virtual int potionMagnitude();
+
+  int getGold();
+  std::string getRace();
+  std::string getAction();
 };
 
 #endif

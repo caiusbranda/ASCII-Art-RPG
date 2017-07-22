@@ -42,17 +42,19 @@ Chamber::Chamber(Board *b, int type)
 }
 
 void Chamber::fillEmpties() {
-
 	// each row (first will always be a wall)
 	for (int y = 0; y < h; ++y) {
 
 		// each column (first will always be a wall)
 		for (int x = 0; x < w; ++x) {
+
 			Posn lp = {x,y}; // local pos (tile relative to chamber)
 			Posn gp = p + lp; // global pos (tile relative to board)
 
 			// get tile at posn from board
+
 			Tile *t = b->getTile(gp);
+
 			char c = t->getType();
 
 			// check if empty, (c == '.') // else do nothing and move on.
