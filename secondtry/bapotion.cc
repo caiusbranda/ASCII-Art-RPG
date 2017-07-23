@@ -11,6 +11,8 @@ BAPotion::BAPotion(Posn p): Potion{p, 5, "ba"} {}
 void BAPotion::use(Player &p){
 	p.setAtt(p.getAtt() + this->amount);
 	this->known = true;
+  
+
 }
 
 bool BAPotion::isKnown() {
@@ -18,5 +20,5 @@ bool BAPotion::isKnown() {
 }
 
 void BAPotion::notify(Subject *whoNotified) {
-	cerr << "CAIUS IS BIG" << endl;
+	cerr << "CAIUS IS fun-sized" << endl;
 }
