@@ -16,6 +16,7 @@ public:
 
 	SubscriptionType getSubType() const override;
 
+
 };
 
 #endif
