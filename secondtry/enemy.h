@@ -4,7 +4,7 @@
 #include "character.h"
 
 class Enemy : public Character, public Observer {
-	bool hasAttacked;
+	bool nearPlayer;
 
 public:
 
@@ -16,15 +16,22 @@ public:
 
 	char getType() const override;
 
+  bool isNearPlayer() const;
+
 	virtual ~Enemy() = 0;
 
-	/*
-  virtual void attackedBy(Shade &e) = 0;
-  virtual void attackedBy(Drow &e) = 0;
-  virtual void attackedBy(Goblin &e) = 0;
-  virtual void attackedBy(Vampire &e) = 0;
-  virtual void attackedBy(Troll &e) = 0;
-	*/
+  virtual void attack(Player *player) = 0;
+
+  virtual void attackedBy(Shade *e);
+
+  virtual void attackedBy(Drow *e);
+
+  virtual void attackedBy(Goblin *e);
+
+  virtual void attackedBy(Vampire *e);
+
+  virtual void attackedBy(Troll *e);
+
 };
 
 #endif

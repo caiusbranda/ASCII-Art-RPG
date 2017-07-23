@@ -24,3 +24,7 @@ void Goblin::attackedBy(Orc &o) {
 	//Damage(Defender) = ceiling((100/(100+Def(Defender))) * Atk(Attacker))
 }
 */
+
+void Goblin::attack(Enemy *enemy) {
+  enemy->attackedBy(this);
+}
