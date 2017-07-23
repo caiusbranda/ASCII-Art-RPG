@@ -10,6 +10,8 @@ class BDPotion final : public Potion{
 		void use(Player &p) override;
 
 		bool isKnown();
+
+		void notify(Subject *whoNotified) override;
 };
 
 #endif

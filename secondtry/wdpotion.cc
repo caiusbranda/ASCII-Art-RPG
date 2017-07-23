@@ -15,3 +15,8 @@ void WDPotion::use(Player &p){
 bool WDPotion::isKnown() {
 	return this->known;
 }
+
+void WDPotion::notify(Subject *whoNotified) {
+	cerr << "CAIUS IS BIG" << endl;
+}
+

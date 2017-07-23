@@ -18,6 +18,3 @@ Posn Entity::getLastPos() const {
 	return this->lastPos;
 }
 
-void Entity::detachTiles() {
-	return;
-}

@@ -8,7 +8,10 @@ class WDPotion final : public Potion{
 	public:
 	  WDPotion(Posn p);
 		void use(Player &p) override;
+
 		bool isKnown();
+
+		void notify(Subject *whoNotified) override;
 };
 
 #endif

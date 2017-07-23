@@ -2,7 +2,7 @@
 #define __ITEM_H__
 
 #include <string>
-#include "Entity.h"
+#include "entity.h"
 
 class Player;
 

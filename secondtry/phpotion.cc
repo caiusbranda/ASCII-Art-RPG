@@ -15,3 +15,8 @@ void PHPotion::use(Player &p){
 bool PHPotion::isKnown() {
 	return this->known;
 }
+
+void PHPotion::notify(Subject *whoNotified) {
+	cerr << "CAIUS IS BIG" << endl;
+}
+

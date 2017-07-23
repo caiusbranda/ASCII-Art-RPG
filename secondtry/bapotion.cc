@@ -1,4 +1,5 @@
 #include "bapotion.h"
+
 using namespace std;
 
 bool BAPotion::known = false;
@@ -14,4 +15,8 @@ void BAPotion::use(Player &p){
 
 bool BAPotion::isKnown() {
 	return this->known;
+}
+
+void BAPotion::notify(Subject *whoNotified) {
+	cerr << "CAIUS IS BIG" << endl;
 }

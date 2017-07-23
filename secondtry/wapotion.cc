@@ -15,3 +15,8 @@ void WAPotion::use(Player &p){
 bool WAPotion::isKnown() {
 	return this->known;
 }
+
+void WAPotion::notify(Subject *whoNotified) {
+	cerr << "CAIUS IS BIG" << endl;
+}
+

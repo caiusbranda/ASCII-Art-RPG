@@ -8,7 +8,10 @@ class RHPotion final : public Potion{
 	public:
 	  RHPotion(Posn p);
 		void use(Player &p) override;
+
 		bool isKnown();
+
+		void notify(Subject *whoNotified) override;
 };
 
 #endif

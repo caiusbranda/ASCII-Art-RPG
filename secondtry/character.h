@@ -14,9 +14,11 @@ class Character : public Entity {
 	int def;
 
 protected:
+
 	virtual void moveEffect();
 	bool canMove(const Posn &np);
 
+	void detachTiles();
 
 public:
 
