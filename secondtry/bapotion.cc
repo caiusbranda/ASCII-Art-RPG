@@ -5,14 +5,13 @@ using namespace std;
 bool BAPotion::known = false;
 
 // Ctor
-BAPotion::BAPotion(Posn p): Potion{p, 5, "ba"} {}
+BAPotion::BAPotion(Posn p): Potion{p, 5, "BA"} {}
 
 // use BA potion
 void BAPotion::use(Player &p){
 	p.setAtt(p.getAtt() + this->amount);
 	this->known = true;
-  
-
+	this->useAction(p);
 }
 
 bool BAPotion::isKnown() {
@@ -20,5 +19,5 @@ bool BAPotion::isKnown() {
 }
 
 void BAPotion::notify(Subject *whoNotified) {
-	cerr << "CAIUS IS fun-sized" << endl;
+	this->encounterAction(this->known);
 }

@@ -4,12 +4,13 @@ using namespace std;
 bool BDPotion::known = false;
 
 // Ctor
-BDPotion::BDPotion(Posn p): Potion{p, 5, "bd"} {}
+BDPotion::BDPotion(Posn p): Potion{p, 5, "BD"} {}
 
 // use BD potion
 void BDPotion::use(Player &p){
 	p.setDef(p.getDef() + this->amount);
 	this->known = true;
+	this->useAction(p);
 }
 
 bool BDPotion::isKnown() {
@@ -17,5 +18,5 @@ bool BDPotion::isKnown() {
 }
 
 void BDPotion::notify(Subject *whoNotified) {
-	cerr << "CAIUS IS BIG" << endl;
+	this->encounterAction(this->known);
 }

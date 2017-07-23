@@ -4,12 +4,13 @@ using namespace std;
 bool WAPotion::known = false;
 
 // Ctor
-WAPotion::WAPotion(Posn p): Potion{p, 5, "wa"} {}
+WAPotion::WAPotion(Posn p): Potion{p, 5, "WA"} {}
 
 // use WA potion
 void WAPotion::use(Player &p){
 	p.setAtt(p.getAtt() - this->amount);
 	this->known = true;
+	this->updateAction(p);
 }
 
 bool WAPotion::isKnown() {
@@ -17,6 +18,6 @@ bool WAPotion::isKnown() {
 }
 
 void WAPotion::notify(Subject *whoNotified) {
-	cerr << "CAIUS IS BIG" << endl;
+	this->encounterAction(this->known);
 }
 

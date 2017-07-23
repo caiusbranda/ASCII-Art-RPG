@@ -4,12 +4,13 @@ using namespace std;
 bool RHPotion::known = false;
 
 // Ctor
-RHPotion::RHPotion(Posn p): Potion{p, 10, "rh"} {}
+RHPotion::RHPotion(Posn p): Potion{p, 10, "RH"} {}
 
 // use RH potion
 void RHPotion::use(Player &p){
 	p.setHp(p.getHp() + this->amount);
 	this->known = true;
+	this->useAction();
 }
 
 bool RHPotion::isKnown() {
@@ -17,6 +18,6 @@ bool RHPotion::isKnown() {
 }
 
 void RHPotion::notify(Subject *whoNotified) {
-	cerr << "CAIUS IS BIG" << endl;
+	this->encounterAction(this->known);
 }
 

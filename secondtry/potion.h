@@ -16,6 +16,8 @@ public:
 
 	void use(Player &p) override;
 
+	void updateAction(Player &p);
+
 	SubscriptionType getSubType() const override;
 
 
