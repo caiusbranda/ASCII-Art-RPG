@@ -34,6 +34,7 @@ public:
   bool move(const std::string &dir) override;
 
   Stats getStats() const override;
+  void setAction(const std::string &s);
 
   //virtual void attack(Enemy *enemy) = 0;
 

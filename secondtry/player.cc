@@ -78,4 +78,8 @@ bool Player::move(const string &dir) {
 	return false;
 }
 
+void setAction(const std::string &s) {
+	this->action = s;
+}
+
 
