@@ -208,6 +208,7 @@ void Board::movePlayer(const string &dir) {
 }
 
 ///////// MISC ////////////
+
 void Board::attachTiles(Subject *s) {
 	Posn sp = s->getCurPos();
 	for (int y = -1; y <= 1; ++y) {
@@ -218,6 +219,7 @@ void Board::attachTiles(Subject *s) {
 
 			if (this->entities.count(tp) == 1) {
 				this->player->attach(this->entities.at(tp));
+				this->player->attach(tp, this->entities.at(tp));
 			}
 
 		}

@@ -94,6 +94,7 @@ bool Character::move(const string &dir) {
 bool Character::canMove(const Posn &np) {
 	char c = this->tileObservers.at(np)->getType();
 	if (c == '.' || c == 92 || c == 'G' || c == '+' || c == '#') return true;
+
 	else return false;
 }
 
