@@ -3,6 +3,7 @@
 
 #include "subscriptions.h"
 class Subject;
+class Player;
 
 class Observer {
 public:

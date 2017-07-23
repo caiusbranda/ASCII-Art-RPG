@@ -13,14 +13,9 @@ class Character : public Entity {
 	int att;
 	int def;
 
-	std::string action;
-
-	bool canMove(const Posn &np);
-
-
-
 protected:
 	virtual void moveEffect();
+	bool canMove(const Posn &np);
 
 
 public:
@@ -33,11 +28,9 @@ public:
 	int getAtt() const;
 	int getDef() const;
 
-
-  bool move(const std::string &dir);
+  virtual bool move(const std::string &dir);
 
   //virtual void attack(Character &other) = 0;
-
 
 	// mutators:
 	void setHp(int newHp);
@@ -46,7 +39,7 @@ public:
 
 	//virtual void move(string dir);
 
- // virtual void attack(Character &other) = 0;
+	//virtual void attack(Subject *other);
 
 
 };

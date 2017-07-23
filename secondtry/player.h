@@ -6,6 +6,7 @@
 class Player : public Character {
 
   std::string race;
+  std::string action;
   int gold;
 
 public:
@@ -30,9 +31,11 @@ public:
 
   virtual int potionMagnitude();
 
-  int getGold();
-  std::string getRace();
-  std::string getAction();
+  bool move(const std::string &dir) override;
+
+  Stats getStats() const override;
+
+
 };
 
 #endif

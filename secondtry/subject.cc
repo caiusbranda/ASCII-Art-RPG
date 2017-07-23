@@ -24,6 +24,9 @@ void Subject::notifyDisplay() {
 	this->display->notifyComing(this);
 }
 */
-
+Stats Subject::getStats() const {
+	Stats ret{-1,0,0,0,"",""};
+	return ret;
+}
 
 Subject::~Subject(){}

@@ -6,4 +6,9 @@ using namespace std;
 
   Elf::~Elf() {}
 
+void Elf::notify(Subject *whoNotified) {
+  this->attack(whoNotified);
 
+  // has attacked
+  this->hasAttacked = true;
+}

@@ -35,6 +35,7 @@ class Board {
 
 	std::map<Posn, Tile*> tiles;
 	std::vector<Chamber *> chambers;
+	//std::vector<Enemy *> enemies;
 
 	Player *player;
 	Stairs *stairs;

@@ -4,6 +4,7 @@
 #include "character.h"
 
 class Enemy : public Character, public Observer {
+	bool hasAttacked;
 
 public:
 

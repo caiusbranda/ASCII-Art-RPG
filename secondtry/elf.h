@@ -8,6 +8,8 @@ class Elf final : public Enemy {
 public:
   Elf(Posn p);
   ~Elf();
+
+  void notify(Subject *whoNotified)
 };
 
 #endif

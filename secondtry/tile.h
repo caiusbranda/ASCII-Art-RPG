@@ -6,6 +6,7 @@
 #include "posn.h"
 #include "entity.h"
 
+class Subject;
 struct Posn;
 
 class Tile final : public Subject, public Observer {

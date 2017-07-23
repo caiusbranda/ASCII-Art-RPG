@@ -127,7 +127,6 @@ void Board::generatePlayer() {
 
 
 
-/*
 void Board::generatePotions() {
 	// 10 potions are spawned on each floor.
 	//	each type having 1/6 probability.
@@ -153,6 +152,7 @@ void Board::generatePotions() {
 	}
 }
 
+/*
 void Board::generateGold() {
 	// 10 piles of gold
 	// the spawn rate of gold is

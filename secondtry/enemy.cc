@@ -3,14 +3,10 @@
 using namespace std;
 
 Enemy::Enemy(int maxhp, int hp, int att, int def, Posn p, char icon)
-	: Character{maxhp, hp, att, def, p, icon} {}
+	: Character{maxhp, hp, att, def, p, icon}, hasAttacked{false} {}
 
 SubscriptionType Enemy::getSubType() {
 	return SubscriptionType::Enemy;
-}
-
-void Enemy::notify(Subject *whoNotified) {
-	return;
 }
 
 char Enemy::getType() const {

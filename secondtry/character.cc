@@ -42,40 +42,31 @@ void Character::setDef(int newDef){
 }
 
 bool Character::move(const string &dir) {
-	Posn np{0,0};
-	string compass = "";
+	Posn np = {0,0};
 
 	if (dir == "no"){
 		np = {0,-1};
-		compass = "North";
 	}
 	else if (dir == "so") {
 		np = {0,1};
-		compass = "South";
 	}
 	else if (dir == "ea") {
 		np = {1,0};
-		compass = "East";
 	}
 	else if (dir == "we") {
 		np = {-1,0};
-		compass = "West";
 	}
 	else if (dir == "ne") {
 		np = {1,-1};
-		compass = "Northeast"
 	}
 	else if (dir == "nw") {
 		np = {-1,-1};
-		compass = "Northwest";
 	}
 	else if (dir == "se") {
 		np = {1,1};
-		compass = "Southeast";
 	}
 	else if (dir == "sw") {
 		np = {1,-1};
-		compass = "Southwest";
 	}
 
 	np = np + this->getCurPos();
@@ -94,7 +85,6 @@ bool Character::move(const string &dir) {
 
 		return true;
 	}
-	action = "Cannot move there!";
 	this->notifyObservers(SubscriptionType::Display);
 	return false;
 }
@@ -108,9 +98,13 @@ bool Character::canMove(const Posn &np) {
 void Character::moveEffect() {
 	return;
 }
-
-string Character::getAction() {
-	return action;
+/*
+void attack(Subject *other) {
+	other.attackedby{this};
 }
+*/
+
+
+
 
 

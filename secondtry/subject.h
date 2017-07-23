@@ -5,11 +5,12 @@
 #include <map>
 
 #include "posn.h"
-#include "display.h"
 #include "subscriptions.h"
+#include "observer.h"
+#include "stats.h"
 
 struct Posn;
-class Observer;
+struct Stats;
 class Display;
 
 class Subject {
@@ -27,6 +28,7 @@ public:
   virtual Posn getCurPos() const = 0;
   virtual Posn getLastPos() const = 0;
   virtual char getIcon() const = 0;
+  virtual Stats getStats() const;
 	virtual ~Subject() = 0;
 
 };
