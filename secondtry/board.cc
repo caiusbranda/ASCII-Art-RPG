@@ -165,7 +165,7 @@ void Board::generatePotions() {
 			pot = new PHPotion(p);
 		}
 		pot->attach(disp);
-		this->entities.push_back(pot);
+		this->entities[p] = pot;
 
 		// update display
 		pot->notifyObservers(SubscriptionType::Display);
@@ -198,6 +198,11 @@ void Board::movePlayer(const string &dir) {
 	bool success = player->move(dir);
 	if (success) {
 		attachTiles(player);
+
+		// update display
+		this->player->notifyObservers(SubscriptionType::Potion);
+		this->player->notifyObservers(SubscriptionType::Display);
+
 		disp->notify(tiles.at(player->getLastPos()));
 	}
 }
@@ -210,6 +215,11 @@ void Board::attachTiles(Subject *s) {
 			Posn tp = {x,y};
 			tp = tp + sp;
 			s->attach(tp, tiles.at(tp));
+
+			if (this->entities.count(tp) == 1) {
+				this->player->attach(this->entities.at(tp));
+			}
+
 		}
 	}
 }

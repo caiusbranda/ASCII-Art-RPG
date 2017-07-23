@@ -14,7 +14,6 @@ protected:
 	Posn curPos;
 	Posn lastPos;
 
-	void detachTiles();
 public:
 
 	Entity(Posn p, char icon);

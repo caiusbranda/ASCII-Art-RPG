@@ -8,7 +8,10 @@ class PHPotion final : public Potion{
 	public:
 		PHPotion(Posn p);
 		void use(Player &p) override;
+
 		bool isKnown();
+
+		void notify(Subject *whoNotified) override;
 };
 
 #endif

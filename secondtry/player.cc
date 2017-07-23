@@ -1,4 +1,5 @@
 #include "player.h"
+#include <iostream>
 
 using namespace std;
 
@@ -24,7 +25,7 @@ bool Player::move(const string &dir) {
 	string compass = this->race;
 	compass += " moves ";
 
-	if (dir == "no"){
+	if (dir == "no") {
 		np = {0,-1};
 		compass += "North";
 	}
@@ -63,13 +64,12 @@ bool Player::move(const string &dir) {
 		this->moveEffect();
 
 		// actual move
+
 		this->detachTiles();
+
 		this->lastPos = this->curPos;
 		this->curPos = np;
 		this->action = compass;
-
-		// update display
-		this->notifyObservers(SubscriptionType::Display);
 
 		return true;
 	}

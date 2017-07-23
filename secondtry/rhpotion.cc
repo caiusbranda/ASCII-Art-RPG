@@ -15,3 +15,8 @@ void RHPotion::use(Player &p){
 bool RHPotion::isKnown() {
 	return this->known;
 }
+
+void RHPotion::notify(Subject *whoNotified) {
+	cerr << "CAIUS IS BIG" << endl;
+}
+

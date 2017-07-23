@@ -1,5 +1,6 @@
 #include "character.h"
 
+
 using namespace std;
 
 Character::Character(int maxhp, int hp, int att, int def, Posn p, char icon) :
@@ -75,12 +76,13 @@ bool Character::move(const string &dir) {
 		this->moveEffect();
 
 		// actual move
+
 		this->detachTiles();
+
 		this->lastPos = this->curPos;
 		this->curPos = np;
 
 		// update display
-
 		this->notifyObservers(SubscriptionType::Display);
 
 		return true;
@@ -98,11 +100,18 @@ bool Character::canMove(const Posn &np) {
 void Character::moveEffect() {
 	return;
 }
+
 /*
 void attack(Subject *other) {
 	other.attackedby{this};
 }
 */
+
+void Character::detachTiles() {
+	for (auto i = tileObservers.begin(); i != tileObservers.end(); ++i){
+		tileObservers.erase(i);
+	}
+}
 
 
 

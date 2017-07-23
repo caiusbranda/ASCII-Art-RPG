@@ -8,7 +8,10 @@ class WAPotion final : public Potion{
 	public:
 	  WAPotion(Posn p);
 		void use(Player &p) override;
+
 		bool isKnown();
+
+		void notify(Subject *whoNotified) override;
 };
 
 #endif

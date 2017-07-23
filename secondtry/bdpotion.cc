@@ -15,3 +15,7 @@ void BDPotion::use(Player &p){
 bool BDPotion::isKnown() {
 	return this->known;
 }
+
+void BDPotion::notify(Subject *whoNotified) {
+	cerr << "CAIUS IS BIG" << endl;
+}
