@@ -1,10 +1,17 @@
 #include "wapotion.h"
 using namespace std;
 
+bool WAPotion::known = false;
+
 // Ctor
-WAPotion::WAPotion(): Potion{5, "wa"}{}
+WAPotion::WAPotion(Posn p): Potion{p, 5, "wa"} {}
 
 // use WA potion
-void use(Player &p){
-	  p.setAtt(p.getAtt() - this->amount);
+void WAPotion::use(Player &p){
+	p.setAtt(p.getAtt() - this->amount);
+	this->known = true;
+}
+
+bool WAPotion::isKnown() {
+	return this->known;
 }

@@ -73,7 +73,7 @@ bool Player::move(const string &dir) {
 
 		return true;
 	}
-	this->action = "Cannot move there!";
+	this->action = "Cannot move there";
 	this->notifyObservers(SubscriptionType::Display);
 	return false;
 }

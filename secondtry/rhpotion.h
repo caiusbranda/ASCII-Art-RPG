@@ -3,9 +3,12 @@
 #include "potion.h"
 
 class RHPotion final : public Potion{
+	static bool known;
+
 	public:
-	  RHPotion();
+	  RHPotion(Posn p);
 		void use(Player &p) override;
+		bool isKnown();
 };
 
 #endif

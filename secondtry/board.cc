@@ -77,8 +77,9 @@ void Board::generateFloor() {
 
 	generatePlayer();
 
-	/*m
+
 	generatePotions();
+	/*
 	generateGold();
 	generateEnemies();
 	*/
@@ -125,7 +126,7 @@ void Board::generatePlayer() {
 	this->attachTiles(player);
 }
 
-
+//// Potions ////
 
 void Board::generatePotions() {
 	// 10 potions are spawned on each floor.
@@ -136,6 +137,7 @@ void Board::generatePotions() {
 
 	for (int i = 0; i < numPotions; ++i) {
 		Posn p{0,0};
+		Potion *pot;
 		// first pick chamber
 		int potChamber = rand() % numChambers;
 
@@ -145,10 +147,28 @@ void Board::generatePotions() {
 		//	then pick type
 		int whichPot = rand() % 6;
 		if (whichPot == 0) {
-
+			pot = new BAPotion(p);
 		}
-		else ()
-		// tiles.at(p)->notifyComing(???)
+		else if (whichPot == 1) {
+			pot = new BDPotion(p);
+		}
+		else if (whichPot == 2) {
+			pot = new WAPotion(p);
+		}
+		else if (whichPot == 3) {
+			pot = new WDPotion(p);
+		}
+		else if (whichPot == 4) {
+			pot = new RHPotion(p);
+		}
+		else if (whichPot == 5) {
+			pot = new PHPotion(p);
+		}
+		pot->attach(disp);
+		this->entities.push_back(pot);
+
+		// update display
+		pot->notifyObservers(SubscriptionType::Display);
 	}
 }
 

@@ -2,7 +2,8 @@
 using namespace std;
 
 // Ctor
-Item::Item(int amount, string type): amount{amount}, type{type}{}
+Item::Item(Posn p, char c, int amount, string type)
+	: Entity{p, c}, amount{amount}, type{type} {}
 
 void Item::notify(Subject *whoNotified) {
 	return;
@@ -16,6 +17,8 @@ char Item::getType() const {
 
 // void Item::notifyLeave(){}
 
+/*
 SubscriptionType Item::getSubType() const {
 	return SubscriptionType::Item;
 }
+*/

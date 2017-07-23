@@ -73,7 +73,6 @@ void Chamber::fillEmpties() {
 }
 
 Posn Chamber::randomTile() const {
-	srand(time(0));
 	int whichTile = (rand() % numEmpty);
 
 	return chamberTiles[whichTile]->getPosn();

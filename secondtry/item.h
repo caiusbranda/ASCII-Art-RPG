@@ -7,12 +7,14 @@
 class Player;
 
 class Item : public Entity, public Observer {
+
+protected:
 	int amount;
 	std::string type;
 
 public:
-	Item(int amount);
-	virtual ~Item() = 0;
+	Item(Posn p, char c, int amount, std::string type);
+	virtual ~Item() = default;
 
 	/*
 	void notifyComing(Subject *whoNotified) override;
@@ -20,7 +22,7 @@ public:
 	*/
 	char getType() const override;
 	void notify(Subject *whoNotified) override;
-	SubscriptionType getSubType() const override;
+	//SubscriptionType getSubType() const override;
 
 	virtual void use(Player &p) = 0;
 };

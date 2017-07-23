@@ -1,10 +1,17 @@
 #include "wdpotion.h"
 using namespace std;
 
+bool WDPotion::known = false;
+
 // Ctor
-WDPotion::WDPotion(): Potion{5, "wd"}{}
+WDPotion::WDPotion(Posn p): Potion{p, 5, "wd"} {}
 
 // use WD potion
-void use(Player &p){
-	  p.setDef(p.getDef() - this->amount);
+void WDPotion::use(Player &p){
+	p.setDef(p.getDef() - this->amount);
+	this->known = true;
+}
+
+bool WDPotion::isKnown() {
+	return this->known;
 }

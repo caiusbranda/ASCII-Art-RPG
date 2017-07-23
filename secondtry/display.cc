@@ -19,6 +19,9 @@ void Display::notify(Subject *whoNotified) {
 	Posn curPos = whoNotified->getCurPos();
 	Posn lastPos = whoNotified->getLastPos();
 	char c = whoNotified->getIcon();
+
+	cerr << c << endl;
+
 	Stats other = whoNotified->getStats();
 	if (other.hp != -1) s = other;
 

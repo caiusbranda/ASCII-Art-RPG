@@ -19,6 +19,12 @@
 //#include "character.h"
 //#include "player.h"
 #include "shade.h"
+#include "bapotion.h"
+#include "bdpotion.h"
+#include "wapotion.h"
+#include "wdpotion.h"
+#include "rhpotion.h"
+#include "phpotion.h"
 
 /*
 #include "passage.h"
@@ -35,7 +41,7 @@ class Board {
 
 	std::map<Posn, Tile*> tiles;
 	std::vector<Chamber *> chambers;
-	//std::vector<Enemy *> enemies;
+	std::vector<Entity *> entities;
 
 	Player *player;
 	Stairs *stairs;
@@ -48,10 +54,8 @@ class Board {
 // generation
 	void generateFloor();
 	void generatePlayer();
-	/*
 	void generatePotions();
-	void generateGold();
-	*/
+	//void generateGold();
 
 	//std::map<Posn, Entity*> ents;
 

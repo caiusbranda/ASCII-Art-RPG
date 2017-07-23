@@ -3,9 +3,13 @@
 #include "potion.h"
 
 class BDPotion final : public Potion{
+	static bool known;
+
 	public:
-	  BDPotion();
+	  BDPotion(Posn p);
 		void use(Player &p) override;
+
+		bool isKnown();
 };
 
 #endif

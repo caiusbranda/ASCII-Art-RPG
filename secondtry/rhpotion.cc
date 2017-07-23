@@ -1,10 +1,17 @@
 #include "rhpotion.h"
 using namespace std;
 
+bool RHPotion::known = false;
+
 // Ctor
-RHPotion::RHPotion(): Potion{10, "rh"}{}
+RHPotion::RHPotion(Posn p): Potion{p, 10, "rh"} {}
 
 // use RH potion
-void use(Player &p){
+void RHPotion::use(Player &p){
 	p.setHp(p.getHp() + this->amount);
+	this->known = true;
+}
+
+bool RHPotion::isKnown() {
+	return this->known;
 }

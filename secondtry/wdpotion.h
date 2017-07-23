@@ -3,9 +3,12 @@
 #include "potion.h"
 
 class WDPotion final : public Potion{
+	static bool known;
+
 	public:
-	  WDPotion();
+	  WDPotion(Posn p);
 		void use(Player &p) override;
+		bool isKnown();
 };
 
 #endif

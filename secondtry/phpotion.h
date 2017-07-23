@@ -3,9 +3,12 @@
 #include "potion.h"
 
 class PHPotion final : public Potion{
+	static bool known;
+
 	public:
-	  PHPotion();
+		PHPotion(Posn p);
 		void use(Player &p) override;
+		bool isKnown();
 };
 
 #endif
