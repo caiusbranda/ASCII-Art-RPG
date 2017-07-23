@@ -10,7 +10,7 @@ PHPotion::PHPotion(Posn p): Potion{p, 10, "PH"} {}
 void PHPotion::use(Player &p){
 	p.setHp(p.getHp() - this->amount);
 	this->known = true;
-	this->updateAction();
+	this->useAction();
 }
 
 bool PHPotion::isKnown() {
@@ -18,6 +18,6 @@ bool PHPotion::isKnown() {
 }
 
 void PHPotion::notify(Subject *whoNotified) {
-	cerr << "CAIUS IS BIG" << endl;
+	this->encounterAction(this->known);
 }
 

@@ -10,7 +10,7 @@ WAPotion::WAPotion(Posn p): Potion{p, 5, "WA"} {}
 void WAPotion::use(Player &p){
 	p.setAtt(p.getAtt() - this->amount);
 	this->known = true;
-	this->updateAction(p);
+	this->useAction(p);
 }
 
 bool WAPotion::isKnown() {

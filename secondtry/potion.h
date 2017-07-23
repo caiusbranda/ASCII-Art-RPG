@@ -16,10 +16,11 @@ public:
 
 	void use(Player &p) override;
 
-	void updateAction(Player &p);
-
 	SubscriptionType getSubType() const override;
+	
+	void useAction(Player &p);
 
+	void encounterAction(Player &p);
 
 };
 
