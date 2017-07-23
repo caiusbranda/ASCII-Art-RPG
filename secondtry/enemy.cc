@@ -12,3 +12,11 @@ SubscriptionType Enemy::getSubType() {
 char Enemy::getType() const {
 	return this->getIcon();
 }
+
+void Enemy::notify(Subject *whoNotified) {
+  this->nearPlayer = true;
+}
+
+bool Enemy::isNearPlayer() {
+  return this->nearPlayer;
+}

@@ -35,6 +35,7 @@ public:
 
   Stats getStats() const override;
 
+  virtual void attack(Enemy *enemy) = 0;
 
 };
 
