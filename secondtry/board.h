@@ -42,6 +42,7 @@ class Board {
 	std::map<Posn, Tile*> tiles;
 	std::vector<Chamber *> chambers;
 	std::map<Posn, Observer *> entities;
+	std::vector<Observer *> dead;
 
 	Player *player;
 	Stairs *stairs;

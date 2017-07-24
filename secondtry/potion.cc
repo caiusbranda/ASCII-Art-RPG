@@ -7,9 +7,6 @@ Potion::Potion(Posn p, int amount, string type): Item{p, 'P', amount, type} {}
 // Dtor
 Potion::~Potion() {}
 
-// use potion
-void Potion::use(Player &p){}
-
 SubscriptionType Potion::getSubType() const {
 	return SubscriptionType::Potion;
 }

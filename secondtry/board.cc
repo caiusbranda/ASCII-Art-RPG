@@ -1,12 +1,11 @@
 #include <cstdlib>
-#include <ctime>
 
 #include "board.h"
 
 using namespace std;
 
 Board::Board() : disp{nullptr}, player{nullptr}, numChambers{5}, playerRace{'s'}
-	{}
+{}
 
 Board::~Board() {
 	delete disp;
@@ -16,6 +15,8 @@ Board::~Board() {
 	for (auto &i : tiles) delete &i;
 
 	for (auto &i : chambers) delete &i;
+
+	for (auto &i : dead) delete &i;
 }
 
 //////////// INITIALIZATION /////////////
@@ -142,8 +143,10 @@ void Board::generatePotions() {
 		int potChamber = rand() % numChambers;
 
 		// second pick tile
-		p = chambers[potChamber]->randomTile();
-
+		while(true) {
+			p = chambers[potChamber]->randomTile();
+			if (entities.count(p) == 0) break;
+		}
 		//	then pick type
 		int whichPot = 0; //rand() % 6;
 		if (whichPot == 0) {
@@ -235,8 +238,14 @@ void Board::attack(const string &dir) {
 ///////// POTIONS ///////////
 
 void Board::use(const string &dir) {
-	bool success = player->use(dir);
+	Posn potPos = player->use(dir);
 
+	if (entities.count(potPos) == 1 &&
+		entities.at(potPos)->getType() == 'P') {
+		dead.push_back(entities.at(potPos));
+		entities.erase(potPos);
+	}
+	attachTiles(player);
 }
 
 /////////////////////////////

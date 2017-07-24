@@ -13,6 +13,7 @@ public:
 	*/
 	virtual void notify(Subject *whoNotified) = 0;
 	virtual char getType() const = 0;
+	virtual void use(Player &p);
 	virtual SubscriptionType getSubType() const = 0;
 	virtual ~Observer() = default;
 

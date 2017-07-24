@@ -14,8 +14,6 @@ public:
 	Potion(Posn p, int amount, std::string type);
 	~Potion();
 
-	void use(Player &p) override;
-
 	SubscriptionType getSubType() const override;
 
 	void useAction(Player &p);

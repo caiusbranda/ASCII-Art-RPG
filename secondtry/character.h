@@ -16,7 +16,7 @@ class Character : public Entity {
 protected:
 
 	virtual void moveEffect();
-	bool canMove(const Posn &np);
+	virtual bool canMove(const Posn &np);
 
 	void detachTiles();
 

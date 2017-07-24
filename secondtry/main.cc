@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
 			}
 			else if (use) {
 				b->use(dir);
-				use = false
+				use = false;
 			}
 			else b->movePlayer(dir);
 		}

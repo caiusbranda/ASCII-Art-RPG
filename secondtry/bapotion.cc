@@ -14,11 +14,12 @@ void BAPotion::use(Player &p) {
 	this->useAction(p);
 }
 
+// Checks if potion encountered is known by PC
 bool BAPotion::isKnown() {
 	return this->known;
 }
 
+// updates Action when potion is within 1-block radius of PC
 void BAPotion::notify(Subject *whoNotified) {
-	cerr << 1 << endl;
 	this->encounterAction(*whoNotified, this->known);
 }

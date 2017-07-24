@@ -11,7 +11,7 @@ char Player::getIcon() const {
 	return '@';
 }
 
-int Player::potionMagnitude() {
+int Player::potMag() {
 	return 1;
 }
 
@@ -83,18 +83,32 @@ bool Player::move(const string &dir) {
 	return false;
 }
 
-bool Player::use(const string &dir) {
+bool Player::canMove(const Posn &np) {
+	char c = this->tileObservers.at(np)->getType();
+	if (c == '.' || c == 92 || c == 'G' || c == '+' || c == '#') return true;
+	else return false;
+}
+
+Posn Player::use(const string &dir) {
 	Posn np = findDir(dir);
 
 	if (canUse(np)) {
-
-		return true;
+		this->tileObservers.at(np)->use(*this);
 	}
-	this->action = "There's no potion to use";
-	this->notifyObservers(SubscriptionType::Display);
-	return false;
+	else {
+		this->action = "There's no potion to use";
+		this->notifyObservers(SubscriptionType::Display);
+	}
+
+	this->detachTiles();
+	return np;
 }
 
+bool Player::canUse(const Posn &np) {
+	char c = this->tileObservers.at(np)->getType();
+	if (c != 'P') return false;
+	return true;
+}
 
 void Player::setAction(const std::string &s) {
 	this->action = s;

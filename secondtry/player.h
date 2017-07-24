@@ -3,6 +3,8 @@
 
 #include "character.h"
 
+class Potion;
+
 class Player : public Character {
 
   std::string race;
@@ -10,8 +12,10 @@ class Player : public Character {
   int gold;
 
 
-  Posn findDir(const std::string );
-  bool canUse(const Posn &p);
+  Posn findDir(const std::string &dir);
+  bool canUse(const Posn &np);
+
+  bool canMove(const Posn &np) override;
 
 public:
 
@@ -33,9 +37,10 @@ public:
   virtual void attackedBy(Human &e) = 0;
   */
 
-  virtual int potionMagnitude();
+  virtual int potMag();
 
   bool move(const std::string &dir) override;
+  Posn use(const std::string &dir);
 
   Stats getStats() const override;
   void setAction(const std::string &s) override;

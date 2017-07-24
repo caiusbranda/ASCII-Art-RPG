@@ -24,7 +24,6 @@ public:
 	void notify(Subject *whoNotified) override;
 	//SubscriptionType getSubType() const override;
 
-	virtual void use(Player &p) = 0;
 };
 
 #endif
