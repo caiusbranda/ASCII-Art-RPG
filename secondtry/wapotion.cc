@@ -8,7 +8,7 @@ WAPotion::WAPotion(Posn p): Potion{p, 5, "WA"} {}
 
 // use WA potion
 void WAPotion::use(Player &p){
-	p.setAtt(p.getAtt() - this->amount);
+	p.setAtt(p.getAtt() - this->amount * p.potMag());
 	this->known = true;
 	this->useAction(p);
 }

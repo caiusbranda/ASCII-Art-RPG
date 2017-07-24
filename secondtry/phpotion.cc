@@ -8,7 +8,7 @@ PHPotion::PHPotion(Posn p): Potion{p, 10, "PH"} {}
 
 // use PH potion
 void PHPotion::use(Player &p){
-	p.setHp(p.getHp() - this->amount);
+	p.setHp(p.getHp() - this->amount * p.potMag());
 	this->known = true;
 	this->useAction(p);
 }

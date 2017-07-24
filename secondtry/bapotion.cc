@@ -9,7 +9,7 @@ BAPotion::BAPotion(Posn p): Potion{p, 5, "BA"} {}
 
 // use BA potion
 void BAPotion::use(Player &p) {
-	p.setAtt(p.getAtt() + this->amount);
+	p.setAtt(p.getAtt() + this->amount * p.potMag());
 	this->known = true;
 	this->useAction(p);
 }

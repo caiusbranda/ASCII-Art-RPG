@@ -8,7 +8,7 @@ RHPotion::RHPotion(Posn p): Potion{p, 10, "RH"} {}
 
 // use RH potion
 void RHPotion::use(Player &p){
-	p.setHp(p.getHp() + this->amount);
+	p.setHp(p.getHp() + this->amount * p.potMag());
 	this->known = true;
 	this->useAction(p);
 }

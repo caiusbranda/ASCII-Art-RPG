@@ -3,12 +3,13 @@
 
 #include "item.h"
 
-class Treasure final : public Item {
+class Treasure : public Item {
 
 public:
-	Treasure(int amount, std::string type);
+	Treasure(int amount);
 	void use(Player &p) override;
-
+	virtual bool canPickUp();
+	void pickAction(Player &p);
 };
 
 #endif
