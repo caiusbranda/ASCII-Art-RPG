@@ -145,10 +145,10 @@ void Board::generatePotions() {
 		// second pick tile
 		while(true) {
 			p = chambers[potChamber]->randomTile();
-			if (entities.count(p) == 0) break;
+			if (p == player->getCurPos() || entities.count(p) == 0) break;
 		}
 		//	then pick type
-		int whichPot = 0; //rand() % 6;
+		int whichPot = rand() % 6;
 		if (whichPot == 0) {
 			pot = new BAPotion(p);
 		}
@@ -169,6 +169,8 @@ void Board::generatePotions() {
 		}
 		pot->attach(disp);
 		this->entities[p] = pot;
+
+		attachTiles(player);
 
 		// update display
 		pot->notifyObservers(SubscriptionType::Display);
@@ -238,14 +240,15 @@ void Board::attack(const string &dir) {
 ///////// POTIONS ///////////
 
 void Board::use(const string &dir) {
-	Posn potPos = player->use(dir);
+	Posn potPos = this->player->use(dir);
 
 	if (entities.count(potPos) == 1 &&
 		entities.at(potPos)->getType() == 'P') {
 		dead.push_back(entities.at(potPos));
 		entities.erase(potPos);
 	}
-	attachTiles(player);
+	this->tiles.at(potPos)->notifyObservers(SubscriptionType::Display);
+	attachTiles(this->player);
 }
 
 /////////////////////////////

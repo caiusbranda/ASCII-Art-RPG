@@ -74,6 +74,7 @@ int main(int argc, char *argv[]){
 				use = false;
 			}
 			else b->movePlayer(dir);
+			b->displayBoard();
 		}
 
 		else if (cmd == "u") use = true;
@@ -94,7 +95,7 @@ int main(int argc, char *argv[]){
 		case "q": b->giveUp(); break;
 		*/
 		//b->updateTurn();
-		b->displayBoard();
+
 	}
 
 }

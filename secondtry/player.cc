@@ -97,8 +97,8 @@ Posn Player::use(const string &dir) {
 	}
 	else {
 		this->action = "There's no potion to use";
-		this->notifyObservers(SubscriptionType::Display);
 	}
+	this->notifyObservers(SubscriptionType::Display);
 
 	this->detachTiles();
 	return np;
