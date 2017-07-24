@@ -62,6 +62,10 @@ public:
   virtual int attack(Enemy *enemy) = 0;
 
   std::string getRace() const override;
+
+	int getGold();
+
+	void setGold(int newGold);
 };
 #include "shade.h"
 #endif

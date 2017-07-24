@@ -34,3 +34,9 @@ void Subject::setAction(const std::string &s) {
 }
 
 Subject::~Subject(){}
+
+/*
+void Subject::use(Subject &p) {
+	return;
+}
+*/

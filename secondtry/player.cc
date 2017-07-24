@@ -183,4 +183,10 @@ int Player::attackedBy(Human *e) {
 }*/
 //--------- ATTACKS -----------//
 
+int Player::getGold() {
+	return this->gold;
+}
 
+void Player::setGold(int newGold) {
+	this->gold = newGold;
+}

@@ -1,0 +1,38 @@
+/////// Movement ///////
+1. user inputs direction to move
+2. move calls board’s move with string direction
+3. board’s move calls move on character with dir
+4. char’s move calls move with dir
+	a) char calls canMove needs to check just tile in direction
+
+
+/////// Enemy/Item “death” ///////
+1. sets posn of enemy or item to -1,-1
+2. notifies board as usual.
+3. board runs from 0 to h/w so doesn’t show
+4. overlapping is ok because no more functions will be called on “dead” objects
+
+/////// Tiles and Observers //////
+1. All entities attach 8 adjacent tiles and it’s current tile to observers on construction
+2. On successful movement, pop_back last 9 observers (can guarantee they are tiles) and reattach new 9 tiles after movement
+
+/////// Move stuff //////
+need display to replace old tile with previous char
+subject has lastPos and curPos
+
+//////////////// Potions ////////////////
+1. spawn potions with correct randomness
+2. correct message when player is near a potion
+	a) Potions observe player
+	b) Every turn potions “scan surroundings”
+
+
+	a) every turn character scans surroundings then notifies somethings if its there
+	b) 
+
+
+
+
+3. using a potion
+
+
