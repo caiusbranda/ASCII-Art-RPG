@@ -21,3 +21,8 @@ Posn Posn::operator+(const Posn &rhs) const {
 	ret.y += rhs.y;
 	return ret;
 }
+
+std::ostream &operator<<(std::ostream &out, const Posn &p) {
+	out << "(" << p.x << "," << p.y << ")";
+	return out;
+}

@@ -1,6 +1,8 @@
 #ifndef __POSN_H__
 #define __POSN_H__
 
+#include <iostream>
+
 struct Posn {
 	int x;
 	int y;
@@ -11,5 +13,7 @@ struct Posn {
 
 	Posn(int x, int y);
 };
+
+std::ostream &operator<<(std::ostream &out, const Posn &p);
 
 #endif

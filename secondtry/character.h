@@ -19,7 +19,6 @@ protected:
 
 	virtual void moveEffect();
 	virtual bool canMove(const Posn &np);
-
 	void detachTiles();
 
 public:
@@ -35,7 +34,8 @@ public:
 
 	int getDef() const;
 
-  virtual bool move(const std::string &dir);
+	// char move takes a posn instead of a string direction.
+  bool move(const Posn &np);
 
   int calculateDamage(Character *attacker);
 

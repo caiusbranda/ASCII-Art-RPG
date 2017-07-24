@@ -18,7 +18,7 @@ int Shade::attackedBy(Elf *e) {
     dmgDealt *= 2;
   }
 
-  this->setHp(this->getHp() - dmgDealt);  
+  this->setHp(this->getHp() - dmgDealt);
   return dmgDealt;
 }
 

@@ -59,7 +59,7 @@ Posn Player::findDir(const string &dir) {
 		compass += "Southeast";
 	}
 	else if (dir == "sw") {
-		np = {1,-1};
+		np = {-1,1};
 		compass += "Southwest";
 	}
 
@@ -75,6 +75,7 @@ bool Player::move(const string &dir) {
 		this->moveEffect();
 
 		// actual move
+		this->notifyObservers(SubscriptionType::Enemy);
 
 		this->detachTiles();
 
@@ -104,7 +105,7 @@ Posn Player::use(const string &dir) {
 		this->action = "There's no potion to use";
 	}
 	this->notifyObservers(SubscriptionType::Display);
-
+	this->notifyObservers(SubscriptionType::Enemy);
 	this->detachTiles();
 	return np;
 }
@@ -123,18 +124,19 @@ void Player::appendAction(const string &s) {
   this->action += " " + s;
 }
 
-void Player::canAttack(const string &dir, map<Posn, Enemy*> &enemies) {
+Posn Player::canAttack(const string &dir, map<Posn, Enemy*> &enemies) {
   stringstream ss;
   Posn attackPosn = this->findDir(dir);
   if(enemies.count(attackPosn) == 1) {
     Enemy* enemy = enemies.at(attackPosn);
     int dmg = this->attack(enemy);
-    ss << this->race << " dealt" << dmg << " damage to " << enemy->getRace() << " (" << enemy->getHp() << " HP).";
+    ss << this->race << " dealt " << dmg << " damage to " << enemy->getRace() << " (" << enemy->getHp() << " HP)";
     this->action = ss.str();
   } else {
     this->action = "Cannot attack that!";
   }
   this->notifyObservers(SubscriptionType::Display);
+  return attackPosn;
 }
 
 //--------- ATTACKS -----------//
@@ -149,7 +151,7 @@ int Player::attackedBy(Elf *e) {
   this->setHp(this->getHp() - dmg);
   return dmg;
 }
-  
+
 int Player::attackedBy(Halfling *e) {
   int dmg = this->calculateDamage(e);
   this->setHp(this->getHp() - dmg);

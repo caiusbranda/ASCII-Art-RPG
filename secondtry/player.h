@@ -33,7 +33,7 @@ public:
 
   /*
   virtual int attackedBy(Orc *e);
-  
+
   virtual int attackedBy(Halfling *e);
 
   virtual int attackedBy(Dragon *e);
@@ -44,10 +44,10 @@ public:
 
   virtual int attackedBy(Human *e);
   */
-  
+
   virtual int potMag();
 
-  bool move(const std::string &dir) override;
+  bool move(const std::string &dir);
 
   Posn use(const std::string &dir);
 
@@ -57,7 +57,7 @@ public:
 
   void appendAction(const std::string &s);
 
-  void canAttack(const std::string &dir, std::map<Posn, Enemy*> &enemies); 
+  Posn canAttack(const std::string &dir, std::map<Posn, Enemy*> &enemies);
 
   virtual int attack(Enemy *enemy) = 0;
 

@@ -13,3 +13,4 @@ int Elf::attack(Player *player) {
 string Elf::getRace() const {
   return "Elf";
 }
+

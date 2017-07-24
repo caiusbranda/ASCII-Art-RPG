@@ -1,5 +1,5 @@
 #include "character.h"
-
+#include <iostream>
 
 using namespace std;
 
@@ -42,35 +42,7 @@ void Character::setDef(int newDef){
 	this->def = newDef;
 }
 
-bool Character::move(const string &dir) {
-	Posn np = {0,0};
-
-	if (dir == "no"){
-		np = {0,-1};
-	}
-	else if (dir == "so") {
-		np = {0,1};
-	}
-	else if (dir == "ea") {
-		np = {1,0};
-	}
-	else if (dir == "we") {
-		np = {-1,0};
-	}
-	else if (dir == "ne") {
-		np = {1,-1};
-	}
-	else if (dir == "nw") {
-		np = {-1,-1};
-	}
-	else if (dir == "se") {
-		np = {1,1};
-	}
-	else if (dir == "sw") {
-		np = {1,-1};
-	}
-
-	np = np + this->getCurPos();
+bool Character::move(const Posn &np) {
 
 	if (canMove(np)) {
 		this->moveEffect();
@@ -82,9 +54,10 @@ bool Character::move(const string &dir) {
 		this->lastPos = this->curPos;
 		this->curPos = np;
 
-		// update display
-		this->notifyObservers(SubscriptionType::Display);
+		//cerr << "lastPos: " << this->lastPos << endl;
+		//cerr << "curPos: " << np << endl;
 
+		this->notifyObservers(SubscriptionType::Display);
 		return true;
 	}
 	this->notifyObservers(SubscriptionType::Display);
@@ -102,13 +75,14 @@ void Character::moveEffect() {
 }
 
 int Character::calculateDamage(Character *attacker) {
-  return ceil((100 / (100 + this->getDef())) * attacker->getAtt());
+	//cerr << this->getDef() << " " << attacker->getAtt() << endl;
+	double tempDmg = (100 / (100 + double(this->getDef())));
+	//cerr << tempDmg << endl;
+  return ceil(tempDmg * attacker->getAtt());
 }
 
 void Character::detachTiles() {
-	for (auto i = tileObservers.begin(); i != tileObservers.end(); ++i){
-		tileObservers.erase(i);
-	}
+	this->tileObservers.clear();
 }
 
 

@@ -60,28 +60,36 @@ int main(int argc, char *argv[]){
 	bool attack = false;
 	bool use = false;
 	while (cin >> cmd) {
+		bool failed = false;
 
 		if (cmd == "no" || cmd == "so" || cmd == "ea" || cmd == "we" ||
 				cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw") {
 
 			dir = cmd;
 			if (attack) {
-				b->attack(dir);
+				failed = b->attack(dir);
 				attack = false;
 			}
 			else if (use) {
-				b->use(dir);
+				failed = b->use(dir);
 				use = false;
 			}
-			else b->movePlayer(dir);
+			else failed = b->movePlayer(dir);
+
+			if (!failed) b->actionEnemy();
+
 			b->displayBoard();
 		}
 
-		else if (cmd == "u") use = true;
+		else if (cmd == "u") {
+			attack = false;
+			use = true;
+		}
+		else if (cmd == "a") {
+			use = false;
+			attack = true;
+		}
 		/*
-		// use potion <direction>
-		case "u": use = true; break;
-
 		// attack <direction>
 		case "a": attack = true; break;
 
@@ -94,7 +102,6 @@ int main(int argc, char *argv[]){
 		// quit while game is running
 		case "q": b->giveUp(); break;
 		*/
-		//b->updateTurn();
 
 	}
 

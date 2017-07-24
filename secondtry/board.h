@@ -42,10 +42,12 @@ class Board {
 	Display *disp;
 
 	std::map<Posn, Tile*> tiles;
-	std::vector<Chamber *> chambers;
 	std::map<Posn, Observer *> entities;
   std::map<Posn, Enemy *> enemies;
+
+  std::vector<Chamber *> chambers;
 	std::vector<Observer *> dead;
+
 
 	Player *player;
 	Stairs *stairs;
@@ -60,13 +62,18 @@ class Board {
 	void generatePlayer();
 	void generatePotions();
 	//void generateGold();
+	void generateEnemies();
 
 	//std::map<Posn, Entity*> ents;
 
 	//int curFloor;
 
 // misc
+	// attaches adjacent entities or tiles to subject's observers
 	void attachTiles(Subject *s);
+
+	// finds the posn of a random tile location in a direction
+	Posn randDir(const Posn &p);
 
 public:
 
@@ -78,15 +85,14 @@ public:
 	//Player Character choices:
 	void choosePlayer(char c);
 
-	void movePlayer(const std::string &dir);
+	bool movePlayer(const std::string &dir);
 
 
 	void generateBoard();
 
-	void attack(const std::string &dir);
-	void use(const std::string &dir);
+	bool attack(const std::string &dir);
+	bool use(const std::string &dir);
 
-  void actionEnemy();
 	/*
 	void restart();
 	void giveUp();
@@ -100,6 +106,9 @@ public:
 
 	// gets pointer to Tile at p
 	Tile* getTile(const Posn &p) const;
+
+	// makes enemies do their actions
+	void actionEnemy();
 
 };
 
