@@ -1,14 +1,17 @@
+#include <sstream>
+#include "player.h"
 #include "treasure.h"
+
 using namespace std;
 
 // Ctor
-Treasure::Treasure(int amount, string type): Item{amount, type}{}
+Treasure::Treasure(Posn p, int amount, string type): Item{p, 'G', amount, type}{}
 
 // Picks up gold
 void Treasure::use(Player &p){
 	if (this->canPickUp()){
-	  p.setGold(p.getGold() + this->amount); // no setGold / getGold method in character yet
-		this->pickAction();
+	  p.setGold(p.getGold() + this->amount);
+		this->pickAction(p);
 	}
 	else {
 		Stats s = p.getStats();
@@ -19,7 +22,10 @@ void Treasure::use(Player &p){
 // updates Action when Player picks up gold
 void Treasure::pickAction(Player &p) {
 	Stats s = p.getStats();
-	p.setAction(s.race + " picks up " + this->amount + " gold");
+	ostringstream os;
+	os << " picks up " << this->amount << " gold";
+	string action = os.str();
+	p.setAction(s.race + action);
 }
 
 // Checks if Player can pick up gold
@@ -29,5 +35,5 @@ bool Treasure::canPickUp(){
 
 // Player has walked on gold
 void Treasure::notify(Subject *whoNotified){
-	// passes Subject to use??
+	this->use(*whoNotified);
 }

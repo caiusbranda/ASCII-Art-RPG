@@ -6,11 +6,11 @@
 class Treasure : public Item {
 
 public:
-	Treasure(int amount);
-	void use(Player &p) override;
+	Treasure(Posn p, int amount, std::string type);
+	void use(Player &p);// override;
 	virtual bool canPickUp();
 	void pickAction(Player &p);
-	void notify(Subject *whoNotified);
+	void notify(Subject *whoNotified) override;
 };
 
 #endif
