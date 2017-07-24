@@ -29,4 +29,8 @@ Stats Subject::getStats() const {
 	return ret;
 }
 
+void Subject::setAction(const std::string &s) {
+	return;
+}
+
 Subject::~Subject(){}

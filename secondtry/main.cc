@@ -65,10 +65,18 @@ int main(int argc, char *argv[]){
 				cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw") {
 
 			dir = cmd;
-			if (attack) b->attack(dir);
-			else if (use) b->use(dir);
+			if (attack) {
+				b->attack(dir);
+				attack = false;
+			}
+			else if (use) {
+				b->use(dir);
+				use = false
+			}
 			else b->movePlayer(dir);
 		}
+
+		else if (cmd == "u") use = true;
 		/*
 		// use potion <direction>
 		case "u": use = true; break;

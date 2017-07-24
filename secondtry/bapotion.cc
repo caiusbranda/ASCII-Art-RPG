@@ -8,7 +8,7 @@ bool BAPotion::known = false;
 BAPotion::BAPotion(Posn p): Potion{p, 5, "BA"} {}
 
 // use BA potion
-void BAPotion::use(Player &p){
+void BAPotion::use(Player &p) {
 	p.setAtt(p.getAtt() + this->amount);
 	this->known = true;
 	this->useAction(p);
@@ -19,5 +19,6 @@ bool BAPotion::isKnown() {
 }
 
 void BAPotion::notify(Subject *whoNotified) {
-	this->encounterAction(this->known);
+	cerr << 1 << endl;
+	this->encounterAction(*whoNotified, this->known);
 }

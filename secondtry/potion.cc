@@ -21,12 +21,12 @@ void Potion::useAction(Player &p) {
 }
 
 // updates Action when PC encounters potion
-void Potion::encounterAction(bool known) {
+void Potion::encounterAction(Subject &p, bool known) {
 	Stats s = p.getStats();
 	if (known) {
-		p.setAction(s.getAction() + " and sees a " + this->type + " potion");
+		p.setAction(s.action + " and sees a " + this->type + " potion");
 	}
 	else {
-		p.setAction(s.getAction() + " and sees an unknown potion";
+		p.setAction(s.action + " and sees an unknown potion");
 	}
 }

@@ -18,6 +18,6 @@ bool WDPotion::isKnown() {
 }
 
 void WDPotion::notify(Subject *whoNotified) {
-	this->encounterAction(this->known);
+	this->encounterAction(*whoNotified, this->known);
 }
 

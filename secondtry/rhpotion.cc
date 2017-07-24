@@ -10,7 +10,7 @@ RHPotion::RHPotion(Posn p): Potion{p, 10, "RH"} {}
 void RHPotion::use(Player &p){
 	p.setHp(p.getHp() + this->amount);
 	this->known = true;
-	this->useAction();
+	this->useAction(p);
 }
 
 bool RHPotion::isKnown() {
@@ -18,6 +18,6 @@ bool RHPotion::isKnown() {
 }
 
 void RHPotion::notify(Subject *whoNotified) {
-	this->encounterAction(this->known);
+	this->encounterAction(*whoNotified, this->known);
 }
 

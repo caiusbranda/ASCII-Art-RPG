@@ -18,6 +18,6 @@ bool WAPotion::isKnown() {
 }
 
 void WAPotion::notify(Subject *whoNotified) {
-	this->encounterAction(this->known);
+	this->encounterAction(*whoNotified, this->known);
 }
 

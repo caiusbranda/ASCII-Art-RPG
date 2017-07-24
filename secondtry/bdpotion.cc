@@ -18,5 +18,5 @@ bool BDPotion::isKnown() {
 }
 
 void BDPotion::notify(Subject *whoNotified) {
-	this->encounterAction(this->known);
+	this->encounterAction(*whoNotified, this->known);
 }

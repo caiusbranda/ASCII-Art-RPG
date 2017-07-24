@@ -28,6 +28,7 @@ public:
   virtual Posn getCurPos() const = 0;
   virtual Posn getLastPos() const = 0;
   virtual char getIcon() const = 0;
+  virtual void setAction(const std::string &s);
   virtual Stats getStats() const;
 	virtual ~Subject() = 0;
 

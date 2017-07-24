@@ -9,6 +9,10 @@ class Player : public Character {
   std::string action;
   int gold;
 
+
+  Posn findDir(const std::string );
+  bool canUse(const Posn &p);
+
 public:
 
   Player(int maxhp, int hp, int att, int def, Posn p, std::string race);
@@ -34,9 +38,12 @@ public:
   bool move(const std::string &dir) override;
 
   Stats getStats() const override;
-  void setAction(const std::string &s);
+  void setAction(const std::string &s) override;
 
   //virtual void attack(Enemy *enemy) = 0;
+
+
+
 
 };
 

@@ -145,7 +145,7 @@ void Board::generatePotions() {
 		p = chambers[potChamber]->randomTile();
 
 		//	then pick type
-		int whichPot = rand() % 6;
+		int whichPot = 0; //rand() % 6;
 		if (whichPot == 0) {
 			pot = new BAPotion(p);
 		}
@@ -218,7 +218,7 @@ void Board::attachTiles(Subject *s) {
 			s->attach(tp, tiles.at(tp));
 
 			if (this->entities.count(tp) == 1) {
-				this->player->attach(this->entities.at(tp));
+				//this->player->attach(this->entities.at(tp));
 				this->player->attach(tp, this->entities.at(tp));
 			}
 
@@ -232,8 +232,11 @@ void Board::attack(const string &dir) {
 	return;
 }
 
+///////// POTIONS ///////////
+
 void Board::use(const string &dir) {
-	return;
+	bool success = player->use(dir);
+
 }
 
 /////////////////////////////

@@ -20,7 +20,7 @@ Stats Player::getStats() const {
 	return ret;
 }
 
-bool Player::move(const string &dir) {
+Posn Player::findDir(const string &dir) {
 	Posn np{0,0};
 	string compass = this->race;
 	compass += " moves ";
@@ -59,6 +59,12 @@ bool Player::move(const string &dir) {
 	}
 
 	np = np + this->getCurPos();
+	this->action = compass;
+	return np;
+}
+
+bool Player::move(const string &dir) {
+	Posn np = findDir(dir);
 
 	if (canMove(np)) {
 		this->moveEffect();
@@ -69,7 +75,6 @@ bool Player::move(const string &dir) {
 
 		this->lastPos = this->curPos;
 		this->curPos = np;
-		this->action = compass;
 
 		return true;
 	}
@@ -77,6 +82,19 @@ bool Player::move(const string &dir) {
 	this->notifyObservers(SubscriptionType::Display);
 	return false;
 }
+
+bool Player::use(const string &dir) {
+	Posn np = findDir(dir);
+
+	if (canUse(np)) {
+
+		return true;
+	}
+	this->action = "There's no potion to use";
+	this->notifyObservers(SubscriptionType::Display);
+	return false;
+}
+
 
 void Player::setAction(const std::string &s) {
 	this->action = s;

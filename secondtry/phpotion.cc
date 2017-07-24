@@ -10,7 +10,7 @@ PHPotion::PHPotion(Posn p): Potion{p, 10, "PH"} {}
 void PHPotion::use(Player &p){
 	p.setHp(p.getHp() - this->amount);
 	this->known = true;
-	this->useAction();
+	this->useAction(p);
 }
 
 bool PHPotion::isKnown() {
@@ -18,6 +18,6 @@ bool PHPotion::isKnown() {
 }
 
 void PHPotion::notify(Subject *whoNotified) {
-	this->encounterAction(this->known);
+	this->encounterAction(*whoNotified, this->known);
 }
 

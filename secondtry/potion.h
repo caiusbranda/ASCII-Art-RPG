@@ -17,10 +17,10 @@ public:
 	void use(Player &p) override;
 
 	SubscriptionType getSubType() const override;
-	
+
 	void useAction(Player &p);
 
-	void encounterAction(Player &p);
+	void encounterAction(Subject &p, bool known);
 
 };
 
