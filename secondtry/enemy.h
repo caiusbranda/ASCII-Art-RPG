@@ -2,6 +2,11 @@
 #define __ENEMY_H__
 
 #include "character.h"
+#include "player.h"
+
+
+class Shade;
+class Subject;
 
 class Enemy : public Character, public Observer {
 	bool nearPlayer;
@@ -18,20 +23,24 @@ public:
 
   bool isNearPlayer() const;
 
-	virtual ~Enemy() = 0;
+	virtual ~Enemy() = default;
 
-  virtual void attack(Player *player) = 0;
+  virtual int attack(Player *player) = 0;
 
-  virtual void attackedBy(Shade *e);
+  virtual int attackedBy(Shade *e);
 
-  virtual void attackedBy(Drow *e);
+  /*
 
-  virtual void attackedBy(Goblin *e);
+  virtual int attackedBy(Drow *e);
 
-  virtual void attackedBy(Vampire *e);
+  virtual int attackedBy(Goblin *e);
 
-  virtual void attackedBy(Troll *e);
+  virtual int attackedBy(Vampire *e);
+
+  virtual int attackedBy(Troll *e);
+  */
 
 };
 
+#include "elf.h"
 #endif

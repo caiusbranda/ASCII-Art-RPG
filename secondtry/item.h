@@ -3,6 +3,7 @@
 
 #include <string>
 #include "entity.h"
+#include "observer.h"
 
 class Player;
 

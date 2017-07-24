@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <sstream>
 
 #include "board.h"
 
@@ -234,7 +235,24 @@ void Board::attachTiles(Subject *s) {
 ///////// COMBAT ////////////
 
 void Board::attack(const string &dir) {
-	return;
+  this->player->canAttack(dir, enemies);
+}
+
+void Board::actionEnemy() {
+
+  for (map<Posn, Enemy*>::iterator it = enemies.begin(); it != enemies.end(); ++it) {
+    if(it->second->isNearPlayer()) {
+      stringstream ss;
+      int dmg = it->second->attack(this->player);
+      ss << it->second->getRace() << " dealt" << dmg << " damage to "
+       << this->player->getRace() << " (" << this->player->getHp() << " HP).";
+      this->player->appendAction(ss.str());
+    } else {
+     // if the enemy doesnt attack playuer, move the enemy
+     // it->second->move();
+    }
+  }
+  this->player->notifyObservers(SubscriptionType::Display);
 }
 
 ///////// POTIONS ///////////

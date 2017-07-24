@@ -17,7 +17,7 @@ void Display::updateDisplay(const Posn &p, char c) {
 
 void Display::notify(Subject *whoNotified) {
 	Posn curPos = whoNotified->getCurPos();
-	Posn lastPos = whoNotified->getLastPos();
+	//Posn lastPos = whoNotified->getLastPos();
 	char c = whoNotified->getIcon();
 
 	Stats other = whoNotified->getStats();

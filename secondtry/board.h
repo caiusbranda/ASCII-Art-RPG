@@ -7,18 +7,20 @@
 #include <map>
 #include <vector>
 #include <string>
+#include "entity.h"
+#include "character.h"
+#include "item.h"
+#include "player.h"
+#include "enemy.h"
+
 
 #include "posn.h"
-
-//#include "observer.h"
-#include "display.h"
-//#include "subject.h"
 #include "tile.h"
 #include "chamber.h"
 #include "stairs.h"
-//#include "character.h"
-//#include "player.h"
+#include "display.h"
 #include "shade.h"
+#include "elf.h"
 #include "bapotion.h"
 #include "bdpotion.h"
 #include "wapotion.h"
@@ -42,6 +44,7 @@ class Board {
 	std::map<Posn, Tile*> tiles;
 	std::vector<Chamber *> chambers;
 	std::map<Posn, Observer *> entities;
+  std::map<Posn, Enemy *> enemies;
 	std::vector<Observer *> dead;
 
 	Player *player;
@@ -82,6 +85,8 @@ public:
 
 	void attack(const std::string &dir);
 	void use(const std::string &dir);
+
+  void actionEnemy();
 	/*
 	void restart();
 	void giveUp();

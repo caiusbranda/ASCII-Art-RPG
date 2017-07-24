@@ -1,5 +1,6 @@
 #include "player.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -18,6 +19,10 @@ int Player::potMag() {
 Stats Player::getStats() const {
 	Stats ret{this->getHp(),this->getAtt(),this->getDef(),this->gold,this->race,this->action};
 	return ret;
+}
+
+string Player::getRace() const {
+  return this->race;
 }
 
 Posn Player::findDir(const string &dir) {
@@ -110,8 +115,70 @@ bool Player::canUse(const Posn &np) {
 	return true;
 }
 
-void Player::setAction(const std::string &s) {
+void Player::setAction(const string &s) {
 	this->action = s;
 }
+
+void Player::appendAction(const string &s) {
+  this->action += " " + s;
+}
+
+void Player::canAttack(const string &dir, map<Posn, Enemy*> &enemies) {
+  stringstream ss;
+  Posn attackPosn = this->findDir(dir);
+  if(enemies.count(attackPosn) == 1) {
+    Enemy* enemy = enemies.at(attackPosn);
+    int dmg = this->attack(enemy);
+    ss << this->race << " dealt" << dmg << " damage to " << enemy->getRace() << " (" << enemy->getHp() << " HP).";
+    this->action = ss.str();
+  } else {
+    this->action = "Cannot attack that!";
+  }
+  this->notifyObservers(SubscriptionType::Display);
+}
+
+//--------- ATTACKS -----------//
+int Player::attackedBy(Elf *e) {
+  int dmg = this->calculateDamage(e);
+  this->setHp(this->getHp() - dmg);
+  return dmg;
+}
+
+/*int Player::attackedBy(Orc *e) {
+  int dmg = this->calculateDamage(e);
+  this->setHp(this->getHp() - dmg);
+  return dmg;
+}
+  
+int Player::attackedBy(Halfling *e) {
+  int dmg = this->calculateDamage(e);
+  this->setHp(this->getHp() - dmg);
+  return dmg;
+}
+
+int Player::attackedBy(Dragon *e) {
+  int dmg = this->calculateDamage(e);
+  this->setHp(this->getHp() - dmg);
+  return dmg;
+}
+
+int Player::attackedBy(Merchant *e) {
+  int dmg = this->calculateDamage(e);
+  this->setHp(this->getHp() - dmg);
+  return dmg;
+}
+
+int Player::attackedBy(Dwarf *e) {
+  int dmg = this->calculateDamage(e);
+  this->setHp(this->getHp() - dmg);
+  return dmg;
+}
+
+int Player::attackedBy(Human *e) {
+  int dmg = this->calculateDamage(e);
+  this->setHp(this->getHp() - dmg);
+  return dmg;
+}*/
+//--------- ATTACKS -----------//
 
 

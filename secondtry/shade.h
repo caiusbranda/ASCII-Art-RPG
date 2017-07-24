@@ -3,28 +3,18 @@
 
 #include "player.h"
 
+class Enemy;
+class Elf;
+
 class Shade final : public Player {
 
 public:
 
 	Shade(Posn p);
 
-  void attack(Enemy *enemy) const override;
+  int attack(Enemy *enemy) override;
 
-  void attackedBy(Elf &e) const override;
-
-  void attackedBy(Orc &e) const override;
-  
-  void attackedBy(Halfling &e) const override;
-
-  void attackedBy(Dragon &e) const override;
-
-  void attackedBy(Merchant &e) const override;
-
-  void attackedBy(Dwarf &e) const override;
-
-  void attackedBy(Human &e) const override;
-
+  int attackedBy(Elf *e) override;
 
   ~Shade();
 };

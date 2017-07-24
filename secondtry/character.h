@@ -2,9 +2,10 @@
 #define __CHARACTERS_H__
 
 #include "entity.h"
-#include "posn.h"
-#include "tile.h"
 #include <cmath>
+
+struct Posn;
+class Tile;
 
 class Character : public Entity {
 
@@ -36,9 +37,7 @@ public:
 
   virtual bool move(const std::string &dir);
 
-  virtual void attack(Character &other) = 0;
-
-  virtual int calculateDamage(Character *attacker);
+  int calculateDamage(Character *attacker);
 
 	// mutators:
 	void setHp(int newHp);
@@ -47,7 +46,7 @@ public:
 
   void setDef(int newDef);
 
-
+  virtual std::string getRace() const = 0;
 };
 
 #endif

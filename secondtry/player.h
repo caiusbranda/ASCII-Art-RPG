@@ -2,9 +2,12 @@
 #define __PLAYER_H__
 
 #include "character.h"
+#include "enemy.h"
 
 class Potion;
-
+class Shade;
+class Enemy;
+class Elf;
 class Player : public Character {
 
   std::string race;
@@ -13,6 +16,7 @@ class Player : public Character {
 
 
   Posn findDir(const std::string &dir);
+
   bool canUse(const Posn &np);
 
   bool canMove(const Posn &np) override;
@@ -25,19 +29,21 @@ public:
 
   char getIcon() const override;
 
-  virtual void attackedBy(Elf &e);
+  virtual int attackedBy(Elf *e);
 
-  virtual void attackedBy(Orc &e);
+  /*
+  virtual int attackedBy(Orc *e);
   
-  virtual void attackedBy(Halfling &e);
+  virtual int attackedBy(Halfling *e);
 
-  virtual void attackedBy(Dragon &e);
+  virtual int attackedBy(Dragon *e);
 
-  virtual void attackedBy(Merchant &e);
+  virtual int attackedBy(Merchant *e);
 
-  virtual void attackedBy(Dwarf &e);
+  virtual int attackedBy(Dwarf *e);
 
-  virtual void attackedBy(Human &e);
+  virtual int attackedBy(Human *e);
+  */
   
   virtual int potMag();
 
@@ -49,7 +55,13 @@ public:
 
   void setAction(const std::string &s) override;
 
-  virtual void attack(Enemy *enemy) = 0;
-};
+  void appendAction(const std::string &s);
 
+  void canAttack(const std::string &dir, std::map<Posn, Enemy*> &enemies); 
+
+  virtual int attack(Enemy *enemy) = 0;
+
+  std::string getRace() const override;
+};
+#include "shade.h"
 #endif
