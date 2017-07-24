@@ -10,6 +10,7 @@ public:
 	void use(Player &p) override;
 	virtual bool canPickUp();
 	void pickAction(Player &p);
+	void notify(Subject *whoNotified);
 };
 
 #endif

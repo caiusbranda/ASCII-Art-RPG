@@ -26,3 +26,8 @@ void Treasure::pickAction(Player &p) {
 bool Treasure::canPickUp(){
 	return true;
 }
+
+// Player has walked on gold
+void Treasure::notify(Subject *whoNotified){
+	// passes Subject to use??
+}

@@ -13,10 +13,12 @@ void WAPotion::use(Player &p){
 	this->useAction(p);
 }
 
+// Checks if potion encountered is known by PC
 bool WAPotion::isKnown() {
 	return this->known;
 }
 
+// updates Action when potion is within 1-block radius of PC
 void WAPotion::notify(Subject *whoNotified) {
 	this->encounterAction(*whoNotified, this->known);
 }

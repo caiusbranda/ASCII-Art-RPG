@@ -13,10 +13,12 @@ void PHPotion::use(Player &p){
 	this->useAction(p);
 }
 
+// Checks if potion encountered is known by PC
 bool PHPotion::isKnown() {
 	return this->known;
 }
 
+// updates Action when potion is within 1-block radius of PC
 void PHPotion::notify(Subject *whoNotified) {
 	this->encounterAction(*whoNotified, this->known);
 }
