@@ -25,31 +25,31 @@ public:
 
   char getIcon() const override;
 
-  //virtual void move(std::string direction);
+  virtual void attackedBy(Elf &e);
 
-  //virtual void attackedBy(Elf &e) = 0;
-  //virtual void attackedBy(Orc &e) = 0;
-  /*
-  virtual void attackedBy(Halfling &e) = 0;
-  virtual void attackedBy(Dragon &e) = 0;
-  virtual void attackedBy(Merchant &e) = 0;
-  virtual void attackedBy(Dwarf &e) = 0;
-  virtual void attackedBy(Human &e) = 0;
-  */
+  virtual void attackedBy(Orc &e);
+  
+  virtual void attackedBy(Halfling &e);
 
+  virtual void attackedBy(Dragon &e);
+
+  virtual void attackedBy(Merchant &e);
+
+  virtual void attackedBy(Dwarf &e);
+
+  virtual void attackedBy(Human &e);
+  
   virtual int potMag();
 
   bool move(const std::string &dir) override;
+
   Posn use(const std::string &dir);
 
   Stats getStats() const override;
+
   void setAction(const std::string &s) override;
 
-  //virtual void attack(Enemy *enemy) = 0;
-
-
-
-
+  virtual void attack(Enemy *enemy) = 0;
 };
 
 #endif

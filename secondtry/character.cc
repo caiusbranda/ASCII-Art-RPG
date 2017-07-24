@@ -101,11 +101,9 @@ void Character::moveEffect() {
 	return;
 }
 
-/*
-void attack(Subject *other) {
-	other.attackedby{this};
+int Character::calculateDamage(Character *attacker) {
+  return ceil((100 / (100 + this->getDef())) * attacker->getAtt());
 }
-*/
 
 void Character::detachTiles() {
 	for (auto i = tileObservers.begin(); i != tileObservers.end(); ++i){

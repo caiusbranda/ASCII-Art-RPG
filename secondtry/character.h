@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "posn.h"
 #include "tile.h"
+#include <cmath>
 
 class Character : public Entity {
 
@@ -26,22 +27,25 @@ public:
 
 	// accessors:
 	int getMaxHp() const;
+
 	int getHp() const;
+
 	int getAtt() const;
+
 	int getDef() const;
 
   virtual bool move(const std::string &dir);
 
-  //virtual void attack(Character &other) = 0;
+  virtual void attack(Character &other) = 0;
+
+  virtual int calculateDamage(Character *attacker);
 
 	// mutators:
 	void setHp(int newHp);
+
   void setAtt(int newAtt);
+
   void setDef(int newDef);
-
-	//virtual void move(string dir);
-
-	//virtual void attack(Subject *other);
 
 
 };
