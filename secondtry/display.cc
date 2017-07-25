@@ -3,7 +3,7 @@
 using namespace std;
 
 Display::Display()
-: theDisplay{}, h{25}, w{79}, s{0,0,0,0,"",""} {}
+: theDisplay{}, h{25}, w{79}, s{0,0,0,0,1,"",""} {}
 
 Display::~Display() {}
 
@@ -41,8 +41,13 @@ std::ostream &operator<<(std::ostream &out, const Display &d) {
 	}
 
 	out << "Race: " << d.s.race;
-	out << " Gold: " << d.s.gold << endl;
-	// floor here
+	out << " Gold: " << d.s.gold;
+
+	for (int i = 0; i < 47; ++i) {
+		out << " ";
+	}
+	out << "Floor: " << d.s.floor << endl;
+
 	out << "HP: " << d.s.hp << endl;
 	out << "Atk: " << d.s.att << endl;
 	out << "Def: " << d.s.def << endl;
@@ -50,6 +55,7 @@ std::ostream &operator<<(std::ostream &out, const Display &d) {
 
 	return out;
 }
+
 
 /*
 void Display::notifyComing(Subject *whoNotified) {

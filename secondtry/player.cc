@@ -7,7 +7,7 @@ using namespace std;
 
 Player::Player(int maxhp, int hp, int att, int def, Posn p, string race)
 	: Character{maxhp, hp, att, def, p, '@'}, race{race},
-		action{"PC has entered floor x"}, gold{0} {}
+		action{race + " has spawned"}, gold{0}, floor{1} {}
 
 char Player::getIcon() const {
 	return '@';
@@ -18,7 +18,7 @@ int Player::potMag() const {
 }
 
 Stats Player::getStats() const {
-	Stats ret{this->getHp(),this->getAtt(),this->getDef(),this->gold,this->race,this->action};
+	Stats ret{this->getHp(),this->getAtt(),this->getDef(),this->gold,this->floor,this->race,this->action};
 	return ret;
 }
 
@@ -96,6 +96,7 @@ bool Player::canMove(const Posn &np) {
 
 Posn Player::use(const string &dir) {
 	Posn np = findDir(dir);
+	this->action = "";
 
 	if (canUse(np)) {
 		this->tileObservers.at(np)->use(*this);
@@ -119,7 +120,10 @@ void Player::setAction(const string &s) {
 }
 
 void Player::appendAction(const string &s) {
-  this->action += " " + s;
+	if (this->action != "") {
+		this->action += " and ";
+	}
+  this->action += s;
 }
 
 Posn Player::canAttack(const string &dir, map<Posn, Enemy*> &enemies) {
@@ -180,9 +184,6 @@ int Player::getGold() const {
 
 void Player::pickUpGold(int gold) {
 	this->gold += gold;
-  stringstream ss;
-  ss << this->race << " picked up " << gold << " gold.";
-  this->appendAction(ss.str());
 }
 
 void Player::notify(Subject *whoNotified) {

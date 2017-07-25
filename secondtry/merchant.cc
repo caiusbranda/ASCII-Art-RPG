@@ -19,5 +19,18 @@ string Merchant::getRace() const {
   return "Merchant";
 }
 
+void Merchant::checkEnemyDead(Player *killer) {
+  if(this->getHp() == 0) {
+  	int addedGold = 4;
+    Treasure t{killer->getCurPos(), addedGold, "drop"};
+    t.use(*killer);
+  }
+}
 
 
+int Merchant::defaultAttack(Character *c) {
+  int dmg = this->calculateDamage(c);
+  this->setHp(this->getHp() - dmg);
+  Merchant::hostile = true;
+  return dmg;
+}

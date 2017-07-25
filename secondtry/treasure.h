@@ -5,13 +5,18 @@
 
 class Treasure : public Item {
 
+	bool dragonSlain;
+
+protected:
+	void setSlain(bool s);
+
 public:
 	Treasure(Posn p, int amount, std::string type);
 	void use(Subject &p) override;
 
 	SubscriptionType getSubType() const override;
 
-	virtual bool canPickUp();
+	bool canPickUp();
 	void pickAction(Subject &p);
 	void notify(Subject *whoNotified) override;
 };

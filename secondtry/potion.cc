@@ -14,16 +14,16 @@ SubscriptionType Potion::getSubType() const {
 // updates Action of Player after using potion
 void Potion::useAction(Player &p) {
 	Stats s = p.getStats();
-	p.setAction(s.race + " uses " + this->type);
+	p.appendAction(s.race + " uses " + this->type);
 }
 
 // updates Action when PC encounters potion
 void Potion::encounterAction(Subject &p, bool known) {
 	Stats s = p.getStats();
 	if (known) {
-		p.setAction(s.action + " and sees a " + this->type + " potion");
+		p.appendAction("sees a " + this->type + " potion");
 	}
 	else {
-		p.setAction(s.action + " and sees an unknown potion");
+		p.appendAction("sees an unknown potion");
 	}
 }

@@ -13,4 +13,6 @@ int Troll::attack(Enemy *enemy) {
 
 Troll::~Troll() {}
 
-
+void Troll::moveEffect() {
+	this->setHp(this->getHp() + 5);
+}

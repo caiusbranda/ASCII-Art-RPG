@@ -6,7 +6,7 @@
 class Player;
 
 class Merchant final : public Enemy {
-  
+
   static bool hostile;
 
 public:
@@ -17,6 +17,10 @@ public:
   int attack(Player *player) override;
 
   bool isHostile() const override;
+
+  int defaultAttack(Character *c) override;
+
+  void checkEnemyDead(Player *killer) override;
 
   std::string getRace() const override;
 };

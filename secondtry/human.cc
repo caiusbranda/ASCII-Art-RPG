@@ -13,7 +13,8 @@ int Human::attack(Player *player) {
 void Human::checkEnemyDead(Player *killer) {
   if(this->getHp() == 0) {
     int addedGold = 4;
-    killer->pickUpGold(addedGold);
+   	Treasure t{killer->getCurPos(), addedGold, "humanDrop"};
+    t.use(*killer);
   }
 }
 

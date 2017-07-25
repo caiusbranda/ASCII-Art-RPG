@@ -13,6 +13,8 @@ public:
 
   int attack(Enemy *enemy) override;
 
+  void moveEffect() override;
+
   ~Troll();
 };
 

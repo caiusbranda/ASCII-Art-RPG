@@ -14,6 +14,7 @@ class Troll;
 class Subject;
 
 class Enemy : public Character, public Observer {
+
 protected:
 	bool nearPlayer;
 
@@ -48,6 +49,7 @@ public:
   virtual int attackedBy(Vampire *e);
 
   virtual int attackedBy(Troll *e);
+
 };
 
 #include "elf.h"

@@ -13,7 +13,8 @@ int Goblin::attack(Enemy *enemy) {
   int dmg = enemy->attackedBy(this);
   enemy->checkEnemyDead(this);
   if(enemy->getHp() == 0) {
-    this->pickUpGold(5);
+    Treasure t{this->getCurPos(), 5, "gobDrop"};
+    t.use(*this);
   }
   return dmg;
 }

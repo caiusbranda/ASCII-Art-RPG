@@ -77,6 +77,7 @@ int Character::calculateDamage(Character *attacker) {
   return ceil(tempDmg * attacker->getAtt());
 }
 
+
 int Character::defaultAttack(Character *c) {
   int dmg = this->calculateDamage(c);
   this->setHp(this->getHp() - dmg);

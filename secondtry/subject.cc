@@ -25,11 +25,15 @@ void Subject::notifyDisplay() {
 }
 */
 Stats Subject::getStats() const {
-	Stats ret{-1,0,0,0,"",""};
+	Stats ret{-1,0,0,0,0,"",""};
 	return ret;
 }
 
 void Subject::setAction(const std::string &s) {
+	return;
+}
+
+void Subject::appendAction(const std::string &s) {
 	return;
 }
 

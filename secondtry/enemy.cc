@@ -38,7 +38,8 @@ void Enemy::checkEnemyDead(Player *killer) {
     if(rand() % 2 == 0){
       addedGold = 1;
     }
-    killer->pickUpGold(addedGold);
+    Treasure t{killer->getCurPos(), addedGold, "drop"};
+    t.use(*killer);
   }
 }
 

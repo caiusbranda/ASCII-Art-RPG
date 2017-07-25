@@ -5,8 +5,9 @@
 
 using namespace std;
 
-Board::Board() : disp{nullptr}, player{nullptr}, numChambers{5}, playerRace{'s'}
-{}
+Board::Board()
+	: disp{nullptr}, player{nullptr}, stairs{nullptr}, floor{1}, numChambers{5},
+		playerRace{0} {}
 
 Board::~Board() {
 	delete disp;
@@ -25,7 +26,7 @@ Board::~Board() {
 //////////// INITIALIZATION /////////////
 
 void Board::initEmpty(const string &source) {
-	if (disp != nullptr) return;
+	if (disp != nullptr) delete disp;
 
 	ifstream in{source};
 
@@ -64,6 +65,8 @@ void Board::initEmpty(const string &source) {
 }
 
 void Board::choosePlayer(char c) {
+	playerRace = c;
+
 	string file = "cc3kfloorbase.txt";
 
 	initEmpty(file);
@@ -75,21 +78,28 @@ void Board::choosePlayer(char c) {
 //////////// GENERATION /////////////
 
 void Board::generateFloor() {
-	srand(time(0)); // seeds generator with current time
 
 	// order is player, stairs, potions, gold, enemies
 
+	// if no command line argument file
+
 	generatePlayer();
+
 	generatePotions();
+
 	generateGold();
+
 	generateEnemies();
+
+	// if yes command line argument file
+	// generate everything differently.
 
 	this->entities.erase(player->getCurPos());
 
 	attachTiles(player);
-  
-  for (auto &i : this->dHoards) {
-    attachTiles(i);
+
+  for (auto &i : this->treasures) {
+    attachTiles(i.second);
   }
 
 }
@@ -97,14 +107,33 @@ void Board::generateFloor() {
 // generates player and stairs
 void Board::generatePlayer() {
 
+
 	// get random chamber
 	int playerChamber = (rand() % numChambers);
+
+	cerr << 10 << endl;
 
 	// get random tile within chosen chamber
 	Posn pp = chambers[playerChamber]->randomTile();
 
+	cerr << 11<< endl;
+
 	// creates player on that tile
-	this->player = new Shade(pp);
+	/*
+		(s)hade
+		(d)row
+		(v)amprie
+		(t)roll
+		(g)oblin
+	*/
+
+	switch(playerRace) {
+		case 's': this->player = new Shade(pp); break;
+		case 'd': this->player = new Drow(pp); break;
+		case 'v': this->player = new Vampire(pp); break;
+		case 't': this->player = new Troll(pp); break;
+		case 'g': this->player = new Goblin(pp); break;
+	}
 	this->entities[pp] = player;
 
 	// attach display to player observers
@@ -114,7 +143,7 @@ void Board::generatePlayer() {
 	int stairsChamber = (rand() % numChambers);
 
 	while(true) {
-		if (stairsChamber != playerChamber) break;
+		if (stairsChamber == playerChamber) break;
 		stairsChamber = (rand() % numChambers);
 	}
 
@@ -149,7 +178,7 @@ void Board::generatePotions() {
 		// second pick tile
 		while(true) {
 			p = chambers[potChamber]->randomTile();
-			if (p == player->getCurPos() || entities.count(p) == 0) break;
+			if (p != player->getCurPos() && entities.count(p) == 0) break;
 		}
 		//	then pick type
 		int whichPot = rand() % 6;
@@ -195,7 +224,7 @@ void Board::generateGold() {
 
 		while (true) {
 			p = this->chambers[goldChamber]->randomTile();
-			if (p == player->getCurPos() || this->entities.count(p) == 0) break;
+			if (p != player->getCurPos() && this->entities.count(p) == 0) break;
 		}
 
 		// then pick type of gold.
@@ -206,12 +235,12 @@ void Board::generateGold() {
 		}
 		else if (goldType < 6) {
 			tre = new DragonHoard{p};
-			this->dHoards.push_back(tre);
 		}
 		else {
 			tre = new Treasure{p, 1, "small"};
 		}
 		tre->attach(disp);
+		this->treasures[p] = tre;
 		this->entities[p] = tre;
 
 		tre->notifyObservers(SubscriptionType::Display);
@@ -223,6 +252,34 @@ void Board::generateGold() {
 ///////// ENEMIES ///////////
 
 void Board::generateEnemies() {
+
+
+	// DRAGONS
+	for (auto &it : this->treasures) {
+		Treasure *i = it.second;
+
+		if (!i->canPickUp()){
+
+			Posn dhp = i->getCurPos();
+
+			Posn dp = randDir(dhp);
+
+			while(true) {
+				dp = randDir(dhp);
+				if (this->tiles.at(dp)->getType() == '.'
+						&& dp != this->player->getCurPos()
+						&& this->entities.count(dp) == 0) {
+					break;
+				}
+			}
+
+			Enemy *en = new Dragon{dp, i};
+			attachThings(en, dp);
+	    en->notifyObservers(SubscriptionType::Display);
+		}
+	}
+
+	// other enemies
 	// Human: 2/9,
 	// Dwarf: 3/18
 	// Halfling: 5/18
@@ -230,7 +287,6 @@ void Board::generateEnemies() {
 	// Orc: 1/9
 	// Merchant: 1/9
 	int numEns = 20;
-
 	for (int i = 0; i < numEns; ++i) {
 		Posn p{0,0};
 		Enemy *en;
@@ -240,8 +296,10 @@ void Board::generateEnemies() {
 		// then pick tile
 		while(true) {
 			p = chambers[enChamber]->randomTile();
-			if (p == player->getCurPos() || entities.count(p) == 0
-					|| enemies.count(p) == 0) break;
+
+			if (p != player->getCurPos()
+					&& entities.count(p) == 0
+					&& enemies.count(p) == 0) break;
 		}
 
 		// then enemy type
@@ -273,14 +331,7 @@ void Board::generateEnemies() {
 		en->notifyObservers(SubscriptionType::Display);
 	}
 
-	// DRAGONS
-	for (auto &i : this->dHoards) {
-		Posn dhp = i->getCurPos();
-		Posn dp = randDir(dhp);
-		Enemy *en = new Dragon{dp, i};
-		attachThings(en, dp);
-    en->notifyObservers(SubscriptionType::Display);
-	}
+
 
 }
 
@@ -300,13 +351,13 @@ bool Board::movePlayer(const string &dir) {
 
 	bool success = player->move(dir);
 	if (success) {
-		
+
 		Posn pp = this->player->getCurPos();
 
-		if (this->entities.count(pp) == 1
-				&& this->entities.at(pp)->getType() == 'G') {
-			dead.push_back(this->entities.at(pp));
-  		entities.erase(pp);
+		// CHECK IF STAIRS
+		if (this->entities.count(pp) == 1  && this->entities.at(pp)->getType() == 92) {
+			this->newFloor();
+			return false;
 		}
 
     attachTiles(player);
@@ -316,11 +367,26 @@ bool Board::movePlayer(const string &dir) {
     this->player->notifyObservers(SubscriptionType::Potion);
     this->player->notifyObservers(SubscriptionType::Gold);
 
+    if (this->entities.count(pp) == 1
+				&& this->entities.at(pp)->getType() == 'G'
+				&& this->treasures.at(pp)->canPickUp()) {
+
+			this->dead.push_back(this->entities.at(pp));
+  		this->entities.erase(pp);
+  		this->treasures.erase(pp);
+		}
+
+
 		// update display
 		this->player->notifyObservers(SubscriptionType::Display);
 
 		// reverts tile moved from in display
-		disp->notify(tiles.at(player->getLastPos()));
+		if (this->treasures.count(player->getLastPos()) == 1) {
+			this->treasures.at(player->getLastPos())->notifyObservers(SubscriptionType::Display);
+		}
+		else {
+			this->disp->notify(tiles.at(player->getLastPos()));
+		}
 	}
 	return !success;
 }
@@ -393,15 +459,22 @@ Posn Board::randDir(const Posn &p) {
 	return np = np + p;
 }
 
-///////// COMBAT ////////////
+///////// MISC //////////////
 
-bool Board::attack(const string &dir) {
-  //reset tiles
+void Board::resetPlayer() {
+	//reset tiles
   this->player->detachTiles();
   attachTiles(this->player);
   this->player->notifyObservers(SubscriptionType::Enemy);
   this->player->notifyObservers(SubscriptionType::Dragon);
   this->player->notifyObservers(SubscriptionType::Gold);
+}
+
+///////// COMBAT ////////////
+
+bool Board::attack(const string &dir) {
+  //reset tiles
+  resetPlayer();
 
   Posn enPos = this->player->canAttack(dir, enemies);
 
@@ -427,10 +500,10 @@ void Board::actionEnemy() {
 
 	map<Posn, Enemy *> temp = this->enemies;
 
-	int i = 0;
+	//int i = 0;
   for (auto &it : this->enemies) {
 
-  	++i;
+  	//++i;
   	Enemy *en = it.second;
 
      //reset tiles
@@ -441,15 +514,15 @@ void Board::actionEnemy() {
   	attachTilesTemp(en, temp);
 
   	// checks if near player
-    if(en->isNearPlayer()) {
+    if(en->isNearPlayer() && en->isHostile()) {
       stringstream ss;
       int dmg = en->attack(this->player);
 
       // printing action:
-      ss << "and "<< en->getRace() << " dealt " << dmg << " damage to "
+      ss << en->getRace() << " dealt " << dmg << " damage to "
        << this->player->getRace() << " (" << this->player->getHp() << " HP)";
 
-      this->player->appendAction(ss.str());  
+      this->player->appendAction(ss.str());
       en->detachTiles();
   		attachTilesTemp(en, temp);
     }
@@ -467,32 +540,34 @@ void Board::actionEnemy() {
     	//	try to move there with en->move(np)
     	//	might move or not
     	//  before attempt, detach and attachtiles from temp
+    	//	TRY AGAIN TO MOVE PLAYER
     	//		IF SUCCESSFUL:
     	//			need to add new location on enemy map
     	//			remove old location
     	//			update display to revert LAST position
-    	//		IF NOT SUCCESSFUL:
-    	//			do NOT update location on enemy map
     	// ALWAYS WANT TO ATTACH TILES
 
-    	Posn np{0,0};
-    	np = randDir(en->getCurPos());
+    	// try 10 times to get a movement spot
+    	for (int i = 0; i < 10; ++i) {
+	    	Posn np{0,0};
+	    	np = randDir(en->getCurPos());
 
-    	// detaches tiles
-    	bool success = en->move(np);
+	    	// detaches tiles
+	    	bool success = en->move(np);
 
-    	//cout << "(" << i << ") " << (success ? "ENEMY MOVED" : "NO ENEMY MOVE :(") << endl;
+	    	//cout << "(" << i << ") " << (success ? "ENEMY MOVED" : "NO ENEMY MOVE :(") << endl;
 
- 			// on success, change location of enemy in temp map, erase last location,
- 			//	change last location of display to previous thing.
-    	if (success && !(en->getLastPos() == en->getCurPos())) {
-    		temp[np] = en;
-    		temp.erase(en->getLastPos());
-    		disp->notify(tiles.at(en->getLastPos()));
-    	}
-
-    	// attaches tiles from temp
-    	attachTilesTemp(en, temp);
+	 			// on success, change location of enemy in temp map, erase last location,
+	 			//	change last location of display to previous thing.
+	    	if (success && !(en->getLastPos() == en->getCurPos())) {
+	    		temp[np] = en;
+	    		temp.erase(en->getLastPos());
+	    		disp->notify(tiles.at(en->getLastPos()));
+	    		break;
+	    	}
+	    	// attaches tiles from temp
+    		attachTilesTemp(en, temp);
+	    }
     }
     en->setNearPlayer(false);
   }
@@ -530,16 +605,20 @@ void Board::attachTilesTemp(Subject *s, map<Posn, Enemy*> &ens) {
 	}
 }
 
-///////// POTIONS ///////////
+/////////// POTIONS ///////////
 
 bool Board::use(const string &dir) {
+
 	Posn potPos = this->player->use(dir);
 	bool failed = true;
 
 	if (entities.count(potPos) == 1 &&
 		entities.at(potPos)->getType() == 'P') {
-		dead.push_back(entities.at(potPos));
-		entities.erase(potPos);
+
+		this->resetPlayer();
+
+		this->dead.push_back(entities.at(potPos));
+		this->entities.erase(potPos);
 		failed = false;
 	}
 
@@ -548,7 +627,7 @@ bool Board::use(const string &dir) {
 	return failed;
 }
 
-//////////////////////////////
+////////////////////////////////
 
 
 void Board::displayBoard() const {
@@ -559,3 +638,77 @@ Tile* Board::getTile(const Posn &p) const {
 	return tiles.at(p);
 }
 
+void Board::clearAction() {
+	this->player->setAction("");
+}
+
+
+/////////////// NEW FLOOR //////////////////
+
+void Board::newFloor() {
+	if (this->floor <= 5) { // check if the floor number is ≤ 5
+    // update floor number
+    ++this->floor;
+
+    // delete old player after saving HP
+    int curHp = this->player->getHp();  // to be used after new copy of player is made
+    int curGold = this->player->getGold(); // to be used after SHUT UP JOYCE
+
+    Player *oldPlayer = this->player;
+    this->player = nullptr;
+    delete oldPlayer;
+
+    // delete stairs
+    //Stairs *oldStairs = this->stairs;
+    //this->stairs = nullptr;
+    //delete oldStairs;
+
+        // delete dead
+  	for (auto &i : dead) delete i;
+    this->dead.clear();
+
+    // delete entities
+    for (auto &i : entities) delete i.second;
+    this->entities.clear();
+
+  	for (auto &i : tiles) delete i.second;
+    this->tiles.clear();
+
+  	for (auto &i : chambers) delete i;
+    this->chambers.clear();
+
+  	for (auto &i : enemies) delete i.second;
+    this->enemies.clear();
+
+  	this->treasures.clear();
+
+
+    this->choosePlayer(playerRace);
+    // update new Player created with right HP
+    player->setHp(curHp);
+    player->pickUpGold(curGold);
+  }
+  else {  // end game
+    // where do we save the score??
+    // ... = generateScore(player);
+    // main deletes board??
+  }
+}
+
+int Board::generateScore(Player *p) {
+  if (p->getRace() == "Shade") {
+    return 1.5 * p->getGold();
+  }
+  else {
+    return p->getGold();
+  }
+}
+/*
+void Board::endGame(bool showScore) {
+
+}
+
+
+
+
+*/

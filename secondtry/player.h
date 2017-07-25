@@ -20,6 +20,7 @@ class Player : public Character, public Observer {
   std::string race;
   std::string action;
 	int gold;
+  int floor;
 
   void notify(Subject *whoNotified) override;
   char getType() const override;
@@ -63,7 +64,7 @@ public:
 
   void setAction(const std::string &s) override;
 
-  void appendAction(const std::string &s);
+  void appendAction(const std::string &s) override;
 
   Posn canAttack(const std::string &dir, std::map<Posn, Enemy*> &enemies);
 
@@ -75,6 +76,7 @@ public:
 
 	void pickUpGold(int gold) override;
 };
+
 #include "shade.h"
 #include "drow.h"
 #include "vampire.h"

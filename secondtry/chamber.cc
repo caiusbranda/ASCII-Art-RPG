@@ -41,6 +41,8 @@ Chamber::Chamber(Board *b, int type)
 	fillEmpties();
 }
 
+Chamber::~Chamber() {}
+
 void Chamber::fillEmpties() {
 	// each row (first will always be a wall)
 	for (int y = 0; y < h; ++y) {

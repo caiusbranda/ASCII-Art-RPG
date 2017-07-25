@@ -2,26 +2,25 @@
 using namespace std;
 
 // Ctor
-DragonHoard::DragonHoard(Posn p): Treasure{p, 6, "dHoard"}, dragonSlain{false}{}
-
-// Checks if PC can pick up dragon hoard
-bool DragonHoard::canPickUp(){
-	return dragonSlain;
+DragonHoard::DragonHoard(Posn p): Treasure{p, 6, "dHoard"} {
+	this->setSlain(false);
 }
-
 // Notify
 void DragonHoard::notify(Subject *whoNotified){
 	// Case 1: Subject is Dragon
 	if (whoNotified->getIcon() == 'D') {
-		this->dragonSlain = true;
+		this->setSlain(true);
 	}
 	// Case 2: Subject is PC
 	else {
-    if(this->dragonSlain) {
+    if(this->canPickUp() && whoNotified->getCurPos() == this->getCurPos()) {
 		  this->use(*whoNotified);
     } else {
       this->notifyObservers(SubscriptionType::Dragon);
-      cerr << " U SHOULD PROLLY KILL DREOGN FIRST" << endl;
+      Stats s = whoNotified->getStats();
+      if (whoNotified->getCurPos() == this->getCurPos()) {
+				whoNotified->appendAction("cannot pick up gold because the dragon has not been slain");
+			}
     }
 	}
 }

@@ -1,37 +1,7 @@
 #ifndef __BOARD_H__
 #define __BOARD_H__
 
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <map>
-#include <vector>
-#include <string>
-#include "entity.h"
-#include "character.h"
-#include "item.h"
-#include "player.h"
-#include "enemy.h"
-
-#include "posn.h"
-#include "tile.h"
-#include "chamber.h"
-#include "stairs.h"
-#include "display.h"
-#include "shade.h"
-#include "elf.h"
-#include "human.h"
-#include "dwarf.h"
-#include "halfling.h"
-#include "orc.h"
-#include "merchant.h"
-#include "bapotion.h"
-#include "bdpotion.h"
-#include "wapotion.h"
-#include "wdpotion.h"
-#include "rhpotion.h"
-#include "phpotion.h"
-#include "dragonhoard.h"
+#include "common.h"
 
 /*
 #include "passage.h"
@@ -49,14 +19,16 @@ class Board {
 	std::map<Posn, Tile*> tiles;
 	std::map<Posn, Observer *> entities;
   std::map<Posn, Enemy *> enemies;
+  std::map<Posn, Treasure *> treasures;
 
   std::vector<Chamber *> chambers;
 	std::vector<Observer *> dead;
-	std::vector<Treasure *> dHoards;
+
 
 	Player *player;
 	Stairs *stairs;
 
+	int floor;
 	const int numChambers;
 	char playerRace;
 
@@ -68,10 +40,6 @@ class Board {
 	void generatePotions();
 	void generateGold();
 	void generateEnemies();
-
-	//std::map<Posn, Entity*> ents;
-
-	//int curFloor;
 
 // misc
 
@@ -86,6 +54,11 @@ class Board {
 
 	// attaches things to enemies
 	void attachThings(Enemy *en, const Posn &p);
+
+	// resets player tiles
+	void resetPlayer();
+
+	void newFloor();
 
 public:
 
@@ -121,6 +94,10 @@ public:
 
 	// makes enemies do their actions
 	void actionEnemy();
+
+	void clearAction();
+
+	int generateScore(Player *p);
 
 };
 

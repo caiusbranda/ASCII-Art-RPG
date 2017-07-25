@@ -1,15 +1,19 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdlib>
+#include <ctime>
+
 #include "board.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]){
+	srand(time(0));
 
 	fstream in;
 
-	Board *b = new Board;
+	Board b{};
 
 	string cmd;
 	char beg;
@@ -23,6 +27,7 @@ int main(int argc, char *argv[]){
 	for (int i = 0; i < 52; ++i) cout << "=";
 	cout << endl << endl;
 	cout << "Thank you for purchasing this Early Access™ title!" << endl;
+	cout << "From CMJ Family Inc™" << endl;
 	cout << endl;
 
 	// init commands
@@ -32,9 +37,10 @@ int main(int argc, char *argv[]){
 		cout << "please enter a character to select a race:" << endl;
 		cout << "(s)hade (hard)" << endl;
 		cout << "(d)row (med)" << endl;
-		cout << "(v)amprie (med)" << endl;
+		cout << "(v)ampire (med)" << endl;
 		cout << "(t)roll (easy)" << endl;
 		cout << "(g)oblin (hard)" << endl;
+		cout << endl;
 
 		cin >> beg;
 
@@ -45,27 +51,38 @@ int main(int argc, char *argv[]){
 		}
 		// shade
 		else if (beg == 's'){
-			b->choosePlayer(beg);
+			b.choosePlayer(beg);
+			break;
+		}
+
+		// drow
+		else if (beg == 'd') {
+			b.choosePlayer(beg);
+			break;
+		}
+
+		// vamp
+		else if (beg == 'v') {
+			b.choosePlayer(beg);
+			break;
+		}
+
+		// troll
+		else if (beg == 't') {
+			b.choosePlayer(beg);
+			break;
+		}
+		// goblin
+		else if (beg == 'g') {
+			b.choosePlayer(beg);
 			break;
 		}
 /*
-		// drow
-		else if (beg == 'd') b->choosePlayer(beg); break;
-
-		// vamp
-		else if (beg == 'v') b->choosePlayer(beg); break;
-
-		// troll
-		else if (beg == 't') b->choosePlayer(beg); break;
-
-		// goblin
-		else if (beg == 'g') b->choosePlayer(beg); break;
-
 		// restart
-		else if (beg == 'r') b->restart(); break;
+		else if (beg == 'r') b.restart(); break;
 
 		// quit
-		else if (beg == 'q') b->quit(); break;
+		else if (beg == 'q') b.quit(); break;
 */
 		else {
 			cout << "Invalid input! Please try again. (or enter 'q' to quit)" << endl;
@@ -75,7 +92,7 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	b->displayBoard();
+	b.displayBoard();
 
 
 
@@ -92,20 +109,20 @@ int main(int argc, char *argv[]){
 
 			dir = cmd;
 			if (attack) {
-				failed = b->attack(dir);
+				failed = b.attack(dir);
 				attack = false;
 			}
 			else if (use) {
-				failed = b->use(dir);
+				failed = b.use(dir);
 				use = false;
 			}
 			else {
-        failed = b->movePlayer(dir);
+        failed = b.movePlayer(dir);
       }
 
-			if (!failed) b->actionEnemy();
-      
-			b->displayBoard();
+			if (!failed) b.actionEnemy();
+
+			b.displayBoard();
 		}
 
 		else if (cmd == "u") {
@@ -118,14 +135,16 @@ int main(int argc, char *argv[]){
 		}
 /*
 		// enemies stop moving
-		case "f": b->freeze(); break;
+		case "f": b.freeze(); break;
 
 		// restart game
-		case "r": b->restart(); break;
+		case "r": b.restart(); break;
 
 		// quit while game is running
-		case "q": b->giveUp(); break;
+		case "q": b.giveUp(); break;
 */
+
+		b.clearAction();
 	}
 
 }
