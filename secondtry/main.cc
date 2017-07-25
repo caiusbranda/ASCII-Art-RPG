@@ -11,14 +11,13 @@ using namespace std;
 int main(int argc, char *argv[]){
 	srand(time(0));
 
-	fstream in;
-
-	Board b{};
-
-	string cmd;
-	char beg;
-
 	while(true) {
+		fstream in;
+
+		Board b{};
+
+		string cmd;
+		char beg;
 
 		cout << endl;
 		for (int i = 0; i < 52; ++i) cout << "=";
@@ -88,7 +87,7 @@ int main(int argc, char *argv[]){
 			}
 
 			// restart
-			else if (beg == 'r');
+			else if (beg == 'r')
 
 			// quit
 			else if (beg == 'q') b.quit(); break;
