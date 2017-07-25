@@ -1,6 +1,7 @@
 #include "player.h"
 #include <iostream>
 #include <sstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ char Player::getIcon() const {
 	return '@';
 }
 
-int Player::potMag() {
+int Player::potMag() const {
 	return 1;
 }
 
@@ -140,53 +141,49 @@ Posn Player::canAttack(const string &dir, map<Posn, Enemy*> &enemies) {
 }
 
 //--------- ATTACKS -----------//
+
 int Player::attackedBy(Elf *e) {
-  int dmg = this->calculateDamage(e);
-  this->setHp(this->getHp() - dmg);
-  return dmg;
+  int dmgDealt = this->calculateDamage(e);
+
+  if (rand() % 2 == 1) {
+    dmgDealt *= 2;
+  }
+
+  this->setHp(this->getHp() - dmgDealt);
+  return dmgDealt;
 }
 
-/*int Player::attackedBy(Orc *e) {
-  int dmg = this->calculateDamage(e);
-  this->setHp(this->getHp() - dmg);
-  return dmg;
+int Player::attackedBy(Orc *e) {
+  return this->defaultAttack(e);
 }
 
 int Player::attackedBy(Halfling *e) {
-  int dmg = this->calculateDamage(e);
-  this->setHp(this->getHp() - dmg);
-  return dmg;
+  return this->defaultAttack(e);
 }
 
 int Player::attackedBy(Dragon *e) {
-  int dmg = this->calculateDamage(e);
-  this->setHp(this->getHp() - dmg);
-  return dmg;
+  return this->defaultAttack(e);
 }
 
 int Player::attackedBy(Merchant *e) {
-  int dmg = this->calculateDamage(e);
-  this->setHp(this->getHp() - dmg);
-  return dmg;
+  return this->defaultAttack(e);
 }
 
 int Player::attackedBy(Dwarf *e) {
-  int dmg = this->calculateDamage(e);
-  this->setHp(this->getHp() - dmg);
-  return dmg;
+  return this->defaultAttack(e);
 }
 
 int Player::attackedBy(Human *e) {
-  int dmg = this->calculateDamage(e);
-  this->setHp(this->getHp() - dmg);
-  return dmg;
-}*/
-//--------- ATTACKS -----------//
+  return this->defaultAttack(e);
+}
 
 int Player::getGold() const {
 	return this->gold;
 }
 
-void Player::setGold(int newGold) {
-	this->gold = newGold;
+void Player::pickUpGold(int gold) {
+	this->gold += gold;
+  stringstream ss;
+  ss << this->race << " picked up " << gold << " gold.";
+  this->appendAction(ss.str());
 }

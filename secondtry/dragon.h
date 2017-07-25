@@ -1,15 +1,15 @@
-#ifndef __ORC_H__
-#define __ORC_H__
+#ifndef __DRAGON_H__
+#define __DRAGON_H__
 
 #include "enemy.h"
 
 class Player;
 
-class Orc final : public Enemy {
+class Dragon final : public Enemy {
 
 public:
-  Orc(Posn p);
-  ~Orc();
+  Dragon(Posn p);
+  ~Dragon();
 
   int attack(Player *player) override;
 

@@ -1,20 +1,21 @@
 #ifndef __GOBLIN_H__
 #define __GOBLIN_H__
 
-
-#include <cstdlib>
-#include <ctime>
-
 #include "player.h"
+
+class Enemy;
 
 class Goblin final : public Player {
 
 public:
+
 	Goblin(Posn p);
 
-	~Goblin();
+  int attack(Enemy *enemy) override;
 
-  void attack(Enemy *enemy) override;
+  int attackedBy(Orc *e) override;
+
+  ~Goblin();
 
 };
 

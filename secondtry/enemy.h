@@ -6,6 +6,11 @@
 
 
 class Shade;
+class Drow;
+class Vampire;
+class Goblin;
+class Troll;
+
 class Subject;
 
 class Enemy : public Character, public Observer {
@@ -23,13 +28,15 @@ public:
 
   bool isNearPlayer() const;
 
+  virtual bool isHostile() const;
+
 	virtual ~Enemy() = default;
+
+  virtual void checkEnemyDead(Player *killer);
 
   virtual int attack(Player *player) = 0;
 
   virtual int attackedBy(Shade *e);
-
-  /*
 
   virtual int attackedBy(Drow *e);
 
@@ -38,9 +45,13 @@ public:
   virtual int attackedBy(Vampire *e);
 
   virtual int attackedBy(Troll *e);
-  */
-
 };
 
 #include "elf.h"
+#include "merchant.h"
+#include "halfling.h"
+#include "dragon.h"
+#include "human.h"
+#include "dwarf.h"
+#include "orc.h"
 #endif

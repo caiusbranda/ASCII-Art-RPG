@@ -1,5 +1,6 @@
 #include "enemy.h"
 #include <iostream>
+#include <cstlib>
 
 using namespace std;
 
@@ -16,7 +17,6 @@ char Enemy::getType() const {
 }
 
 void Enemy::notify(Subject *whoNotified) {
-	//cerr << "enemy notified" << endl;
   this->nearPlayer = !this->nearPlayer;
 }
 
@@ -24,8 +24,37 @@ bool Enemy::isNearPlayer() const {
   return this->nearPlayer;
 }
 
-int Enemy::attackedBy(Shade *e) {
-  int dmg = this->calculateDamage(e);
-  this->setHp(this->getHp() - dmg);
-  return dmg;
+bool Enemy::isHostile() const {
+  return true;
+}
+
+virtual void checkEnemyDead(Player *killer) {
+  if(this->getHp() == 0) {
+    int addedGold = 2;
+    if(rand() % 2 == 0){
+      addedGold = 1;
+    }
+    killer->pickUpGold(addedGold);
+  }
+}
+
+int Enemy::attackedBy(Shade *p) {
+  return this->defaultAttack(p);
+}
+
+int Enemy::attackedBy(Drow *p) {
+  return this->defaultAttack(p);
+}
+
+int Enemy::attackedBy(Goblin *p) {
+  return this->defaultAttack(p);
+}
+
+int Enemy::attackedBy(Vampire *p) {
+  p->setHp(p->getHp + 5); // gain 5 HP every attack
+  return this->defaultAttack(p);
+}
+
+int Enemy::attackedBy(Troll *p) {
+  return this->defaultAttack(p);
 }

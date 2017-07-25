@@ -39,6 +39,8 @@ public:
 
   int calculateDamage(Character *attacker);
 
+  virtual int defaultAttack(Character *c);
+
 	// mutators:
 	void setHp(int newHp);
 

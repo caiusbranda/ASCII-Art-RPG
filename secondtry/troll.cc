@@ -1,0 +1,16 @@
+#include "troll.h"
+
+using namespace std;
+
+Trol::Troll(Posn p)
+  : Player{120, 120, 25, 15, p, "Troll"} {}
+
+int Troll::attack(Enemy *enemy) {
+  int dmg = enemy->attackedBy(this);
+  enemy->checkEnemyDead(this);
+  return dmg;
+}
+
+Troll::~Troll() {}
+
+

@@ -47,15 +47,10 @@ bool Character::move(const Posn &np) {
 	if (canMove(np)) {
 		this->moveEffect();
 
-		// actual move
-
 		this->detachTiles();
 
 		this->lastPos = this->curPos;
 		this->curPos = np;
-
-		//cerr << "lastPos: " << this->lastPos << endl;
-		//cerr << "curPos: " << np << endl;
 
 		this->notifyObservers(SubscriptionType::Display);
 		return true;
@@ -75,10 +70,14 @@ void Character::moveEffect() {
 }
 
 int Character::calculateDamage(Character *attacker) {
-	//cerr << this->getDef() << " " << attacker->getAtt() << endl;
 	double tempDmg = (100 / (100 + double(this->getDef())));
-	//cerr << tempDmg << endl;
   return ceil(tempDmg * attacker->getAtt());
+}
+
+int Character::defaultAttack(Character *c) {
+  int dmg = this->calculateDamage(c);
+  this->setHp(this->getHp() - dmg);
+  return dmg;
 }
 
 void Character::detachTiles() {

@@ -3,6 +3,8 @@
 
 #include "enemy.h"
 
+class Player;
+
 class Elf final : public Enemy {
 
 public:

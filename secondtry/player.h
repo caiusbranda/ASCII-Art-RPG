@@ -5,9 +5,15 @@
 #include "enemy.h"
 
 class Potion;
-class Shade;
 class Enemy;
 class Elf;
+class Merchant;
+class Halfling;
+class Dragon;
+class Human;
+class Dwarf;
+class Orc;
+
 class Player : public Character {
 
   std::string race;
@@ -31,7 +37,6 @@ public:
 
   virtual int attackedBy(Elf *e);
 
-  /*
   virtual int attackedBy(Orc *e);
 
   virtual int attackedBy(Halfling *e);
@@ -43,9 +48,8 @@ public:
   virtual int attackedBy(Dwarf *e);
 
   virtual int attackedBy(Human *e);
-  */
 
-  virtual int potMag();
+  virtual int potMag() const;
 
   bool move(const std::string &dir);
 
@@ -65,7 +69,12 @@ public:
 
 	int getGold() const override;
 
-	void setGold(int newGold) override;
+	void pickUpGold(int gold);
 };
 #include "shade.h"
+#include "drow.h"
+#include "vampire.h"
+#include "goblin.h"
+#include "troll.h"
+
 #endif
