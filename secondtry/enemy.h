@@ -10,6 +10,7 @@ class Drow;
 class Vampire;
 class Goblin;
 class Troll;
+class Ghost;
 
 class Subject;
 
@@ -49,6 +50,8 @@ public:
   virtual int attackedBy(Vampire *e);
 
   virtual int attackedBy(Troll *e);
+
+  virtual int attackedBy(Ghost *e);
 
 };
 
