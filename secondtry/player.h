@@ -84,5 +84,6 @@ public:
 #include "vampire.h"
 #include "goblin.h"
 #include "troll.h"
+#include "ghost.h"
 
 #endif

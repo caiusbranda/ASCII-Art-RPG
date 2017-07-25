@@ -63,3 +63,7 @@ int Enemy::attackedBy(Vampire *p) {
 int Enemy::attackedBy(Troll *p) {
   return this->defaultAttack(p);
 }
+
+int Enemy::attackedBy(Ghost *p) {
+  return this->defaultAttack(p);
+}
