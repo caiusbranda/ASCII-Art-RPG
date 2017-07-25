@@ -48,15 +48,9 @@ bool Character::move(const Posn &np) {
 		this->moveEffect();
 
 		// actual move
-
 		this->detachTiles();
-
 		this->lastPos = this->curPos;
 		this->curPos = np;
-
-		//cerr << "lastPos: " << this->lastPos << endl;
-		//cerr << "curPos: " << np << endl;
-
 		this->notifyObservers(SubscriptionType::Display);
 		return true;
 	}

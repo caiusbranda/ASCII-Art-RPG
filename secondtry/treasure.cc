@@ -35,5 +35,11 @@ bool Treasure::canPickUp(){
 
 // Player has walked on gold
 void Treasure::notify(Subject *whoNotified){
-	this->use(*whoNotified);
+	if (this->curPos == whoNotified->getCurPos()){
+		this->use(*whoNotified);
+	}
+}
+
+SubscriptionType Treasure::getSubType() const {
+	return SubscriptionType::Gold;
 }

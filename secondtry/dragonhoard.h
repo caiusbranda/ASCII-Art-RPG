@@ -4,7 +4,7 @@
 #include "treasure.h"
 
 class DragonHoard final : public Treasure{
-	bool DragonSlain;
+	bool dragonSlain;
 public:
 	DragonHoard(Posn p);
 	bool canPickUp() override;

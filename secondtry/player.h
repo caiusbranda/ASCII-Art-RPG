@@ -8,12 +8,16 @@ class Potion;
 class Shade;
 class Enemy;
 class Elf;
-class Player : public Character {
+
+class Player : public Character, public Observer {
 
   std::string race;
   std::string action;
 	int gold;
 
+  void notify(Subject *whoNotified) override;
+  char getType() const override;
+  SubscriptionType getSubType() const override;
 
   Posn findDir(const std::string &dir);
 

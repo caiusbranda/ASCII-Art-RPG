@@ -13,7 +13,6 @@
 #include "player.h"
 #include "enemy.h"
 
-
 #include "posn.h"
 #include "tile.h"
 #include "chamber.h"
@@ -27,6 +26,7 @@
 #include "wdpotion.h"
 #include "rhpotion.h"
 #include "phpotion.h"
+#include "dragonhoard.h"
 
 /*
 #include "passage.h"
@@ -47,7 +47,7 @@ class Board {
 
   std::vector<Chamber *> chambers;
 	std::vector<Observer *> dead;
-
+	std::vector<Treasure *> dHoards;
 
 	Player *player;
 	Stairs *stairs;
@@ -72,8 +72,14 @@ class Board {
 	// attaches adjacent entities or tiles to subject's observers
 	void attachTiles(Subject *s);
 
+	// specifically for enemy movement
+	void attachTilesTemp(Subject *s, std::map<Posn, Enemy*> &ens);
+
 	// finds the posn of a random tile location in a direction
 	Posn randDir(const Posn &p);
+
+	// attaches things to enemies
+	void attachThings(Enemy *en, const Posn &p);
 
 public:
 
@@ -87,7 +93,7 @@ public:
 
 	bool movePlayer(const std::string &dir);
 
-
+	// randomly generates board
 	void generateBoard();
 
 	bool attack(const std::string &dir);

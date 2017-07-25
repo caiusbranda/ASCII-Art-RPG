@@ -190,3 +190,23 @@ int Player::getGold() const {
 void Player::setGold(int newGold) {
 	this->gold = newGold;
 }
+
+void Player::notify(Subject *whoNotified) {
+	return;
+}
+
+char Player::getType() const {
+	return this->getIcon();
+}
+
+SubscriptionType Player::getSubType() const {
+	return SubscriptionType::Player;
+}
+
+
+
+
+
+
+
+
