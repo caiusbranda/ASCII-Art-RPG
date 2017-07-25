@@ -20,8 +20,6 @@ Board::~Board() {
 	for (auto &i : dead) delete &i;
 
 	for (auto &i : entities) delete &i;
-
-	for (auto &i : enemies) delete &i;
 }
 
 //////////// INITIALIZATION /////////////
@@ -61,7 +59,7 @@ void Board::initEmpty(const string &source) {
 	for (int i = 1; i <= numChambers; ++i) {
 
 		chambers.push_back(new Chamber(this, i));
-
+		//cout << *(chambers.at(i));
 	}
 }
 
@@ -82,12 +80,10 @@ void Board::generateFloor() {
 	// order is player, stairs, potions, gold, enemies
 
 	generatePlayer();
-	//generatePotions();
-	generateEnemies();
-	/*
+	generatePotions();
 	generateGold();
+	generateEnemies();
 
-	*/
 }
 
 // generates player and stairs
@@ -181,7 +177,6 @@ void Board::generatePotions() {
 	}
 }
 
-
 void Board::generateGold() {
 	// 10 piles of gold
 	// the spawn rate of gold is
@@ -192,11 +187,32 @@ void Board::generateGold() {
 
 	for (int i = 0; i < numPiles; ++i) {
 		Posn p{0,0};
+		Treasure *tre;
 		//first pick chamber and tile
 		int goldChamber = rand() % numChambers;
-		p = chambers[goldChamber]->randomTile();
+
+		while (true) {
+			p = this->chambers[goldChamber]->randomTile();
+			if (this->entites.count(p) == 0) break;
+		}
 
 		// then pick type of gold.
+		int goldType = rand() % 8;
+		int goldSize = 0;
+
+		if (goldType < 5) {
+			tre = new Treasure{p, 2, "normal"};
+		}
+		else if (goldType < 6)
+			tre = new DragonHoard{p};
+		else {
+			tre = new Treasure{p, 1, "small"};
+		}
+		tre->attach(disp);
+		this->entities[p] = tre;
+
+		tre->notifyObservers(SubscriptionType::Display);
+
 	}
 }
 
@@ -211,7 +227,6 @@ void Board::generateEnemies() {
 	this->entities[p] = en;
 	attachTiles(en);
 
-	//cerr << "count at generation: " << enemies.count(p) << endl;
 
 	en->notifyObservers(SubscriptionType::Display);
 }
@@ -253,7 +268,6 @@ void Board::attachTiles(Subject *s) {
 			else {
 				s->attach(tp, tiles.at(tp));
 			}
-
 		}
 	}
 }
@@ -304,7 +318,7 @@ bool Board::attack(const string &dir) {
   		dead.push_back(en);
   		entities.erase(enPos);
   		enemies.erase(enPos);
-
+  		//en->deathEffect();
   		this->tiles.at(enPos)->notifyObservers(SubscriptionType::Display);
 			attachTiles(this->player);
   	}
@@ -336,13 +350,14 @@ void Board::actionEnemy() {
     else {
     	// first pick spot for enemy to move
     	Enemy *en = it.second;
-
+    	// if dragon then move on
+    	if (en->getType() == 'D') continue;
     	// attempt to move
     	Posn np{0,0};
 
     	while(true) {
     		np = randDir(en->getCurPos());
-
+    		cerr << en->getRace() << " attempting to move" << endl;
     		// detaches tiles on successful move
     		bool success = en->move(np);
     		if (success) break;

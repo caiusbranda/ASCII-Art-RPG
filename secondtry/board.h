@@ -61,7 +61,7 @@ class Board {
 	void generateFloor();
 	void generatePlayer();
 	void generatePotions();
-	//void generateGold();
+	void generateGold();
 	void generateEnemies();
 
 	//std::map<Posn, Entity*> ents;
