@@ -12,7 +12,7 @@ class Player : public Character {
 
   std::string race;
   std::string action;
-  int gold;
+	int gold;
 
 
   Posn findDir(const std::string &dir);
@@ -63,9 +63,9 @@ public:
 
   std::string getRace() const override;
 
-	int getGold();
+	int getGold() const override;
 
-	void setGold(int newGold);
+	void setGold(int newGold) override;
 };
 #include "shade.h"
 #endif

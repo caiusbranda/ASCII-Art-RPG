@@ -6,7 +6,7 @@
 class DragonHoard final : public Treasure{
 	bool DragonSlain;
 public:
-	DragonHoard();
+	DragonHoard(Posn p);
 	bool canPickUp() override;
 	void notify(Subject *whoNotified) override;
 };

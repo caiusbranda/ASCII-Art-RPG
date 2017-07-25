@@ -35,8 +35,14 @@ void Subject::setAction(const std::string &s) {
 
 Subject::~Subject(){}
 
-/*
 void Subject::use(Subject &p) {
 	return;
 }
-*/
+
+int Subject::getGold() const {
+	return 0;
+}
+
+void Subject::setGold(int newGold) {
+	return;
+}
