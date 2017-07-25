@@ -13,13 +13,13 @@ int Goblin::attack(Enemy *enemy) {
   int dmg = enemy->attackedBy(this);
   enemy->checkEnemyDead(this);
   if(enemy->getHp() == 0) {
-    this->setGold(this->getGold + 5);
+    this->setGold(this->getGold() + 5);
   }
   return dmg;
 }
 
 int Goblin::attackedBy(Orc *e) {
-  double dmg = double(this->calculateDamage(c));
+  double dmg = double(this->calculateDamage(e));
   dmg *= 1.5;
   this->setHp(this->getHp() - dmg);
   return dmg;

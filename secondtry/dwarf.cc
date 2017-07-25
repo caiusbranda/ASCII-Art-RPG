@@ -11,7 +11,7 @@ int Dwarf::attack(Player *player) {
 }
 
 int Dwarf::attackedBy(Vampire *e) {
-  p->setHp(p->getHp - 5); // lose 5 HP every attack
+  e->setHp(e->getHp()- 5); // lose 5 HP every attack
   return this->defaultAttack(e);
 }
 

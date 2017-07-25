@@ -6,7 +6,9 @@
 class Player;
 
 class Merchant final : public Enemy {
+  
   static bool hostile;
+
 public:
   Merchant(Posn p);
 

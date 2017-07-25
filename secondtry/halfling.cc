@@ -14,7 +14,7 @@ int Halfling::defaultAttack(Character *c) {
     if (rand() % 2 == 1) {
       return 0;
     }
-    int dmgDealt = this->calculateDamage(e);
+    int dmgDealt = this->calculateDamage(c);
     this->setHp(this->getHp() - dmgDealt);
     return dmgDealt;
   }

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Trol::Troll(Posn p)
+Troll::Troll(Posn p)
   : Player{120, 120, 25, 15, p, "Troll"} {}
 
 int Troll::attack(Enemy *enemy) {

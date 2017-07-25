@@ -10,7 +10,7 @@ int Human::attack(Player *player) {
   return player->attackedBy(this);
 }
 
-virtual void checkEnemyDead(Player *killer) {
+void Human::checkEnemyDead(Player *killer) {
   if(this->getHp() == 0) {
     int addedGold = 4;
     killer->pickUpGold(addedGold);

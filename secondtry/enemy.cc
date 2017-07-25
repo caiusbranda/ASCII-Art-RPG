@@ -1,6 +1,6 @@
 #include "enemy.h"
 #include <iostream>
-#include <cstlib>
+#include <cstdlib>
 
 using namespace std;
 
@@ -28,7 +28,7 @@ bool Enemy::isHostile() const {
   return true;
 }
 
-virtual void checkEnemyDead(Player *killer) {
+void Enemy::checkEnemyDead(Player *killer) {
   if(this->getHp() == 0) {
     int addedGold = 2;
     if(rand() % 2 == 0){
@@ -51,7 +51,7 @@ int Enemy::attackedBy(Goblin *p) {
 }
 
 int Enemy::attackedBy(Vampire *p) {
-  p->setHp(p->getHp + 5); // gain 5 HP every attack
+  p->setHp(p->getHp() + 5); // gain 5 HP every attack
   return this->defaultAttack(p);
 }
 

@@ -1,7 +1,9 @@
 #include "merchant.h"
 using namespace std;
 
-Merchant::Merchant(Posn p) : Enemy{30, 30, 70, 5, p, 'M'}, hostile{false} {}
+bool Merchant::hostile = false;
+
+Merchant::Merchant(Posn p) : Enemy{30, 30, 70, 5, p, 'M'}{}
 
 Merchant::~Merchant() {}
 
