@@ -111,12 +111,8 @@ void Board::generatePlayer() {
 	// get random chamber
 	int playerChamber = (rand() % numChambers);
 
-	cerr << 10 << endl;
-
 	// get random tile within chosen chamber
 	Posn pp = chambers[playerChamber]->randomTile();
-
-	cerr << 11<< endl;
 
 	// creates player on that tile
 	/*
@@ -163,10 +159,12 @@ void Board::generatePlayer() {
 //// Potions ////
 
 void Board::generatePotions() {
+
 	// 10 potions are spawned on each floor.
 	//	each type having 1/6 probability.
 	//	each chamber has equal 1/5 probability.
 	//	Each tile in the chamber has equal chance.
+
 	int numPotions = 10;
 
 	for (int i = 0; i < numPotions; ++i) {
@@ -650,6 +648,7 @@ void Board::newFloor() {
     // update floor number
     ++this->floor;
 
+
     // delete old player after saving HP
     int curHp = this->player->getHp();  // to be used after new copy of player is made
     int curGold = this->player->getGold(); // to be used after SHUT UP JOYCE
@@ -687,12 +686,11 @@ void Board::newFloor() {
     // update new Player created with right HP
     player->setHp(curHp);
     player->pickUpGold(curGold);
+    player->setFloor(floor);
+    ostringstream
   }
   else {  // end game
-    // where do we save the score??
-    // ... = generateScore(player);
-    // main deletes board??
-  }
+
 }
 
 int Board::generateScore(Player *p) {
@@ -707,8 +705,11 @@ int Board::generateScore(Player *p) {
 void Board::endGame(bool showScore) {
 
 }
-
-
-
-
 */
+
+
+
+
+
+
+
