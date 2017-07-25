@@ -14,6 +14,7 @@ class Troll;
 class Subject;
 
 class Enemy : public Character, public Observer {
+protected:
 	bool nearPlayer;
 
 public:
@@ -27,6 +28,8 @@ public:
 	char getType() const override;
 
   bool isNearPlayer() const;
+
+  void setNearPlayer(bool b);
 
   virtual bool isHostile() const;
 

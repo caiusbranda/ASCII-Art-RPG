@@ -97,10 +97,12 @@ int main(int argc, char *argv[]){
 				failed = b->use(dir);
 				use = false;
 			}
-			else failed = b->movePlayer(dir);
+			else {
+        failed = b->movePlayer(dir);
+      }
 
 			if (!failed) b->actionEnemy();
-
+      
 			b->displayBoard();
 		}
 

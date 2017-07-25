@@ -17,11 +17,15 @@ char Enemy::getType() const {
 }
 
 void Enemy::notify(Subject *whoNotified) {
-  this->nearPlayer = !this->nearPlayer;
+  this->nearPlayer = true;
 }
 
 bool Enemy::isNearPlayer() const {
   return this->nearPlayer;
+}
+
+void Enemy::setNearPlayer(bool b) {
+  this->nearPlayer = b;
 }
 
 bool Enemy::isHostile() const {

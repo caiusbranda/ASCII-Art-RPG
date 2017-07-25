@@ -17,6 +17,11 @@ void DragonHoard::notify(Subject *whoNotified){
 	}
 	// Case 2: Subject is PC
 	else {
-		this->use(*whoNotified);
+    if(this->dragonSlain) {
+		  this->use(*whoNotified);
+    } else {
+      this->notifyObservers(SubscriptionType::Dragon);
+      cerr << " U SHOULD PROLLY KILL DREOGN FIRST" << endl;
+    }
 	}
 }

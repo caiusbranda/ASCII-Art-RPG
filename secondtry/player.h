@@ -73,7 +73,7 @@ public:
 
 	int getGold() const override;
 
-	void pickUpGold(int gold);
+	void pickUpGold(int gold) override;
 };
 #include "shade.h"
 #include "drow.h"

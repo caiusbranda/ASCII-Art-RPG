@@ -13,7 +13,7 @@ int Goblin::attack(Enemy *enemy) {
   int dmg = enemy->attackedBy(this);
   enemy->checkEnemyDead(this);
   if(enemy->getHp() == 0) {
-    this->setGold(this->getGold() + 5);
+    this->pickUpGold(5);
   }
   return dmg;
 }

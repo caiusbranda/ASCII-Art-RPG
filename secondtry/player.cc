@@ -76,8 +76,6 @@ bool Player::move(const string &dir) {
 		this->moveEffect();
 
 		// actual move
-		this->notifyObservers(SubscriptionType::Enemy);
-
 		this->detachTiles();
 
 		this->lastPos = this->curPos;
@@ -106,7 +104,6 @@ Posn Player::use(const string &dir) {
 		this->action = "There's no potion to use";
 	}
 	this->notifyObservers(SubscriptionType::Display);
-	this->notifyObservers(SubscriptionType::Enemy);
 	this->detachTiles();
 	return np;
 }

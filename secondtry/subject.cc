@@ -43,6 +43,6 @@ int Subject::getGold() const {
 	return 0;
 }
 
-void Subject::setGold(int newGold) {
+void Subject::pickUpGold(int newGold) {
 	return;
 }

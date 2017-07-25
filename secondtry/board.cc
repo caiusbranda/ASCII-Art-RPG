@@ -87,6 +87,10 @@ void Board::generateFloor() {
 	this->entities.erase(player->getCurPos());
 
 	attachTiles(player);
+  
+  for (auto &i : this->dHoards) {
+    attachTiles(i);
+  }
 
 }
 
@@ -270,14 +274,14 @@ void Board::generateEnemies() {
 	}
 
 	// DRAGONS
-/*
 	for (auto &i : this->dHoards) {
-		Posn dhp = i.getCurPos();
+		Posn dhp = i->getCurPos();
 		Posn dp = randDir(dhp);
-		Enemy *en = new Dragon{dp};
-		attachThings(en);
+		Enemy *en = new Dragon{dp, i};
+		attachThings(en, dp);
+    en->notifyObservers(SubscriptionType::Display);
 	}
-	*/
+
 }
 
 void Board::attachThings(Enemy *en, const Posn &p) {
@@ -286,18 +290,17 @@ void Board::attachThings(Enemy *en, const Posn &p) {
 	this->attachTiles(en);
 }
 
-
 ///////// MOVEMENT //////////
 
 bool Board::movePlayer(const string &dir) {
+  //reset tiles
+  this->player->detachTiles();
+  attachTiles(this->player);
+
+
 	bool success = player->move(dir);
 	if (success) {
-		attachTiles(player);
-
-		this->player->notifyObservers(SubscriptionType::Potion);
-		this->player->notifyObservers(SubscriptionType::Enemy);
-		this->player->notifyObservers(SubscriptionType::Gold);
-
+		
 		Posn pp = this->player->getCurPos();
 
 		if (this->entities.count(pp) == 1
@@ -305,6 +308,13 @@ bool Board::movePlayer(const string &dir) {
 			dead.push_back(this->entities.at(pp));
   		entities.erase(pp);
 		}
+
+    attachTiles(player);
+
+    this->player->notifyObservers(SubscriptionType::Enemy);
+    this->player->notifyObservers(SubscriptionType::Dragon);
+    this->player->notifyObservers(SubscriptionType::Potion);
+    this->player->notifyObservers(SubscriptionType::Gold);
 
 		// update display
 		this->player->notifyObservers(SubscriptionType::Display);
@@ -320,7 +330,7 @@ bool Board::movePlayer(const string &dir) {
 
 void Board::attachTiles(Subject *s) {
 
-	cerr << s->getIcon() << " called attachTiles." << endl;
+	//cerr << s->getIcon() << " called attachTiles." << endl;
 
 	Posn sp = s->getCurPos();
 	for (int y = -1; y <= 1; ++y) {
@@ -386,6 +396,13 @@ Posn Board::randDir(const Posn &p) {
 ///////// COMBAT ////////////
 
 bool Board::attack(const string &dir) {
+  //reset tiles
+  this->player->detachTiles();
+  attachTiles(this->player);
+  this->player->notifyObservers(SubscriptionType::Enemy);
+  this->player->notifyObservers(SubscriptionType::Dragon);
+  this->player->notifyObservers(SubscriptionType::Gold);
+
   Posn enPos = this->player->canAttack(dir, enemies);
 
   // check if there is an enemy there (attack went through)
@@ -412,8 +429,13 @@ void Board::actionEnemy() {
 
 	int i = 0;
   for (auto &it : this->enemies) {
+
   	++i;
   	Enemy *en = it.second;
+
+     //reset tiles
+    en->detachTiles();
+    attachTiles(en);
 
   	en->detachTiles();
   	attachTilesTemp(en, temp);
@@ -427,8 +449,7 @@ void Board::actionEnemy() {
       ss << "and "<< en->getRace() << " dealt " << dmg << " damage to "
        << this->player->getRace() << " (" << this->player->getHp() << " HP)";
 
-      this->player->appendAction(ss.str());
-
+      this->player->appendAction(ss.str());  
       en->detachTiles();
   		attachTilesTemp(en, temp);
     }
@@ -460,7 +481,7 @@ void Board::actionEnemy() {
     	// detaches tiles
     	bool success = en->move(np);
 
-    	cout << "(" << i << ") " << (success ? "ENEMY MOVED" : "NO ENEMY MOVE :(") << endl;
+    	//cout << "(" << i << ") " << (success ? "ENEMY MOVED" : "NO ENEMY MOVE :(") << endl;
 
  			// on success, change location of enemy in temp map, erase last location,
  			//	change last location of display to previous thing.
@@ -473,6 +494,7 @@ void Board::actionEnemy() {
     	// attaches tiles from temp
     	attachTilesTemp(en, temp);
     }
+    en->setNearPlayer(false);
   }
   this->enemies = temp;
   this->player->notifyObservers(SubscriptionType::Display);

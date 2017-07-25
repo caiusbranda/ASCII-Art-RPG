@@ -1,6 +1,7 @@
 #include <sstream>
 #include "player.h"
 #include "treasure.h"
+#include <iostream>
 
 using namespace std;
 
@@ -9,8 +10,9 @@ Treasure::Treasure(Posn p, int amount, string type): Item{p, 'G', amount, type}{
 
 // Picks up gold
 void Treasure::use(Subject &p){
+  cerr << " OPTION USED" << endl;
 	if (this->canPickUp()){
-	  p.setGold(p.getGold() + this->amount);
+	  p.pickUpGold(this->amount);
 		this->pickAction(p);
 	}
 	else {

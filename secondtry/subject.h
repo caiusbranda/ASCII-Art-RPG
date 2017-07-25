@@ -32,7 +32,7 @@ public:
 	virtual void use(Subject &p);
   virtual Stats getStats() const;
 	virtual int getGold() const;
-	virtual void setGold(int newGold);
+	virtual void pickUpGold(int newGold);
 	virtual ~Subject() = 0;
 };
 

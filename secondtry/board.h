@@ -74,6 +74,7 @@ class Board {
 	//int curFloor;
 
 // misc
+
 	// attaches adjacent entities or tiles to subject's observers
 	void attachTiles(Subject *s);
 
