@@ -42,11 +42,9 @@ int main(int argc, char *argv[]){
 			cout << "(t)roll (easy)" << endl;
 			cout << "(g)oblin (hard)" << endl;
 
-	/*
 			if (dlcEnabled) {
 				cout << "g(h)ost (???)" << endl;
 			}
-	*/
 
 			cout << endl;
 
@@ -87,7 +85,7 @@ int main(int argc, char *argv[]){
 			}
 
 			// restart
-			else if (beg == 'r')
+			else if (beg == 'r') return;
 
 			// quit
 			else if (beg == 'q') b.quit(); break;

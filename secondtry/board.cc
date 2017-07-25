@@ -7,7 +7,7 @@ using namespace std;
 
 Board::Board()
 	: disp{nullptr}, player{nullptr}, stairs{nullptr}, floor{1}, numChambers{5},
-		playerRace{0} {}
+		playerRace{0}, freeze{false} {}
 
 Board::~Board() {
 	delete disp;
@@ -526,7 +526,7 @@ void Board::actionEnemy() {
     }
 
     // if the enemy doesnt attack player, move the enemy
-    else {
+    else if (!freeze) {
     	// first pick spot for enemy to move
 
     	// if dragon then move on
@@ -657,11 +657,6 @@ void Board::newFloor() {
     this->player = nullptr;
     delete oldPlayer;
 
-    // delete stairs
-    //Stairs *oldStairs = this->stairs;
-    //this->stairs = nullptr;
-    //delete oldStairs;
-
         // delete dead
   	for (auto &i : dead) delete i;
     this->dead.clear();
@@ -683,14 +678,15 @@ void Board::newFloor() {
 
 
     this->choosePlayer(playerRace);
+
     // update new Player created with right HP
     player->setHp(curHp);
     player->pickUpGold(curGold);
     player->setFloor(floor);
-    ostringstream
+
   }
   else {  // end game
-
+	}
 }
 
 int Board::generateScore(Player *p) {
@@ -707,7 +703,9 @@ void Board::endGame(bool showScore) {
 }
 */
 
-
+void Board::toggleFreeze() {
+	this->freeze = !this->freeze;
+}
 
 
 

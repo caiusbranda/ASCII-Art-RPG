@@ -32,6 +32,8 @@ class Board {
 	const int numChambers;
 	char playerRace;
 
+	bool freeze;
+
 	void initEmpty(const std::string &source);
 
 // generation
@@ -98,6 +100,8 @@ public:
 	void clearAction();
 
 	int generateScore(Player *p);
+
+	void toggleFreeze();
 
 };
 
