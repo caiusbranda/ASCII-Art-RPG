@@ -14,39 +14,62 @@ int main(int argc, char *argv[]){
 	string cmd;
 	char beg;
 
+	cout << endl;
+	for (int i = 0; i < 52; ++i) cout << "=";
+	cout << endl;
+	cout << ">>>>>>>> ";
+	cout << "WELCOME TO CC3K - DAY ONE EDITION™";
+	cout << " <<<<<<<<" << endl;
+	for (int i = 0; i < 52; ++i) cout << "=";
+	cout << endl << endl;
+	cout << "Thank you for purchasing this Early Access™ title!" << endl;
+	cout << endl;
+
 	// init commands
-	if (cin >> beg) {
+	while(true) {
+
+		cout << "To start the game, please enter a character to select a race:" << endl;
+		cout << "(s)hade (hard)" << endl;
+		cout << "(d)row (med)" << endl;
+		cout << "(v)amprie (med)" << endl;
+		cout << "(t)roll (easy)" << endl;
+		cout << "(g)oblin (hard)" << endl;
+
+		cin >> beg;
 
 		// end of file case
 		if (cin.eof()) {
 			cerr << "End of file detected. Exiting." << endl;
 			return 0;
 		}
-
-		switch(beg) {
-
-			// shade
-			case 's': b->choosePlayer(beg); break;
+		// shade
+		else if (beg == 's'){
+			b->choosePlayer(beg);
+			break;
+		}
 /*
-			// drow
-			case 'd': b->choosePlayer(beg); break;
+		// drow
+		else if (beg == 'd') b->choosePlayer(beg); break;
 
-			// vamp
-			case 'v': b->choosePlayer(beg); break;
+		// vamp
+		else if (beg == 'v') b->choosePlayer(beg); break;
 
-			// troll
-			case 't': b->choosePlayer(beg); break;
+		// troll
+		else if (beg == 't') b->choosePlayer(beg); break;
 
-			// goblin
-			case 'g': b->choosePlayer(beg); break;
+		// goblin
+		else if (beg == 'g') b->choosePlayer(beg); break;
 
-			// restart
-			case 'r': b->restart(); break;
+		// restart
+		else if (beg == 'r') b->restart(); break;
 
-			// quit
-			case 'q': b->quit(); break;
+		// quit
+		else if (beg == 'q') b->quit(); break;
 */
-			default: cerr << "INVALID INPUT" << endl; break;
+		else {
+			cerr << "Invalid input! Please try again. (or enter 'q' to quit)" << endl;
+			cin.clear();
+			cin.ignore();
 		}
 	}
 
@@ -89,10 +112,7 @@ int main(int argc, char *argv[]){
 			use = false;
 			attack = true;
 		}
-		/*
-		// attack <direction>
-		case "a": attack = true; break;
-
+/*
 		// enemies stop moving
 		case "f": b->freeze(); break;
 
@@ -101,8 +121,7 @@ int main(int argc, char *argv[]){
 
 		// quit while game is running
 		case "q": b->giveUp(); break;
-		*/
-
+*/
 	}
 
 }
