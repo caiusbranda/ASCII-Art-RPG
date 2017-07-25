@@ -14,6 +14,10 @@ bool Posn::operator==(const Posn &rhs) const {
 	return true;
 }
 
+bool Posn::operator!=(const Posn &rhs) const {
+	return !(*this == rhs);
+}
+
 Posn Posn::operator+(const Posn &rhs) const {
 	Posn ret{x, y};
 

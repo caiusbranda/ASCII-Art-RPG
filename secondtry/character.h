@@ -19,11 +19,12 @@ protected:
 
 	virtual void moveEffect();
 	virtual bool canMove(const Posn &np);
-	void detachTiles();
 
 public:
 
 	Character(int maxhp, int hp, int att, int def, Posn p, char icon);
+
+	void detachTiles();
 
 	// accessors:
 	int getMaxHp() const;

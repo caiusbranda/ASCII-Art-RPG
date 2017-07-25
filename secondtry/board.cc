@@ -236,28 +236,31 @@ void Board::generateEnemies() {
 		// then pick tile
 		while(true) {
 			p = chambers[enChamber]->randomTile();
-			if (p == player->getCurPos() || entities.count(p) == 0) break;
+			if (p == player->getCurPos() || entities.count(p) == 0
+					|| enemies.count(p) == 0) break;
 		}
 
 		// then enemy type
 		int whichEn = rand() % 18;
+
+		// create enemy
 		if (whichEn < 4) {
-			en = new Elf{p}; //new Human{p};
+			en = new Human{p};
 		}
 		else if (whichEn < 7) {
-			en = new Elf{p}; //new Dwarf{p};
+			en = new Dwarf{p};
 		}
 		else if (whichEn < 12) {
-			en = new Elf{p}; //new Halfling{p};
+			en = new Halfling{p};
 		}
 		else if (whichEn < 14) {
-			en = new Elf{p}; //new Elf{p};
+			en = new Elf{p};
 		}
 		else if (whichEn < 16) {
-			en = new Elf{p}; //new Orc{p};
+			en = new Orc{p};
 		}
 		else {
-			en = new Elf{p}; //new Dwarf{p};
+			en = new Merchant{p};
 		}
 
 		attachThings(en, p);
@@ -280,7 +283,6 @@ void Board::generateEnemies() {
 void Board::attachThings(Enemy *en, const Posn &p) {
 	en->attach(this->disp);
 	this->enemies[p] = en;
-	this->entities[p] = en;
 	this->attachTiles(en);
 }
 
@@ -411,23 +413,30 @@ void Board::actionEnemy() {
 	int i = 0;
   for (auto &it : this->enemies) {
   	++i;
+  	Enemy *en = it.second;
+
+  	en->detachTiles();
+  	attachTilesTemp(en, temp);
 
   	// checks if near player
-    if(it.second->isNearPlayer()) {
+    if(en->isNearPlayer()) {
       stringstream ss;
-      int dmg = it.second->attack(this->player);
+      int dmg = en->attack(this->player);
 
       // printing action:
-      ss << "and "<< it.second->getRace() << " dealt " << dmg << " damage to "
+      ss << "and "<< en->getRace() << " dealt " << dmg << " damage to "
        << this->player->getRace() << " (" << this->player->getHp() << " HP)";
 
       this->player->appendAction(ss.str());
+
+      en->detachTiles();
+  		attachTilesTemp(en, temp);
     }
 
     // if the enemy doesnt attack player, move the enemy
     else {
     	// first pick spot for enemy to move
-    	Enemy *en = it.second;
+
     	// if dragon then move on
     	if (en->getType() == 'D') continue;
     	// attempt to move
@@ -436,6 +445,7 @@ void Board::actionEnemy() {
     	//	get random positon to move to
     	//	try to move there with en->move(np)
     	//	might move or not
+    	//  before attempt, detach and attachtiles from temp
     	//		IF SUCCESSFUL:
     	//			need to add new location on enemy map
     	//			remove old location
@@ -454,7 +464,7 @@ void Board::actionEnemy() {
 
  			// on success, change location of enemy in temp map, erase last location,
  			//	change last location of display to previous thing.
-    	if (success) {
+    	if (success && !(en->getLastPos() == en->getCurPos())) {
     		temp[np] = en;
     		temp.erase(en->getLastPos());
     		disp->notify(tiles.at(en->getLastPos()));

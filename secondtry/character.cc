@@ -50,13 +50,14 @@ bool Character::move(const Posn &np) {
 		// actual move
 
 		this->detachTiles();
-    
+
 		this->lastPos = this->curPos;
 		this->curPos = np;
 
 		this->notifyObservers(SubscriptionType::Display);
 		return true;
 	}
+	this->detachTiles();
 	this->notifyObservers(SubscriptionType::Display);
 	return false;
 }
