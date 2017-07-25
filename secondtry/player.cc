@@ -183,7 +183,7 @@ int Player::attackedBy(Human *e) {
 }*/
 //--------- ATTACKS -----------//
 
-int Player::getGold() {
+int Player::getGold() const {
 	return this->gold;
 }
 

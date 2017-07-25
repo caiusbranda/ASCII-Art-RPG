@@ -8,7 +8,7 @@ using namespace std;
 Treasure::Treasure(Posn p, int amount, string type): Item{p, 'G', amount, type}{}
 
 // Picks up gold
-void Treasure::use(Player &p){
+void Treasure::use(Subject &p){
 	if (this->canPickUp()){
 	  p.setGold(p.getGold() + this->amount);
 		this->pickAction(p);
@@ -20,7 +20,7 @@ void Treasure::use(Player &p){
 }
 
 // updates Action when Player picks up gold
-void Treasure::pickAction(Player &p) {
+void Treasure::pickAction(Subject &p) {
 	Stats s = p.getStats();
 	ostringstream os;
 	os << " picks up " << this->amount << " gold";

@@ -29,10 +29,11 @@ public:
   virtual Posn getLastPos() const = 0;
   virtual char getIcon() const = 0;
   virtual void setAction(const std::string &s);
-	//virtual void use(Subject &p);
+	virtual void use(Subject &p);
   virtual Stats getStats() const;
+	virtual int getGold() const;
+	virtual void setGold(int newGold);
 	virtual ~Subject() = 0;
-
 };
 
 #endif

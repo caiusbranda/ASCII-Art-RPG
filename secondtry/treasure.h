@@ -7,9 +7,9 @@ class Treasure : public Item {
 
 public:
 	Treasure(Posn p, int amount, std::string type);
-	void use(Player &p);// override;
+	void use(Subject &p) override;
 	virtual bool canPickUp();
-	void pickAction(Player &p);
+	void pickAction(Subject &p);
 	void notify(Subject *whoNotified) override;
 };
 

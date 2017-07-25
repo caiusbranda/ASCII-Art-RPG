@@ -181,7 +181,7 @@ void Board::generatePotions() {
 	}
 }
 
-
+/*
 void Board::generateGold() {
 	// 10 piles of gold
 	// the spawn rate of gold is
@@ -199,7 +199,7 @@ void Board::generateGold() {
 		// then pick type of gold.
 	}
 }
-
+*/
 
 ///////// ENEMIES ///////////
 
