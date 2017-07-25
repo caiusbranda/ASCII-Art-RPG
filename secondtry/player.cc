@@ -187,3 +187,23 @@ void Player::pickUpGold(int gold) {
   ss << this->race << " picked up " << gold << " gold.";
   this->appendAction(ss.str());
 }
+
+void Player::notify(Subject *whoNotified) {
+	return;
+}
+
+char Player::getType() const {
+	return this->getIcon();
+}
+
+SubscriptionType Player::getSubType() const {
+	return SubscriptionType::Player;
+}
+
+
+
+
+
+
+
+

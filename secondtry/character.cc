@@ -47,8 +47,10 @@ bool Character::move(const Posn &np) {
 	if (canMove(np)) {
 		this->moveEffect();
 
-		this->detachTiles();
+		// actual move
 
+		this->detachTiles();
+    
 		this->lastPos = this->curPos;
 		this->curPos = np;
 
