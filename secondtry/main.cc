@@ -28,7 +28,8 @@ int main(int argc, char *argv[]){
 	// init commands
 	while(true) {
 
-		cout << "To start the game, please enter a character to select a race:" << endl;
+		cout << "To start the game," << endl;
+		cout << "please enter a character to select a race:" << endl;
 		cout << "(s)hade (hard)" << endl;
 		cout << "(d)row (med)" << endl;
 		cout << "(v)amprie (med)" << endl;
@@ -67,7 +68,8 @@ int main(int argc, char *argv[]){
 		else if (beg == 'q') b->quit(); break;
 */
 		else {
-			cerr << "Invalid input! Please try again. (or enter 'q' to quit)" << endl;
+			cout << "Invalid input! Please try again. (or enter 'q' to quit)" << endl;
+			cout << endl;
 			cin.clear();
 			cin.ignore();
 		}
