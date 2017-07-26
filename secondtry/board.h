@@ -102,11 +102,13 @@ public:
 
 	void clearAction();
 
-	int generateScore(Player *p);
+	int generateScore();
 
 	void toggleFreeze();
 
 	bool isGameOver();
+
+	bool wonGame();
 
 };
 

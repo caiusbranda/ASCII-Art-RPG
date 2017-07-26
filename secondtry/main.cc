@@ -103,7 +103,7 @@ int main(int argc, char *argv[]){
 			else if (beg == 'r') return;
 
 			// quit
-			else if (beg == 'q') b.quit(); break;
+			else if (beg == 'q') break;
 			
 			else {
 				cout << "Invalid input! Please try again. (or enter 'q' to quit)" << endl;
@@ -168,12 +168,12 @@ int main(int argc, char *argv[]){
 			b.clearAction();
 		}
 		// Check if game has ended
-		if (b->isGameOver() && b->wonGame()) {
+		if (b.isGameOver() && b.wonGame()) {
 			cout << "You won!" << endl;
-			int score = b->generateScore();
+			int score = b.generateScore();
 			cout << "Your score: " << score << endl;
 		}
-		else if (b->isGameOver()) {
+		else if (b.isGameOver()) {
 			cout << "Game over!" << endl;
 		}
 	}
