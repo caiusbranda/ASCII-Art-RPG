@@ -1,12 +1,23 @@
-#include <iostream>
+#include <iostream> 
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <cstdlib>
 #include <ctime>
 
 #include "board.h"
 
 using namespace std;
+
+void handleArgs(int argc, char* argv[], bool dlcEnabled, string &source){
+	for (int i = 1; i < argc; ++i) {
+		string argument;
+		istringstream ss{argv[i]};
+		argument = ss.str();
+		if (argument == "-dlc") dlcEnabled = true;
+		else source = argument;
+	}
+}
 
 int main(int argc, char *argv[]){
 	srand(time(0));
@@ -18,6 +29,8 @@ int main(int argc, char *argv[]){
 
 		string cmd;
 		char beg;
+		bool dlcEnabled;
+		string source = "cc3kfloorbase.txt";
 
 		cout << endl;
 		for (int i = 0; i < 52; ++i) cout << "=";
@@ -30,6 +43,8 @@ int main(int argc, char *argv[]){
 		cout << "Thank you for purchasing this Early Access™ title!" << endl;
 		cout << "From CMJ Family Inc™" << endl;
 		cout << endl;
+		
+		handleArgs(argc, argv, dlcEnabled, source);
 
 		// init commands
 		while(true) {
@@ -57,7 +72,7 @@ int main(int argc, char *argv[]){
 			}
 			// shade
 			else if (beg == 's'){
-				b.choosePlayer(beg);
+				b.choosePlayer(beg, source);
 				break;
 			}
 
