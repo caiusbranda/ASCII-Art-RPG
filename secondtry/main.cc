@@ -104,7 +104,7 @@ int main(int argc, char *argv[]){
 
 			// quit
 			else if (beg == 'q') b.quit(); break;
-
+			
 			else {
 				cout << "Invalid input! Please try again. (or enter 'q' to quit)" << endl;
 				cout << endl;
@@ -166,6 +166,15 @@ int main(int argc, char *argv[]){
 	*/
 
 			b.clearAction();
+		}
+		// Check if game has ended
+		if (b->isGameOver() && b->wonGame()) {
+			cout << "You won!" << endl;
+			int score = b->generateScore();
+			cout << "Your score: " << score << endl;
+		}
+		else if (b->isGameOver()) {
+			cout << "Game over!" << endl;
 		}
 	}
 }

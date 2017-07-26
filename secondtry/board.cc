@@ -7,7 +7,7 @@ using namespace std;
 
 Board::Board()
 	: disp{nullptr}, player{nullptr}, stairs{nullptr}, floor{1}, numChambers{5},
-		playerRace{0}, freeze{false} {}
+		playerRace{0}, freeze{false}, gameOver{false}, playerWin{false} {}
 
 Board::~Board() {
 	delete disp;
@@ -686,15 +686,17 @@ void Board::newFloor() {
 
   }
   else {  // end game
+		this->gameOver = true;
+		this->playerWin = true;
 	}
 }
 
-int Board::generateScore(Player *p) {
-  if (p->getRace() == "Shade") {
+int Board::generateScore() {
+  if (this->player->getRace() == "Shade") {
     return 1.5 * p->getGold();
   }
   else {
-    return p->getGold();
+    return this->player->getGold();
   }
 }
 /*
@@ -707,7 +709,13 @@ void Board::toggleFreeze() {
 	this->freeze = !this->freeze;
 }
 
+bool Board::isGameOver() {
+	if (this->player->getHp() == 0) {
+		this->gameOver = true;
+	}
+	return this->gameOver();
+}
 
-
-
-
+bool Board::wonGame() {
+	return playerWin;
+}

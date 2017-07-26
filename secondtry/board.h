@@ -33,6 +33,8 @@ class Board {
 	char playerRace;
 
 	bool freeze;
+	bool gameOver;
+	bool playerWin;
 
 	void initEmpty(const std::string &source);
 
@@ -60,6 +62,7 @@ class Board {
 	// resets player tiles
 	void resetPlayer();
 
+	// "creates" new floor
 	void newFloor();
 
 public:
@@ -83,9 +86,9 @@ public:
 	/*
 	void restart();
 	void giveUp();
-	void quit();
 	void freeze();
 	void updateTurn();
+	void quit();
 	*/
 
 	// displays board to cout
@@ -102,6 +105,8 @@ public:
 	int generateScore(Player *p);
 
 	void toggleFreeze();
+
+	bool isGameOver();
 
 };
 
