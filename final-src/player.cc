@@ -198,11 +198,7 @@ SubscriptionType Player::getSubType() const {
 	return SubscriptionType::Player;
 }
 
-void Player::setFloor(int fl) {
-	if (fl < 1) this->floor = 1;
-	else if (fl > 5) this->floor = 5;
-	else this->floor = fl;
-}
+
 
 
 

@@ -75,8 +75,6 @@ public:
 	int getGold() const override;
 
 	void pickUpGold(int gold) override;
-
-  void setFloor(int fl);
 };
 
 #include "shade.h"

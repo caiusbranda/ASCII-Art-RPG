@@ -32,10 +32,6 @@ class Board {
 	const int numChambers;
 	char playerRace;
 
-	bool freeze;
-	bool gameOver;
-	bool playerWin;
-
 	void initEmpty(const std::string &source);
 
 // generation
@@ -62,7 +58,6 @@ class Board {
 	// resets player tiles
 	void resetPlayer();
 
-	// "creates" new floor
 	void newFloor();
 
 public:
@@ -86,9 +81,9 @@ public:
 	/*
 	void restart();
 	void giveUp();
+	void quit();
 	void freeze();
 	void updateTurn();
-	void quit();
 	*/
 
 	// displays board to cout
@@ -102,13 +97,7 @@ public:
 
 	void clearAction();
 
-	int generateScore();
-
-	void toggleFreeze();
-
-	bool isGameOver();
-
-	bool wonGame();
+	int generateScore(Player *p);
 
 };
 

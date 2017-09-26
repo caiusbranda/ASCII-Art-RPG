@@ -7,7 +7,7 @@ using namespace std;
 
 Board::Board()
 	: disp{nullptr}, player{nullptr}, stairs{nullptr}, floor{1}, numChambers{5},
-		playerRace{0}, freeze{false}, gameOver{false}, playerWin{false} {}
+		playerRace{0} {}
 
 Board::~Board() {
 	delete disp;
@@ -111,8 +111,12 @@ void Board::generatePlayer() {
 	// get random chamber
 	int playerChamber = (rand() % numChambers);
 
+	cerr << 10 << endl;
+
 	// get random tile within chosen chamber
 	Posn pp = chambers[playerChamber]->randomTile();
+
+	cerr << 11<< endl;
 
 	// creates player on that tile
 	/*
@@ -159,12 +163,10 @@ void Board::generatePlayer() {
 //// Potions ////
 
 void Board::generatePotions() {
-
 	// 10 potions are spawned on each floor.
 	//	each type having 1/6 probability.
 	//	each chamber has equal 1/5 probability.
 	//	Each tile in the chamber has equal chance.
-
 	int numPotions = 10;
 
 	for (int i = 0; i < numPotions; ++i) {
@@ -526,7 +528,7 @@ void Board::actionEnemy() {
     }
 
     // if the enemy doesnt attack player, move the enemy
-    else if (!freeze) {
+    else {
     	// first pick spot for enemy to move
 
     	// if dragon then move on
@@ -648,7 +650,6 @@ void Board::newFloor() {
     // update floor number
     ++this->floor;
 
-
     // delete old player after saving HP
     int curHp = this->player->getHp();  // to be used after new copy of player is made
     int curGold = this->player->getGold(); // to be used after SHUT UP JOYCE
@@ -656,6 +657,11 @@ void Board::newFloor() {
     Player *oldPlayer = this->player;
     this->player = nullptr;
     delete oldPlayer;
+
+    // delete stairs
+    //Stairs *oldStairs = this->stairs;
+    //this->stairs = nullptr;
+    //delete oldStairs;
 
         // delete dead
   	for (auto &i : dead) delete i;
@@ -678,44 +684,31 @@ void Board::newFloor() {
 
 
     this->choosePlayer(playerRace);
-
     // update new Player created with right HP
     player->setHp(curHp);
     player->pickUpGold(curGold);
-    player->setFloor(floor);
-
   }
   else {  // end game
-		this->gameOver = true;
-		this->playerWin = true;
-	}
+    // where do we save the score??
+    // ... = generateScore(player);
+    // main deletes board??
+  }
 }
 
-int Board::generateScore() {
-  if (this->player->getRace() == "Shade") {
+int Board::generateScore(Player *p) {
+  if (p->getRace() == "Shade") {
     return 1.5 * p->getGold();
   }
   else {
-    return this->player->getGold();
+    return p->getGold();
   }
 }
 /*
 void Board::endGame(bool showScore) {
 
 }
+
+
+
+
 */
-
-void Board::toggleFreeze() {
-	this->freeze = !this->freeze;
-}
-
-bool Board::isGameOver() {
-	if (this->player->getHp() == 0) {
-		this->gameOver = true;
-	}
-	return this->gameOver();
-}
-
-bool Board::wonGame() {
-	return playerWin;
-}
